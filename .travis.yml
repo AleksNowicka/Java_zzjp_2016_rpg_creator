@@ -1,3 +1,3 @@
 language: java
 mvn test
-mvn install -junit=true -assertj-core=true -qlite-jdbc=true
+mvn install -junit=true -assertj-core=true -qlite-jdbc=true -mockito-core=true
