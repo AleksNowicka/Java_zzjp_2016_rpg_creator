@@ -1,2 +1,3 @@
 language: java
-script: mvn clean install -f rpg_creator/pom.xml
+before_install: cd rpg_creator
+script: mvn clean install
