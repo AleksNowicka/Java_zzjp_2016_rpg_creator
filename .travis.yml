@@ -1,2 +1,2 @@
 language: java
-script: cd rpg_creator && mvn clean install
+script: cd rpg-creator && mvn clean install
