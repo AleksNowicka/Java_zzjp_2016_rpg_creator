@@ -43,8 +43,9 @@ public class CharacterCreation {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setResizable(false);
 		frame.getContentPane().setBackground(Color.DARK_GRAY);
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 450, 260);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -95,11 +96,11 @@ public class CharacterCreation {
 		frame.getContentPane().add(btnSelectGroup);
 		
 		JButton btnSave = new JButton("Save");
-		btnSave.setBounds(10, 229, 99, 23);
+		btnSave.setBounds(119, 195, 77, 23);
 		frame.getContentPane().add(btnSave);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(264, 43, 160, 207);
+		panel.setBounds(264, 43, 160, 175);
 		frame.getContentPane().add(panel);
 		
 		JComboBox comboBox = new JComboBox();
