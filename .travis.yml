@@ -1,3 +1,2 @@
 language: java
-mvn test
-mvn install -junit=true -assertj-core=true -qlite-jdbc=true -mockito-core=true
+script: cd rpg-creator && mvn clean install
