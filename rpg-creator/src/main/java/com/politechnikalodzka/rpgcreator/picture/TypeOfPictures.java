@@ -1,9 +1,11 @@
 package com.politechnikalodzka.rpgcreator.picture;
 
-enum TypeOfPictrues {
-    HAT,
+ enum TypeOfPictrues {
+    BODY,
     HEAD,
-    SHOES,
-    CLOTHES,
-    HAIR
+    EYES,
+    OUTFIT,
+    HAIR,
+    HAT,
+    ACCESSORIES
 }

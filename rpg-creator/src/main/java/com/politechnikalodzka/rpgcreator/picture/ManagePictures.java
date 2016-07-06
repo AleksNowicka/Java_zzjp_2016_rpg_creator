@@ -8,11 +8,15 @@ import java.util.List;
  * @author lbary
  */
 public class ManagePictures {
-    private final List<Picture> pictrueToDraw;
-    private final List<Picture> allPicture;
+    private List<Picture> pictrueToDraw;
+    private List<Picture> allPicture;
 
     public ManagePictures() {
         this.pictrueToDraw = new ArrayList();
+        for(int i = 0; i < 7; i++)
+        {
+            pictrueToDraw.add(null);
+        }
         this.allPicture = new ArrayList();
     }
 
@@ -24,45 +28,55 @@ public class ManagePictures {
         return allPicture;
     }
     
-    public void addPictures(int id, String url, TypeOfPictrues type)
+    public void addPictures(TypeOfPictrues type, String url, int id)
     {
-        if(!allPicture.contains(new Picture(id, url, type))) {
-            allPicture.add(new Picture(id, url, type));
-        }
-    }
-    
-    private void setPriorityPicture(Picture picture)
-    {        
-        TypeOfPictrues tempType;
-        tempType = picture.getTYPE();
-        
-        switch(tempType)
-        {
-            case HEAD:
-                pictrueToDraw.set(0, picture);
-                break;
-            case CLOTHES:
-                pictrueToDraw.set(1, picture);
-                break;            
-            case SHOES:
-                pictrueToDraw.set(2, picture);
-                break;
-            case HAIR:
-                pictrueToDraw.set(3, picture);
-                break;
-            case HAT:
-                pictrueToDraw.set(4, picture);
-                break;                
-        }
-    }
-    
-    public void choosePicture(int ID)
-    {
-        for (Picture picture : allPicture) {
-            if(picture.getID() == ID)
-            {
-                setPriorityPicture(picture);            
+        boolean isNotContain = true;
+        for(int i = 0; i < allPicture.size(); i++)
+        {            
+            if(allPicture.get(i).getURL().equals(url)) {
+                isNotContain = false;
             }
         }
+        
+        if(isNotContain) {
+            allPicture.add(PictureFactory.addPicture(type, url, id));
+        }
+    }
+    
+    public void choosePicture(int ID) {
+        Picture tempP = null;
+        int priority = 8;
+        for(int i = 0; i < allPicture.size(); i++)
+        {
+            if(allPicture.get(i).getID() == ID)
+            {
+                tempP = allPicture.get(i);
+                priority = tempP.getPriority();
+            }
+        }
+        
+        switch (priority) {
+                case 1:
+                    pictrueToDraw.set(0, tempP);
+                    break;
+                case 2:
+                    pictrueToDraw.set(1, tempP);
+                    break;
+                case 3:
+                    pictrueToDraw.set(2, tempP);
+                    break;
+                case 4:
+                    pictrueToDraw.set(3, tempP);
+                    break;
+                case 5:
+                    pictrueToDraw.set(4, tempP);
+                    break;
+                case 6:                    
+                    pictrueToDraw.set(5, tempP);
+                    break;
+                case 7:
+                    pictrueToDraw.set(6, tempP);
+                    break;
+        }        
     }
 }
