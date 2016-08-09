@@ -1,4 +1,4 @@
-package com.politechnikalodzka.rpgcreator.dbmodule;
+package com.politechnikalodzka.rpgcreator.database;
 
 /**
  * Created by aleks on 19.05.16.
