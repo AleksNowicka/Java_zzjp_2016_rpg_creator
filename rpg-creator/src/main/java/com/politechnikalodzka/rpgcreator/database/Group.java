@@ -1,4 +1,4 @@
-package com.politechnikalodzka.rpgcreator.dbmodule;
+package com.politechnikalodzka.rpgcreator.database;
 
 import java.sql.Array;
 import java.sql.ResultSet;
