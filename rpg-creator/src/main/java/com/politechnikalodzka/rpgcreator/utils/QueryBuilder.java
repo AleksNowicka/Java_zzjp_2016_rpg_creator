@@ -1,9 +1,5 @@
 package com.politechnikalodzka.rpgcreator.utils;
 
-import com.politechnikalodzka.rpgcreator.database.DataBase;
-import com.sun.xml.internal.org.jvnet.fastinfoset.VocabularyApplicationData;
-import com.sun.xml.internal.ws.policy.jaxws.SafePolicyReader;
-
 import java.util.List;
 import java.util.Map;
 
