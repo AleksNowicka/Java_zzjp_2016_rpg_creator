@@ -3,52 +3,60 @@ package com.politechnikalodzka.rpgcreator.database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by aleks on 19.05.16.
  */
-public class User {
+public class User extends BaseDataBaseEntity{
 
     private int id;
     private String nick;
     private String emailAddress;
     private String password;
-    private DataBase dataBase;
+    private Map<Group, List<Character>> usersGroupsWithTheirCharacters;
 
-    User() throws ClassNotFoundException {
-        this.dataBase = DataBase.getInstance();
+    User() throws ClassNotFoundException, SQLException {
+        initDataBaseAndQueryBuilder("User");
     }
 
     public boolean authenticateAndGetData(String nick, String password) throws SQLException {
-        Statement statement = dataBase.getConnection().createStatement();
-        statement.setQueryTimeout(30);
-        ResultSet rs = statement.executeQuery("select * from User " +
-                "where nick = "+nick);
-        if(rs.getString("password") != password){
+        ResultSet resultSet = dataBaseStatement.executeQuery(queryBuilder.getFullRowQuery(columnsNames.get(1),
+                nick));
+        if(resultSet.getString(columnsNames.get(3)) != password){
             return false;
         }
-        id = Integer.parseInt(rs.getString("id"));
+        id = Integer.parseInt(resultSet.getString(columnsNames.get(0)));
         this.nick = nick;
-        emailAddress = rs.getString("emailAddress");
+        emailAddress = resultSet.getString(columnsNames.get(2));
         this.password = password;
         return true;
     }
 
+    public void getUsersGroupsWithTheirCharacters(){
+        
+    }
+
     public void saveAsEditedUser() throws SQLException {
-        Statement statement = dataBase.getConnection().createStatement();
-        statement.setQueryTimeout(30);
-        statement.executeUpdate("update User set nick = '"+this.nick+"', emailAddress = '"+this.emailAddress+
-                "', password = '"+this.password+"' where id = "+Integer.toString(this.id));
+        Map<String, String> columsNamesWithUpdatedValues = new HashMap<String, String>();
+        columsNamesWithUpdatedValues.put(columnsNames.get(1), nick);
+        columsNamesWithUpdatedValues.put(columnsNames.get(2), emailAddress);
+        columsNamesWithUpdatedValues.put(columnsNames.get(3), password);
+        dataBaseStatement.executeUpdate(queryBuilder.getUpdateRowQuery(columsNamesWithUpdatedValues,
+                columnsNames.get(0), String.valueOf(id)));
     }
 
     public void saveAsNewUser(String password) throws SQLException {
-        Statement statement = dataBase.getConnection().createStatement();
-        statement.setQueryTimeout(30);
-        ResultSet rs = statement.executeQuery("select max(id) from User");
-        int newId = Integer.parseInt(rs.getString("max(id)"));
-        statement.executeUpdate("insert into User values ("+Integer.toString(newId)+", '"+this.nick+
-                "', '"+this.emailAddress+"', '"+password+"')");
+        ResultSet resultSet = dataBaseStatement.executeQuery(queryBuilder.getRowMaxColumnValueQuery(
+                String.valueOf(id)));
+        int newId = Integer.parseInt(resultSet.getString("max("+columnsNames.get(0)+")"));
+        List<String> rowValues = new ArrayList<String>();
+        rowValues.add(String.valueOf(newId)); rowValues.add(nick);
+        rowValues.add(emailAddress); rowValues.add(password);
+        dataBaseStatement.executeUpdate(queryBuilder.getInsertRowQuery(rowValues));
     }
 
     public String getNick() { return nick; }
