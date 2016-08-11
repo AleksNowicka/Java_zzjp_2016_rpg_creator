@@ -46,8 +46,8 @@ public class QueryBuilder {
         return query;
     }
 
-    public String getRowMaxColumnValueQuery(String searchedColumn, String byColumnName, String byValue){
-        return SELECT+MAX_START+searchedColumn+MAX_MIN_END+WHERE+byColumnName+EQUALS+byValue;
+    public String getRowMaxColumnValueQuery(String searchedColumn){
+        return SELECT+MAX_START+searchedColumn+MAX_MIN_END+FROM+tableName;
     }
 
     public String getRowMinColumnValueQuery(String searchedColumn, String byColumnName, String byValue){

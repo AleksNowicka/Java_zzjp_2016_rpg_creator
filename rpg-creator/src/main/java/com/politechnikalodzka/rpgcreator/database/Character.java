@@ -6,8 +6,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by aleks on 19.05.16.
@@ -34,6 +33,7 @@ public class Character {
     Character() throws ClassNotFoundException, SQLException {
         dataBase = DataBase.getInstance();
         dataBaseStatement = dataBase.getConnection().createStatement();
+        dataBaseStatement.setQueryTimeout(30);
         queryBuilder = new QueryBuilder(tableName);
         getColumnsNames();
     }
@@ -69,7 +69,6 @@ public class Character {
     }
 
     public void getData(int id) throws SQLException {
-        dataBaseStatement.setQueryTimeout(30);
         String columnName = "id";
         if(!doesColumnExist(columnName)){
             return;
@@ -90,24 +89,30 @@ public class Character {
     }
 
     public void saveAsEditedCharacter() throws SQLException{
-        Statement statement = dataBase.getConnection().createStatement();
-        statement.setQueryTimeout(30);
-        statement.executeUpdate("update Characters set name = '"+name+"' gender = '"+gender+
-                "' hair = "+Integer.toString(hairId)+" hat = "+Integer.toString(hatId)+
-                " outfit = "+Integer.toString(outfitId)+" eyes = "+Integer.toString(eyesId)+
-                " accessories = "+Integer.toString(accessoriesId)+" belongsToGroup = "+
-                Integer.toString(groupId)+" where id = "+Integer.toString(id));
+        Map<String, String> columsNamesWithUpdatedValues = new HashMap<String, String>();
+        columsNamesWithUpdatedValues.put(columnsNames.get(1), name);
+        columsNamesWithUpdatedValues.put(columnsNames.get(2), String.valueOf(gender));
+        columsNamesWithUpdatedValues.put(columnsNames.get(3), String.valueOf(hairId));
+        columsNamesWithUpdatedValues.put(columnsNames.get(4), String.valueOf(hatId));
+        columsNamesWithUpdatedValues.put(columnsNames.get(5), String.valueOf(outfitId));
+        columsNamesWithUpdatedValues.put(columnsNames.get(6), String.valueOf(eyesId));
+        columsNamesWithUpdatedValues.put(columnsNames.get(7), String.valueOf(accessoriesId));
+        columsNamesWithUpdatedValues.put(columnsNames.get(8), String.valueOf(groupId));
+        dataBaseStatement.executeUpdate(queryBuilder.getUpdateRowQuery(columsNamesWithUpdatedValues,
+                columnsNames.get(0), String.valueOf(id)));
     }
 
     public void saveAsNewCharacter() throws  SQLException{
-        Statement statement = dataBase.getConnection().createStatement();
-        statement.setQueryTimeout(30);
-        ResultSet rs = statement.executeQuery("select max(id) from Characters");
-        int newId = Integer.parseInt(rs.getString("max(id)"));
-        statement.executeUpdate("insert into Characters values ("+Integer.toString(newId)+", '"+name+
-                "', '"+gender+"', "+Integer.toString(hairId)+", "+Integer.toString(hatId)+
-                ", "+Integer.toString(outfitId)+", "+Integer.toString(eyesId)+", "+
-                Integer.toString(accessoriesId)+", "+Integer.toString(groupId)+")");
+        ResultSet resultSet = dataBaseStatement.executeQuery(queryBuilder.getRowMaxColumnValueQuery(
+                columnsNames.get(0)));
+        int newId = Integer.parseInt(resultSet.getString("max("+columnsNames.get(0)+")"));
+        List<String> rowValues = new ArrayList<String>();
+        rowValues.add(String.valueOf(newId)); rowValues.add(name);
+        rowValues.add(String.valueOf(gender)); rowValues.add(String.valueOf(hairId));
+        rowValues.add(String.valueOf(hatId)); rowValues.add(String.valueOf(outfitId));
+        rowValues.add(String.valueOf(eyesId)); rowValues.add(String.valueOf(accessoriesId));
+        rowValues.add(String.valueOf(groupId));
+        dataBaseStatement.executeUpdate(queryBuilder.getInsertRowQuery(rowValues));
     }
 
     public String getName() { return name; }
