@@ -1,20 +1,13 @@
 package com.politechnikalodzka.rpgcreator.database;
 
-import com.politechnikalodzka.rpgcreator.utils.QueryBuilder;
-
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Group {
-
-    private String tableName;
-    private List<String> columnsNames;
+public class Group extends BaseDataBaseEntity{
 
     private int id;
     private String name;
@@ -23,9 +16,6 @@ public class Group {
     private String groupIcon;
     private int groupOwnerId;
 
-    private DataBase dataBase;
-    private QueryBuilder queryBuilder;
-    private Statement dataBaseStatement;
 
     public Group() throws ClassNotFoundException, SQLException {
         initDataBaseAndQueryBuilder("Groups");
@@ -40,29 +30,12 @@ public class Group {
         }
     }
 
-    private void initDataBaseAndQueryBuilder(String tableName) throws ClassNotFoundException, SQLException {
-        this.tableName = tableName;
-        dataBase = DataBase.getInstance();
-        dataBaseStatement = dataBase.getConnection().createStatement();
-        dataBaseStatement.setQueryTimeout(30);
-        queryBuilder = new QueryBuilder(tableName);
-        getColumnsNames();
-    }
-
-    private void getColumnsNames() throws SQLException {
-        columnsNames = new ArrayList<String>();
-        ResultSet resultSet = dataBaseStatement.executeQuery(queryBuilder.getAllQuery());
-        if(resultSet.getFetchSize() == 0){
+    public void getData(int id) throws SQLException {
+        String columnName = "id";
+        if(!doesColumnExist(columnName)){
             return;
         }
-        ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
-        for(int i=1; i<=resultSetMetaData.getColumnCount(); i++){
-            columnsNames.add(resultSetMetaData.getColumnName(i));
-        }
-    }
-
-    public void getData(int id) throws SQLException {
-        ResultSet rs = dataBaseStatement.executeQuery(queryBuilder.getFullRowQuery(columnsNames.get(0),
+        ResultSet rs = dataBaseStatement.executeQuery(queryBuilder.getFullRowQuery(columnName,
                 String.valueOf(id)));
         if(rs.getFetchSize() == 0){
             return;

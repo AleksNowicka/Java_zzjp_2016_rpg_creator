@@ -1,17 +1,10 @@
 package com.politechnikalodzka.rpgcreator.database;
 
-import com.politechnikalodzka.rpgcreator.utils.QueryBuilder;
-
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.*;
 
-public class Character {
-
-    private String tableName;
-    private List<String> columnsNames;
+public class Character extends BaseDataBaseEntity{
 
     private int id;
     private String name;
@@ -22,10 +15,6 @@ public class Character {
     private int eyesId;
     private int accessoriesId;
     private int groupId;
-
-    private DataBase dataBase;
-    private QueryBuilder queryBuilder;
-    private Statement dataBaseStatement;
 
     Character() throws ClassNotFoundException, SQLException {
         initDataBaseAndQueryBuilder("Characters");
@@ -38,36 +27,6 @@ public class Character {
         }catch(SQLException e){
             System.out.println(e.getMessage());
         }
-    }
-
-    private void initDataBaseAndQueryBuilder(String tableName) throws ClassNotFoundException, SQLException {
-        this.tableName = tableName;
-        dataBase = DataBase.getInstance();
-        dataBaseStatement = dataBase.getConnection().createStatement();
-        dataBaseStatement.setQueryTimeout(30);
-        queryBuilder = new QueryBuilder(tableName);
-        getColumnsNames();
-    }
-
-    private void getColumnsNames() throws SQLException {
-        columnsNames = new ArrayList<String>();
-        ResultSet resultSet = dataBaseStatement.executeQuery(queryBuilder.getAllQuery());
-        if(resultSet.getFetchSize() == 0){
-            return;
-        }
-        ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
-        for(int i=1; i<=resultSetMetaData.getColumnCount(); i++){
-            columnsNames.add(resultSetMetaData.getColumnName(i));
-        }
-    }
-
-    private boolean doesColumnExist(String columnName){
-        for(String column : columnsNames){
-            if(columnName.equals(column)){
-                return true;
-            }
-        }
-        return false;
     }
 
     public void getData(int id) throws SQLException {
