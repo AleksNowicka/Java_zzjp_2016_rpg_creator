@@ -8,12 +8,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 
-/**
- * Created by aleks on 19.05.16.
- */
 public class Character {
 
-    private final String tableName = "Characters";
+    private String tableName;
     private List<String> columnsNames;
 
     private int id;
@@ -31,20 +28,25 @@ public class Character {
     private Statement dataBaseStatement;
 
     Character() throws ClassNotFoundException, SQLException {
-        dataBase = DataBase.getInstance();
-        dataBaseStatement = dataBase.getConnection().createStatement();
-        dataBaseStatement.setQueryTimeout(30);
-        queryBuilder = new QueryBuilder(tableName);
-        getColumnsNames();
+        initDataBaseAndQueryBuilder("Characters");
     }
 
-    Character(int id) throws ClassNotFoundException{
-        dataBase = DataBase.getInstance();
+    Character(int id) throws ClassNotFoundException, SQLException {
+        initDataBaseAndQueryBuilder("Characters");
         try {
             getData(id);
         }catch(SQLException e){
             System.out.println(e.getMessage());
         }
+    }
+
+    private void initDataBaseAndQueryBuilder(String tableName) throws ClassNotFoundException, SQLException {
+        this.tableName = tableName;
+        dataBase = DataBase.getInstance();
+        dataBaseStatement = dataBase.getConnection().createStatement();
+        dataBaseStatement.setQueryTimeout(30);
+        queryBuilder = new QueryBuilder(tableName);
+        getColumnsNames();
     }
 
     private void getColumnsNames() throws SQLException {
@@ -78,14 +80,14 @@ public class Character {
             return;
         }
         this.id = id;
-        name = resultSet.getString(columnsNames.get(0));
-        gender = resultSet.getString(columnsNames.get(1)).charAt(0);
-        hairId = Integer.parseInt(resultSet.getString(columnsNames.get(2)));
-        hatId = Integer.parseInt(resultSet.getString(columnsNames.get(3)));
-        outfitId = Integer.parseInt(resultSet.getString(columnsNames.get(4)));
-        eyesId = Integer.parseInt(resultSet.getString(columnsNames.get(5)));
-        accessoriesId = Integer.parseInt(resultSet.getString(columnsNames.get(6)));
-        groupId = Integer.parseInt(resultSet.getString(columnsNames.get(7)));
+        name = resultSet.getString(columnsNames.get(1));
+        gender = resultSet.getString(columnsNames.get(2)).charAt(0);
+        hairId = Integer.parseInt(resultSet.getString(columnsNames.get(3)));
+        hatId = Integer.parseInt(resultSet.getString(columnsNames.get(4)));
+        outfitId = Integer.parseInt(resultSet.getString(columnsNames.get(5)));
+        eyesId = Integer.parseInt(resultSet.getString(columnsNames.get(6)));
+        accessoriesId = Integer.parseInt(resultSet.getString(columnsNames.get(7)));
+        groupId = Integer.parseInt(resultSet.getString(columnsNames.get(8)));
     }
 
     public void saveAsEditedCharacter() throws SQLException{
