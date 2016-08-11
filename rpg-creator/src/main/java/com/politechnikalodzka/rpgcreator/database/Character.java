@@ -1,13 +1,21 @@
 package com.politechnikalodzka.rpgcreator.database;
 
+import com.politechnikalodzka.rpgcreator.utils.QueryBuilder;
+
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by aleks on 19.05.16.
  */
 public class Character {
+
+    private final String tableName = "Characters";
+    private List<String> columnsNames;
 
     private int id;
     private String name;
@@ -18,10 +26,16 @@ public class Character {
     private int eyesId;
     private int accessoriesId;
     private int groupId;
-    private DataBase dataBase;
 
-    Character() throws ClassNotFoundException {
+    private DataBase dataBase;
+    private QueryBuilder queryBuilder;
+    private Statement dataBaseStatement;
+
+    Character() throws ClassNotFoundException, SQLException {
         dataBase = DataBase.getInstance();
+        dataBaseStatement = dataBase.getConnection().createStatement();
+        queryBuilder = new QueryBuilder(tableName);
+        getColumnsNames();
     }
 
     Character(int id) throws ClassNotFoundException{
@@ -33,22 +47,46 @@ public class Character {
         }
     }
 
+    private void getColumnsNames() throws SQLException {
+        columnsNames = new ArrayList<String>();
+        ResultSet resultSet = dataBaseStatement.executeQuery(queryBuilder.getAllQuery());
+        if(resultSet.getFetchSize() == 0){
+            return;
+        }
+        ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+        for(int i=1; i<=resultSetMetaData.getColumnCount(); i++){
+            columnsNames.add(resultSetMetaData.getColumnName(i));
+        }
+    }
+
+    private boolean doesColumnExist(String columnName){
+        for(String column : columnsNames){
+            if(columnName.equals(column)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void getData(int id) throws SQLException {
-        Statement statement = dataBase.getConnection().createStatement();
-        statement.setQueryTimeout(30);
-        ResultSet rs = statement.executeQuery("select * from Characters where id = "+ Integer.toString(id));
-        if(rs.getFetchSize() == 0){
+        dataBaseStatement.setQueryTimeout(30);
+        String columnName = "id";
+        if(!doesColumnExist(columnName)){
+            return;
+        }
+        ResultSet resultSet = dataBaseStatement.executeQuery(queryBuilder.getFullRowQuery(columnName, Integer.toString(id)));
+        if(resultSet.getFetchSize() == 0){
             return;
         }
         this.id = id;
-        name = rs.getString("name");
-        gender = rs.getString("gender").charAt(0);
-        hairId = Integer.parseInt(rs.getString("hair"));
-        hatId = Integer.parseInt(rs.getString("hat"));
-        outfitId = Integer.parseInt(rs.getString("outfit"));
-        eyesId = Integer.parseInt(rs.getString("eyes"));
-        accessoriesId = Integer.parseInt(rs.getString("accessories"));
-        groupId = Integer.parseInt(rs.getString("belongsToGroup"));
+        name = resultSet.getString(columnsNames.get(0));
+        gender = resultSet.getString(columnsNames.get(1)).charAt(0);
+        hairId = Integer.parseInt(resultSet.getString(columnsNames.get(2)));
+        hatId = Integer.parseInt(resultSet.getString(columnsNames.get(3)));
+        outfitId = Integer.parseInt(resultSet.getString(columnsNames.get(4)));
+        eyesId = Integer.parseInt(resultSet.getString(columnsNames.get(5)));
+        accessoriesId = Integer.parseInt(resultSet.getString(columnsNames.get(6)));
+        groupId = Integer.parseInt(resultSet.getString(columnsNames.get(7)));
     }
 
     public void saveAsEditedCharacter() throws SQLException{

@@ -11,8 +11,8 @@ import java.util.List;
  * Created by aleks on 19.05.16.
  */
 public class Group {
-    private final int maxNumberOfCharactersInGroup = 10;
 
+    private int maxNumberOfCharactersInGroup;
     private int id;
     private String name;
     private  String description;
