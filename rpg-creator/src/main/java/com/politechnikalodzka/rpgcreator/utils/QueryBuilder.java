@@ -32,11 +32,15 @@ public class QueryBuilder {
         return SELECT+ALL+FROM+tableName;
     }
 
-    public String getFullRowQuery(String byColumnName, String byValue){
+    public String getFullRowQueryFromOwnTable(String byColumnName, String byValue){
         return SELECT+ALL+FROM+tableName+WHERE+byColumnName+EQUALS+byValue;
     }
 
-    public String getRowColumnsValuesQuery(List<String> searchedColumns, String byColumnName, String byValue){
+    public String getFullRowQuery(String searchedTableName, String byColumnName, String byValue){
+        return SELECT+ALL+FROM+searchedTableName+WHERE+byColumnName+EQUALS+byValue;
+    }
+
+    public String getRowColumnsValuesQueryFromOwnTable(List<String> searchedColumns, String byColumnName, String byValue){
         String query = SELECT;
         for(String searchedColumnName : searchedColumns){
             query += searchedColumnName+", ";
@@ -46,15 +50,15 @@ public class QueryBuilder {
         return query;
     }
 
-    public String getRowMaxColumnValueQuery(String searchedColumn){
+    public String getRowMaxColumnValueQueryFromOwnTable(String searchedColumn){
         return SELECT+MAX_START+searchedColumn+MAX_MIN_END+FROM+tableName;
     }
 
-    public String getRowMinColumnValueQuery(String searchedColumn, String byColumnName, String byValue){
+    public String getRowMinColumnValueQueryFromOwnTable(String searchedColumn, String byColumnName, String byValue){
         return SELECT+MIN_START+searchedColumn+MAX_MIN_END+WHERE+byColumnName+EQUALS+byValue;
     }
 
-    public String getInsertRowQuery(List<String> rowValues){
+    public String getInsertRowQueryFromOwnTable(List<String> rowValues){
         String query = INSERT+tableName+VALUES+"(";
         for(String value : rowValues){
             query += "'"+value+"', ";
@@ -64,7 +68,7 @@ public class QueryBuilder {
         return query;
     }
 
-    public String getUpdateRowQuery(Map<String, String> columsNamesWithUpdatedValues, String byColumnName, String byValue){
+    public String getUpdateRowQueryFromOwnTable(Map<String, String> columsNamesWithUpdatedValues, String byColumnName, String byValue){
         String query = UPDATE+tableName+SET;
         for(String key : columsNamesWithUpdatedValues.keySet()){
             query += key+EQUALS+"'"+columsNamesWithUpdatedValues.get(key)+"' ";
@@ -73,7 +77,7 @@ public class QueryBuilder {
         return query;
     }
 
-    public String getDeleteRowQuery(String byColumnName, String byValue){
+    public String getDeleteRowQueryFromOwnTable(String byColumnName, String byValue){
         return DELETE+FROM+tableName+WHERE+byColumnName+EQUALS+byValue;
     }
 

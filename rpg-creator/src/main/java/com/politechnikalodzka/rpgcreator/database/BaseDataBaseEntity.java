@@ -27,10 +27,10 @@ public class BaseDataBaseEntity {
         dataBaseStatement = dataBase.getConnection().createStatement();
         dataBaseStatement.setQueryTimeout(30);
         queryBuilder = new QueryBuilder(tableName);
-        getColumnsNames();
+        retriveColumnsNames();
     }
 
-    protected void getColumnsNames() throws SQLException {
+    protected void retriveColumnsNames() throws SQLException {
         columnsNames = new ArrayList<String>();
         ResultSet resultSet = dataBaseStatement.executeQuery(queryBuilder.getAllQuery());
         if(resultSet.getFetchSize() == 0){
@@ -51,4 +51,6 @@ public class BaseDataBaseEntity {
         return false;
     }
 
+    public String getTableName() { return tableName; }
+    public List<String> getColumnsNames() { return columnsNames; }
 }

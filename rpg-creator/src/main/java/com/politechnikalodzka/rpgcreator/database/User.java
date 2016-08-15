@@ -2,7 +2,6 @@ package com.politechnikalodzka.rpgcreator.database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +23,7 @@ public class User extends BaseDataBaseEntity{
     }
 
     public boolean authenticateAndGetData(String nick, String password) throws SQLException {
-        ResultSet resultSet = dataBaseStatement.executeQuery(queryBuilder.getFullRowQuery(columnsNames.get(1),
+        ResultSet resultSet = dataBaseStatement.executeQuery(queryBuilder.getFullRowQueryFromOwnTable(columnsNames.get(1),
                 nick));
         if(resultSet.getString(columnsNames.get(3)) != password){
             return false;
@@ -36,8 +35,31 @@ public class User extends BaseDataBaseEntity{
         return true;
     }
 
-    public void getUsersGroupsWithTheirCharacters(){
-        
+    public void getUsersGroupsWithTheirCharacters() throws SQLException, ClassNotFoundException {
+        ResultSet groupsResultSet, groupCharactersResultSet;
+        List<Character> groupCharacters;
+        Group group = new Group();
+        Character character = new Character();
+        usersGroupsWithTheirCharacters = new HashMap<Group, List<Character>>();
+        groupsResultSet = dataBaseStatement.executeQuery(queryBuilder.getFullRowQuery(group.getTableName(),
+                group.getColumnsNames().get(group.getColumnsNames().size()-1), String.valueOf(id)));
+        if(groupsResultSet.getFetchSize() == 0){
+            return;
+        }
+        while (groupsResultSet.next()){
+            group = new Group();
+            groupCharacters = new ArrayList<Character>();
+            group.getData(groupsResultSet.getInt(group.getColumnsNames().get(0)));
+            groupCharactersResultSet = dataBaseStatement.executeQuery(queryBuilder.getFullRowQuery(
+                    character.getTableName(), character.getColumnsNames().get(character.getColumnsNames().size()-1),
+                            String.valueOf(group.getId())));
+            while (groupCharactersResultSet.next()){
+                character = new Character();
+                character.getData(groupCharactersResultSet.getInt(character.getColumnsNames().get(0)));
+                groupCharacters.add(character);
+            }
+            usersGroupsWithTheirCharacters.put(group, groupCharacters);
+        }
     }
 
     public void saveAsEditedUser() throws SQLException {
@@ -45,18 +67,18 @@ public class User extends BaseDataBaseEntity{
         columsNamesWithUpdatedValues.put(columnsNames.get(1), nick);
         columsNamesWithUpdatedValues.put(columnsNames.get(2), emailAddress);
         columsNamesWithUpdatedValues.put(columnsNames.get(3), password);
-        dataBaseStatement.executeUpdate(queryBuilder.getUpdateRowQuery(columsNamesWithUpdatedValues,
+        dataBaseStatement.executeUpdate(queryBuilder.getUpdateRowQueryFromOwnTable(columsNamesWithUpdatedValues,
                 columnsNames.get(0), String.valueOf(id)));
     }
 
     public void saveAsNewUser(String password) throws SQLException {
-        ResultSet resultSet = dataBaseStatement.executeQuery(queryBuilder.getRowMaxColumnValueQuery(
+        ResultSet resultSet = dataBaseStatement.executeQuery(queryBuilder.getRowMaxColumnValueQueryFromOwnTable(
                 String.valueOf(id)));
         int newId = Integer.parseInt(resultSet.getString("max("+columnsNames.get(0)+")"));
         List<String> rowValues = new ArrayList<String>();
         rowValues.add(String.valueOf(newId)); rowValues.add(nick);
         rowValues.add(emailAddress); rowValues.add(password);
-        dataBaseStatement.executeUpdate(queryBuilder.getInsertRowQuery(rowValues));
+        dataBaseStatement.executeUpdate(queryBuilder.getInsertRowQueryFromOwnTable(rowValues));
     }
 
     public String getNick() { return nick; }

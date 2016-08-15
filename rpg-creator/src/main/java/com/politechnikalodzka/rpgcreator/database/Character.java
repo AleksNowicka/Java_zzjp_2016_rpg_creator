@@ -34,7 +34,7 @@ public class Character extends BaseDataBaseEntity{
         if(!doesColumnExist(columnName)){
             return;
         }
-        ResultSet resultSet = dataBaseStatement.executeQuery(queryBuilder.getFullRowQuery(columnName, Integer.toString(id)));
+        ResultSet resultSet = dataBaseStatement.executeQuery(queryBuilder.getFullRowQueryFromOwnTable(columnName, Integer.toString(id)));
         if(resultSet.getFetchSize() == 0){
             return;
         }
@@ -59,12 +59,12 @@ public class Character extends BaseDataBaseEntity{
         columsNamesWithUpdatedValues.put(columnsNames.get(6), String.valueOf(eyesId));
         columsNamesWithUpdatedValues.put(columnsNames.get(7), String.valueOf(accessoriesId));
         columsNamesWithUpdatedValues.put(columnsNames.get(8), String.valueOf(groupId));
-        dataBaseStatement.executeUpdate(queryBuilder.getUpdateRowQuery(columsNamesWithUpdatedValues,
+        dataBaseStatement.executeUpdate(queryBuilder.getUpdateRowQueryFromOwnTable(columsNamesWithUpdatedValues,
                 columnsNames.get(0), String.valueOf(id)));
     }
 
     public void saveAsNewCharacter() throws  SQLException{
-        ResultSet resultSet = dataBaseStatement.executeQuery(queryBuilder.getRowMaxColumnValueQuery(
+        ResultSet resultSet = dataBaseStatement.executeQuery(queryBuilder.getRowMaxColumnValueQueryFromOwnTable(
                 columnsNames.get(0)));
         int newId = Integer.parseInt(resultSet.getString("max("+columnsNames.get(0)+")"));
         List<String> rowValues = new ArrayList<String>();
@@ -73,7 +73,7 @@ public class Character extends BaseDataBaseEntity{
         rowValues.add(String.valueOf(hatId)); rowValues.add(String.valueOf(outfitId));
         rowValues.add(String.valueOf(eyesId)); rowValues.add(String.valueOf(accessoriesId));
         rowValues.add(String.valueOf(groupId));
-        dataBaseStatement.executeUpdate(queryBuilder.getInsertRowQuery(rowValues));
+        dataBaseStatement.executeUpdate(queryBuilder.getInsertRowQueryFromOwnTable(rowValues));
     }
 
     public String getName() { return name; }

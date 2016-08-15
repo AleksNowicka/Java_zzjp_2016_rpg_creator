@@ -9,6 +9,8 @@ import java.util.Map;
 
 public class Group extends BaseDataBaseEntity{
 
+    private final String tableName = "Groups";
+
     private int id;
     private String name;
     private  String description;
@@ -18,11 +20,11 @@ public class Group extends BaseDataBaseEntity{
 
 
     public Group() throws ClassNotFoundException, SQLException {
-        initDataBaseAndQueryBuilder("Groups");
+        initDataBaseAndQueryBuilder(tableName);
     }
 
     public Group(int id) throws ClassNotFoundException, SQLException {
-        initDataBaseAndQueryBuilder("Groups");
+        initDataBaseAndQueryBuilder(tableName);
         try{
             getData(id);
         }catch (SQLException e){
@@ -35,7 +37,7 @@ public class Group extends BaseDataBaseEntity{
         if(!doesColumnExist(columnName)){
             return;
         }
-        ResultSet rs = dataBaseStatement.executeQuery(queryBuilder.getFullRowQuery(columnName,
+        ResultSet rs = dataBaseStatement.executeQuery(queryBuilder.getFullRowQueryFromOwnTable(columnName,
                 String.valueOf(id)));
         if(rs.getFetchSize() == 0){
             return;
@@ -55,21 +57,22 @@ public class Group extends BaseDataBaseEntity{
         columsNamesWithUpdatedValues.put(columnsNames.get(3), String.valueOf(maxGroupMembers));
         columsNamesWithUpdatedValues.put(columnsNames.get(4), groupIcon);
         columsNamesWithUpdatedValues.put(columnsNames.get(5), String.valueOf(groupOwnerId));
-        dataBaseStatement.executeUpdate(queryBuilder.getUpdateRowQuery(columsNamesWithUpdatedValues,
+        dataBaseStatement.executeUpdate(queryBuilder.getUpdateRowQueryFromOwnTable(columsNamesWithUpdatedValues,
                 columnsNames.get(0), String.valueOf(id)));
     }
 
     public void saveAsNewGroup() throws  SQLException{
-        ResultSet resultSet = dataBaseStatement.executeQuery(queryBuilder.getRowMaxColumnValueQuery(
+        ResultSet resultSet = dataBaseStatement.executeQuery(queryBuilder.getRowMaxColumnValueQueryFromOwnTable(
                 columnsNames.get(0)));
         int newId = Integer.parseInt(resultSet.getString("max("+columnsNames.get(0)+")"));
         List<String> rowValues = new ArrayList<String>();
         rowValues.add(String.valueOf(newId)); rowValues.add(name);
         rowValues.add(description); rowValues.add(String.valueOf(maxGroupMembers));
         rowValues.add(groupIcon); rowValues.add(String.valueOf(groupOwnerId));
-        dataBaseStatement.executeUpdate(queryBuilder.getInsertRowQuery(rowValues));
+        dataBaseStatement.executeUpdate(queryBuilder.getInsertRowQueryFromOwnTable(rowValues));
     }
 
+    public int getId() { return id; }
     public String getName() {return name;}
     public void setName(String name) {this.name = name;}
     public String getDescription() {return description;}
