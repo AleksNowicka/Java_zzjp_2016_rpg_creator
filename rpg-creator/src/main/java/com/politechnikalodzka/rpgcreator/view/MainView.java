@@ -9,7 +9,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class MainFrame extends JFrame implements FrameSetter{
+public class MainView extends JFrame implements FrameSetter{
 
 	public JButton createNewCharacterButton;
 	public JButton editExistingCharactersButton;
@@ -20,7 +20,7 @@ public class MainFrame extends JFrame implements FrameSetter{
 	private JLabel welcomeMessageLabel;
 	private JPanel userAvatarPanel;
 
-	public MainFrame(String title) {
+	public MainView(String title) {
 		super(title);
 
 		setupContentPane();

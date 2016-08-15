@@ -9,7 +9,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class EditExistingCharactersFrame extends JFrame implements FrameSetter{
+public class EditExistingCharactersView extends JFrame implements FrameSetter{
 
 	public JButton goBackButton;
 
@@ -24,7 +24,7 @@ public class EditExistingCharactersFrame extends JFrame implements FrameSetter{
 	private JLabel group2Label;
 	private JLabel group3Label;
 
-	public EditExistingCharactersFrame(String title) {
+	public EditExistingCharactersView(String title) {
 		super(title);
 
 		setupContentPane();

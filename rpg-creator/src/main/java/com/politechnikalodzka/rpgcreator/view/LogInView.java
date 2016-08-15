@@ -10,7 +10,7 @@ import java.awt.Color;
 import javax.swing.UIManager;
 import javax.swing.JPasswordField;
 
-public class LogInFrame extends JFrame implements FrameSetter{
+public class LogInView extends JFrame implements FrameSetter{
 
 	public JButton loginButton;
 
@@ -19,7 +19,7 @@ public class LogInFrame extends JFrame implements FrameSetter{
 	private JLabel loginLabel;
 	private JLabel passwordLabel;
 
-	public LogInFrame(String title) {
+	public LogInView(String title) {
 		super(title);
 		setupContentPane();
 		setupComponents();

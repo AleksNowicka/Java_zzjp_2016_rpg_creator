@@ -9,7 +9,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class EditExistingGroupsFrame extends JFrame implements FrameSetter{
+public class EditExistingGroupsView extends JFrame implements FrameSetter{
 
 	private JLabel frameNameLabel;
 	private JButton editGroup1Button;
@@ -22,7 +22,7 @@ public class EditExistingGroupsFrame extends JFrame implements FrameSetter{
 	private JLabel character2Label;
 	private JLabel character3Label;
 
-	public EditExistingGroupsFrame(String title) {
+	public EditExistingGroupsView(String title) {
 		super(title);
 		setupContentPane();
 		setupComponents();

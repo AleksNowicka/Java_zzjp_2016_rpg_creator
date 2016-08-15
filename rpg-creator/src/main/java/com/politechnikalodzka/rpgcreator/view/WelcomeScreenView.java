@@ -1,23 +1,30 @@
 package com.politechnikalodzka.rpgcreator.view;
 
 import com.politechnikalodzka.rpgcreator.interfaces.FrameSetter;
+import com.politechnikalodzka.rpgcreator.viewmodel.WelcomeScreenViewModel;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class WelcomeScreen extends JFrame implements FrameSetter{
+public class WelcomeScreenView extends JFrame implements FrameSetter{
 
-	public JButton beginButton;
+	private WelcomeScreenViewModel welcomeScreenViewModel;
+	private String appTitle;
 
+	private JButton beginButton;
 	private JLabel titleLabel;
 
-	public WelcomeScreen(String title){
+	public WelcomeScreenView(String title){
 		super( title );
-
+		welcomeScreenViewModel = new WelcomeScreenViewModel();
+		appTitle = title;
 		setupContentPane();
 		setupComponents();
+		setupListeners();
 	}
 
 	public void setupContentPane() {
@@ -39,6 +46,13 @@ public class WelcomeScreen extends JFrame implements FrameSetter{
 	}
 
 	public void setupListeners() {
+		final WelcomeScreenView classInstance = this;
 
+		beginButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				welcomeScreenViewModel.setupNewFrame(appTitle);
+				welcomeScreenViewModel.switchFrames(classInstance, welcomeScreenViewModel.getLogInView());
+			}
+		});
 	}
 }

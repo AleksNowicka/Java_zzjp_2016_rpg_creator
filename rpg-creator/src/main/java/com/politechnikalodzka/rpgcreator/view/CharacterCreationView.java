@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
-public class CharacterCreationFrame extends JFrame implements FrameSetter{
+public class CharacterCreationView extends JFrame implements FrameSetter{
 
 	public JButton saveButton;
 
@@ -31,7 +31,7 @@ public class CharacterCreationFrame extends JFrame implements FrameSetter{
 	private JLabel eyesLabel;
 	private JLabel accessoriesLabel;
 
-	public CharacterCreationFrame(String title) {
+	public CharacterCreationView(String title) {
 		super(title);
 
 		setupContentPane();

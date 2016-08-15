@@ -13,7 +13,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 
-public class GroupCreationFrame extends JFrame implements FrameSetter{
+public class GroupCreationView extends JFrame implements FrameSetter{
 
 	public JButton saveButton;
 
@@ -28,7 +28,7 @@ public class GroupCreationFrame extends JFrame implements FrameSetter{
 	private JComboBox maxGroupMembersComboBox;
 	private JPanel groupIconPanel;
 
-	public GroupCreationFrame(String title) {
+	public GroupCreationView(String title) {
 		super(title);
 
 		setupContentPane();

@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 
-public class EditProfileFrame extends JFrame implements FrameSetter{
+public class EditProfileView extends JFrame implements FrameSetter{
 
 	public JButton btnSaveChanges;
 
@@ -23,7 +23,7 @@ public class EditProfileFrame extends JFrame implements FrameSetter{
 	private JLabel editLoginLabel;
 	private JLabel editPasswordLabel;
 
-	public EditProfileFrame(String title) {
+	public EditProfileView(String title) {
 		super(title);
 		setupContentPane();
 		setupComponents();
