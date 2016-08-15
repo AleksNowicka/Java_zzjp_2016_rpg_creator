@@ -23,15 +23,15 @@ public class DataBase {
         }catch(SQLException e){
             System.err.println(e.getMessage());
         }
-        finally{
-            try{
-                if(connection != null)
-                    connection.close();
-            }
-            catch(SQLException e){
-                System.err.println(e);
-            }
-        }
+//        finally{
+//            try{
+//                if(connection != null)
+//                    connection.close();
+//            }
+//            catch(SQLException e){
+//                System.err.println(e);
+//            }
+//        }
     }
 
     public static DataBase getInstance() throws ClassNotFoundException {

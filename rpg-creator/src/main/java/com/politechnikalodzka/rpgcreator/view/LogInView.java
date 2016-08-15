@@ -1,19 +1,20 @@
 package com.politechnikalodzka.rpgcreator.view;
 
 import com.politechnikalodzka.rpgcreator.interfaces.FrameSetter;
+import com.politechnikalodzka.rpgcreator.viewmodel.LogInViewModel;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.Color;
-import javax.swing.UIManager;
-import javax.swing.JPasswordField;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class LogInView extends JFrame implements FrameSetter{
 
-	public JButton loginButton;
+	private LogInViewModel logInViewModel;
+	private String appTitle;
 
+	private JButton loginButton;
 	private JTextField loginTextField;
 	private JPasswordField passwordField;
 	private JLabel loginLabel;
@@ -21,8 +22,11 @@ public class LogInView extends JFrame implements FrameSetter{
 
 	public LogInView(String title) {
 		super(title);
+		logInViewModel = new LogInViewModel();
+		appTitle = title;
 		setupContentPane();
 		setupComponents();
+		setupListeners();
 	}
 
 	public void setupContentPane() {
@@ -60,6 +64,24 @@ public class LogInView extends JFrame implements FrameSetter{
 	}
 
 	public void setupListeners() {
+		final LogInView classInstance = this;
 
+		loginButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String nick, password;
+				nick = loginTextField.getText();
+				password = String.valueOf(passwordField.getPassword());
+				try {
+					if(logInViewModel.authenticateAndGetUser(nick, password)){
+                        logInViewModel.setupNewFrame(appTitle);
+						logInViewModel.switchFrames(classInstance, logInViewModel.getMainView());
+                    }
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				} catch (ClassNotFoundException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
 	}
 }

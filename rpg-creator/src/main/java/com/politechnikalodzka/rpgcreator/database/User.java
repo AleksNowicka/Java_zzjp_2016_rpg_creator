@@ -18,14 +18,14 @@ public class User extends BaseDataBaseEntity{
     private String password;
     private Map<Group, List<Character>> usersGroupsWithTheirCharacters;
 
-    User() throws ClassNotFoundException, SQLException {
+    public User() throws ClassNotFoundException, SQLException {
         initDataBaseAndQueryBuilder("User");
     }
 
     public boolean authenticateAndGetData(String nick, String password) throws SQLException {
         ResultSet resultSet = dataBaseStatement.executeQuery(queryBuilder.getFullRowQueryFromOwnTable(columnsNames.get(1),
                 nick));
-        if(resultSet.getString(columnsNames.get(3)) != password){
+        if(!resultSet.getString(columnsNames.get(3)).equals(password)){
             return false;
         }
         id = Integer.parseInt(resultSet.getString(columnsNames.get(0)));

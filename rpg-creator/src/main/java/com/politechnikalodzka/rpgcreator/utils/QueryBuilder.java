@@ -33,11 +33,11 @@ public class QueryBuilder {
     }
 
     public String getFullRowQueryFromOwnTable(String byColumnName, String byValue){
-        return SELECT+ALL+FROM+tableName+WHERE+byColumnName+EQUALS+byValue;
+        return SELECT+ALL+FROM+tableName+WHERE+byColumnName+EQUALS+"'"+byValue+"'";
     }
 
     public String getFullRowQuery(String searchedTableName, String byColumnName, String byValue){
-        return SELECT+ALL+FROM+searchedTableName+WHERE+byColumnName+EQUALS+byValue;
+        return SELECT+ALL+FROM+searchedTableName+WHERE+byColumnName+EQUALS+"'"+byValue+"'";
     }
 
     public String getRowColumnsValuesQueryFromOwnTable(List<String> searchedColumns, String byColumnName, String byValue){
@@ -46,7 +46,7 @@ public class QueryBuilder {
             query += searchedColumnName+", ";
         }
         query = query.substring(0, query.length()-2);
-        query += FROM+tableName+WHERE+byColumnName+EQUALS+byValue;
+        query += FROM+tableName+WHERE+byColumnName+EQUALS+"'"+byValue+"'";
         return query;
     }
 
@@ -55,7 +55,7 @@ public class QueryBuilder {
     }
 
     public String getRowMinColumnValueQueryFromOwnTable(String searchedColumn, String byColumnName, String byValue){
-        return SELECT+MIN_START+searchedColumn+MAX_MIN_END+WHERE+byColumnName+EQUALS+byValue;
+        return SELECT+MIN_START+searchedColumn+MAX_MIN_END+WHERE+byColumnName+EQUALS+"'"+byValue+"'";
     }
 
     public String getInsertRowQueryFromOwnTable(List<String> rowValues){
@@ -73,12 +73,12 @@ public class QueryBuilder {
         for(String key : columsNamesWithUpdatedValues.keySet()){
             query += key+EQUALS+"'"+columsNamesWithUpdatedValues.get(key)+"' ";
         }
-        query += WHERE+byColumnName+EQUALS+byValue;
+        query += WHERE+byColumnName+EQUALS+"'"+byValue+"'";
         return query;
     }
 
     public String getDeleteRowQueryFromOwnTable(String byColumnName, String byValue){
-        return DELETE+FROM+tableName+WHERE+byColumnName+EQUALS+byValue;
+        return DELETE+FROM+tableName+WHERE+byColumnName+EQUALS+"'"+byValue+"'";
     }
 
 }
