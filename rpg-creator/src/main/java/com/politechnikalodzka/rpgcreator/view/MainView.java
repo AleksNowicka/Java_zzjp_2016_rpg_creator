@@ -1,30 +1,35 @@
 package com.politechnikalodzka.rpgcreator.view;
 
 import com.politechnikalodzka.rpgcreator.interfaces.FrameSetter;
+import com.politechnikalodzka.rpgcreator.viewmodel.MainViewModel;
 
 import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class MainView extends JFrame implements FrameSetter{
 
-	public JButton createNewCharacterButton;
-	public JButton editExistingCharactersButton;
-	public JButton createNewGroupButton;
-	public JButton editExistingGroupsButton;
-	public JButton editProfileButton;
+	private MainViewModel mainViewModel;
 
+	private JButton createNewCharacterButton;
+	private JButton editExistingCharactersButton;
+	private JButton createNewGroupButton;
+	private JButton editExistingGroupsButton;
+	private JButton editProfileButton;
 	private JLabel welcomeMessageLabel;
 	private JPanel userAvatarPanel;
 
 	public MainView(String title) {
 		super(title);
-
+		mainViewModel = new MainViewModel(title);
 		setupContentPane();
 		setupComponents();
+		setupListeners();
 	}
 
 	public void setupContentPane() {
@@ -67,6 +72,36 @@ public class MainView extends JFrame implements FrameSetter{
 	}
 
 	public void setupListeners() {
+		final MainView classInstance = this;
 
+		createNewCharacterButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainViewModel.switchFrames(classInstance, mainViewModel.getCharacterCreationView());
+			}
+		});
+
+		editExistingCharactersButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainViewModel.switchFrames(classInstance, mainViewModel.getEditExistingCharactersView());
+			}
+		});
+
+		createNewGroupButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainViewModel.switchFrames(classInstance, mainViewModel.getGroupCreationView());
+			}
+		});
+
+		editExistingGroupsButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainViewModel.switchFrames(classInstance, mainViewModel.getEditExistingGroupsView());
+			}
+		});
+
+		editProfileButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainViewModel.switchFrames(classInstance, mainViewModel.getEditProfileView());
+			}
+		});
 	}
 }

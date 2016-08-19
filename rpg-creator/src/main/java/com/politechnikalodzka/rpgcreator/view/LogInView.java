@@ -12,7 +12,6 @@ import java.sql.SQLException;
 public class LogInView extends JFrame implements FrameSetter{
 
 	private LogInViewModel logInViewModel;
-	private String appTitle;
 
 	private JButton loginButton;
 	private JTextField loginTextField;
@@ -22,8 +21,7 @@ public class LogInView extends JFrame implements FrameSetter{
 
 	public LogInView(String title) {
 		super(title);
-		logInViewModel = new LogInViewModel();
-		appTitle = title;
+		logInViewModel = new LogInViewModel(title);
 		setupContentPane();
 		setupComponents();
 		setupListeners();
@@ -73,7 +71,6 @@ public class LogInView extends JFrame implements FrameSetter{
 				password = String.valueOf(passwordField.getPassword());
 				try {
 					if(logInViewModel.authenticateAndGetUser(nick, password)){
-                        logInViewModel.setupNewFrame(appTitle);
 						logInViewModel.switchFrames(classInstance, logInViewModel.getMainView());
                     }
 				} catch (SQLException e1) {

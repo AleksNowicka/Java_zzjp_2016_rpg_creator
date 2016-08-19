@@ -1,11 +1,14 @@
 package com.politechnikalodzka.rpgcreator.view;
 
 import com.politechnikalodzka.rpgcreator.interfaces.FrameSetter;
+import com.politechnikalodzka.rpgcreator.viewmodel.EditProfileViewModel;
 
 import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -13,8 +16,9 @@ import javax.swing.JPasswordField;
 
 public class EditProfileView extends JFrame implements FrameSetter{
 
-	public JButton btnSaveChanges;
+	private EditProfileViewModel editProfileViewModel;
 
+	private JButton saveButton;
 	private JTextField loginTextField;
 	private JPasswordField passwordField;
 	private JButton loadImageButton;
@@ -25,8 +29,10 @@ public class EditProfileView extends JFrame implements FrameSetter{
 
 	public EditProfileView(String title) {
 		super(title);
+		editProfileViewModel = new EditProfileViewModel(title);
 		setupContentPane();
 		setupComponents();
+		setupListeners();
 	}
 
 	public void setupContentPane() {
@@ -72,12 +78,18 @@ public class EditProfileView extends JFrame implements FrameSetter{
 		passwordField.setBounds(182, 145, 86, 20);
 		getContentPane().add(passwordField);
 
-		btnSaveChanges = new JButton("Save changes");
-		btnSaveChanges.setBounds(316, 173, 99, 23);
-		getContentPane().add(btnSaveChanges);
+		saveButton = new JButton("Save changes");
+		saveButton.setBounds(316, 173, 99, 23);
+		getContentPane().add(saveButton);
 	}
 
 	public void setupListeners() {
+		final EditProfileView classInstance = this;
 
+		saveButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				editProfileViewModel.switchFrames(classInstance, editProfileViewModel.getMainView());
+			}
+		});
 	}
 }

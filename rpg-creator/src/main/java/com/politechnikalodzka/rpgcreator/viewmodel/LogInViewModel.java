@@ -3,6 +3,7 @@ package com.politechnikalodzka.rpgcreator.viewmodel;
 import com.politechnikalodzka.rpgcreator.database.User;
 import com.politechnikalodzka.rpgcreator.view.MainView;
 
+import javax.swing.*;
 import java.sql.SQLException;
 
 /**
@@ -11,11 +12,9 @@ import java.sql.SQLException;
 public class LogInViewModel extends BaseViewModel {
 
     private MainView mainView;
-
     private User currentUser;
 
-    @Override
-    public void setupNewFrame(String title) {
+    public LogInViewModel(String title){
         mainView = new MainView(title);
     }
 

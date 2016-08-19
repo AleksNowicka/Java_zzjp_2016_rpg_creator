@@ -15,8 +15,6 @@ import javax.swing.JButton;
 
 public class GroupCreationView extends JFrame implements FrameSetter{
 
-	public JButton saveButton;
-
 	private JTextField nameTextField;
 	private JTextField passwordTextField;
 	private JLabel frameNameLabel;
@@ -27,12 +25,14 @@ public class GroupCreationView extends JFrame implements FrameSetter{
 	private JLabel membersLabel;
 	private JComboBox maxGroupMembersComboBox;
 	private JPanel groupIconPanel;
+	private JButton saveButton;
 
 	public GroupCreationView(String title) {
 		super(title);
 
 		setupContentPane();
 		setupComponents();
+		setupListeners();
 	}
 
 	public void setupContentPane() {

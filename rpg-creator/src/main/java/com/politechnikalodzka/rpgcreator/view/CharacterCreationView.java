@@ -14,7 +14,6 @@ import javax.swing.DefaultComboBoxModel;
 public class CharacterCreationView extends JFrame implements FrameSetter{
 
 	public JButton saveButton;
-
 	private JButton selectGroupButton;
 	private JPanel characterViewPanel;
 	private JComboBox genderComboBox;
@@ -36,6 +35,7 @@ public class CharacterCreationView extends JFrame implements FrameSetter{
 
 		setupContentPane();
 		setupComponents();
+		setupListeners();
 	}
 
 	public void setupContentPane() {
