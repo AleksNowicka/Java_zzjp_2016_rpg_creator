@@ -11,6 +11,7 @@ public class App {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
+                    System.out.print("test");
                     welcomeScreenView.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
