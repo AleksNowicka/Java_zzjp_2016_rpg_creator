@@ -14,11 +14,11 @@ public class User extends BaseDataBaseEntity{
 
     private static User instance = null;
 
-    private int id;
-    private String nick;
-    private String emailAddress;
-    private String password;
-    private Map<Group, List<Character>> usersGroupsWithTheirCharacters;
+    private static int id;
+    private static String nick;
+    private static String emailAddress;
+    private static String password;
+    private static Map<Group, List<Character>> usersGroupsWithTheirCharacters;
 
     protected User() throws ClassNotFoundException, SQLException {
         initDataBaseAndQueryBuilder("User");

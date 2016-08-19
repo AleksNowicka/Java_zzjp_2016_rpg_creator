@@ -1,5 +1,6 @@
 package com.politechnikalodzka.rpgcreator.view;
 
+import com.politechnikalodzka.rpgcreator.enums.ViewModeEnum;
 import com.politechnikalodzka.rpgcreator.interfaces.FrameSetter;
 
 import javax.swing.JFrame;
@@ -28,7 +29,7 @@ public class GroupCreationView extends JFrame implements FrameSetter{
 	private JComboBox maxGroupMembersComboBox;
 	private JPanel groupIconPanel;
 
-	public GroupCreationView(String title) {
+	public GroupCreationView(String title, ViewModeEnum viewModeEnum) {
 		super(title);
 
 		setupContentPane();

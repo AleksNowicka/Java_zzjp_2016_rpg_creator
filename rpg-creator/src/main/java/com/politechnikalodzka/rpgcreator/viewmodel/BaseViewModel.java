@@ -1,7 +1,5 @@
 package com.politechnikalodzka.rpgcreator.viewmodel;
 
-import com.politechnikalodzka.rpgcreator.view.MainView;
-
 import javax.swing.*;
 
 /**

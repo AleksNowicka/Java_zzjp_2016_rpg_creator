@@ -71,7 +71,7 @@ public class LogInView extends JFrame implements FrameSetter{
 				password = String.valueOf(passwordField.getPassword());
 				try {
 					if(logInViewModel.checkGivenDataAndLogIn(nick, password)){
-						logInViewModel.switchFrames(classInstance, logInViewModel.getMainView());
+						logInViewModel.switchFrames(classInstance, logInViewModel.getNavigationView());
 					}
 				} catch (SQLException e1) {
 					e1.printStackTrace();

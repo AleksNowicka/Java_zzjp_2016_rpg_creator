@@ -1,8 +1,10 @@
 package com.politechnikalodzka.rpgcreator.viewmodel;
 
 import com.politechnikalodzka.rpgcreator.database.User;
-import com.politechnikalodzka.rpgcreator.view.MainView;
+import com.politechnikalodzka.rpgcreator.view.NavigationView;
 
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 import java.sql.SQLException;
 
 /**
@@ -10,24 +12,25 @@ import java.sql.SQLException;
  */
 public class LogInViewModel extends BaseViewModel {
 
-    private MainView mainView;
+    private NavigationView navigationView;
 
     private User user;
 
     public LogInViewModel(String title) throws SQLException, ClassNotFoundException {
-        mainView = new MainView(title);
+        navigationView = new NavigationView(title);
         user = User.getInstance();
     }
 
     public boolean checkGivenDataAndLogIn(String nick, String password) throws SQLException, ClassNotFoundException {
         if(user.authenticateAndGetData(nick, password)){
             user.getUsersGroupsWithTheirCharacters();
+            System.out.println(user.getNick());
             return true;
         }
         return false;
     }
 
-    public MainView getMainView() {
-        return mainView;
+    public NavigationView getNavigationView() {
+        return navigationView;
     }
 }

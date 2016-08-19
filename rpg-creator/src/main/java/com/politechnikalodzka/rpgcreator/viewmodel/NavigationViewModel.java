@@ -11,7 +11,7 @@ import java.sql.SQLException;
 /**
  * Created by aleks on 19.08.16.
  */
-public class MainViewModel extends BaseViewModel {
+public class NavigationViewModel extends BaseViewModel {
 
     private EditProfileView editProfileView;
     private CharacterCreationView characterCreationView;
@@ -21,13 +21,18 @@ public class MainViewModel extends BaseViewModel {
 
     private User user;
 
-    public MainViewModel(String title) throws SQLException, ClassNotFoundException {
+    public NavigationViewModel(String title) throws SQLException, ClassNotFoundException {
         editProfileView = new EditProfileView(title);
-        characterCreationView = new CharacterCreationView(title);
+        characterCreationView = new CharacterCreationView(title, ViewModeEnum.CREATE);
         editExistingCharactersView = new EditExistingCharactersView(title);
-        groupCreationView = new GroupCreationView(title);
+        groupCreationView = new GroupCreationView(title, ViewModeEnum.CREATE);
         editExistingGroupsView = new EditExistingGroupsView(title);
         user = User.getInstance();
+        System.out.println("nick: " + user.getNick());
+    }
+
+    public String getUserNick() {
+        return user.getNick();
     }
 
     public EditProfileView getEditProfileView() {

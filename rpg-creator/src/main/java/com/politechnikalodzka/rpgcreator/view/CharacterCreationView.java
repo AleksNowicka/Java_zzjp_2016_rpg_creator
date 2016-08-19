@@ -1,5 +1,6 @@
 package com.politechnikalodzka.rpgcreator.view;
 
+import com.politechnikalodzka.rpgcreator.enums.ViewModeEnum;
 import com.politechnikalodzka.rpgcreator.interfaces.FrameSetter;
 
 import javax.swing.JFrame;
@@ -31,7 +32,7 @@ public class CharacterCreationView extends JFrame implements FrameSetter{
 	private JLabel eyesLabel;
 	private JLabel accessoriesLabel;
 
-	public CharacterCreationView(String title) {
+	public CharacterCreationView(String title, ViewModeEnum viewModeEnum) {
 		super(title);
 
 		setupContentPane();
