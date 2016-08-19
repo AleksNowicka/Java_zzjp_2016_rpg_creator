@@ -10,4 +10,24 @@ import java.sql.SQLException;
  */
 public class LogInViewModel extends BaseViewModel {
 
+    private MainView mainView;
+
+    private User user;
+
+    public LogInViewModel(String title) throws SQLException, ClassNotFoundException {
+        mainView = new MainView(title);
+        user = User.getInstance();
+    }
+
+    public boolean checkGivenDataAndLogIn(String nick, String password) throws SQLException, ClassNotFoundException {
+        if(user.authenticateAndGetData(nick, password)){
+            user.getUsersGroupsWithTheirCharacters();
+            return true;
+        }
+        return false;
+    }
+
+    public MainView getMainView() {
+        return mainView;
+    }
 }

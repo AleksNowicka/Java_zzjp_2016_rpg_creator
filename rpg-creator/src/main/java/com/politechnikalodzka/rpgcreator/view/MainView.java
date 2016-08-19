@@ -1,15 +1,19 @@
 package com.politechnikalodzka.rpgcreator.view;
 
 import com.politechnikalodzka.rpgcreator.interfaces.FrameSetter;
+import com.politechnikalodzka.rpgcreator.viewmodel.MainViewModel;
 
 import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class MainView extends JFrame implements FrameSetter{
+
+	private MainViewModel mainViewModel;
 
 	public JButton createNewCharacterButton;
 	public JButton editExistingCharactersButton;
@@ -20,9 +24,9 @@ public class MainView extends JFrame implements FrameSetter{
 	private JLabel welcomeMessageLabel;
 	private JPanel userAvatarPanel;
 
-	public MainView(String title) {
+	public MainView(String title) throws SQLException, ClassNotFoundException {
 		super(title);
-
+		mainViewModel = new MainViewModel(title);
 		setupContentPane();
 		setupComponents();
 	}

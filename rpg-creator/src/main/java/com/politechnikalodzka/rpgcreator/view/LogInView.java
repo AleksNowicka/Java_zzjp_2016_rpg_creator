@@ -12,7 +12,6 @@ import java.sql.SQLException;
 public class LogInView extends JFrame implements FrameSetter{
 
 	private LogInViewModel logInViewModel;
-	private String appTitle;
 
 	private JButton loginButton;
 	private JTextField loginTextField;
@@ -20,10 +19,9 @@ public class LogInView extends JFrame implements FrameSetter{
 	private JLabel loginLabel;
 	private JLabel passwordLabel;
 
-	public LogInView(String title) {
+	public LogInView(String title) throws SQLException, ClassNotFoundException {
 		super(title);
-		logInViewModel = new LogInViewModel();
-		appTitle = title;
+		logInViewModel = new LogInViewModel(title);
 		setupContentPane();
 		setupComponents();
 		setupListeners();
@@ -72,10 +70,9 @@ public class LogInView extends JFrame implements FrameSetter{
 				nick = loginTextField.getText();
 				password = String.valueOf(passwordField.getPassword());
 				try {
-					if(logInViewModel.authenticateAndGetUser(nick, password)){
-                        logInViewModel.setupNewFrame(appTitle);
+					if(logInViewModel.checkGivenDataAndLogIn(nick, password)){
 						logInViewModel.switchFrames(classInstance, logInViewModel.getMainView());
-                    }
+					}
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				} catch (ClassNotFoundException e1) {

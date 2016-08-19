@@ -9,19 +9,18 @@ import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class WelcomeScreenView extends JFrame implements FrameSetter{
 
 	private WelcomeScreenViewModel welcomeScreenViewModel;
-	private String appTitle;
 
 	private JButton beginButton;
 	private JLabel titleLabel;
 
-	public WelcomeScreenView(String title){
+	public WelcomeScreenView(String title) throws SQLException, ClassNotFoundException {
 		super( title );
-		welcomeScreenViewModel = new WelcomeScreenViewModel();
-		appTitle = title;
+		welcomeScreenViewModel = new WelcomeScreenViewModel(title);
 		setupContentPane();
 		setupComponents();
 		setupListeners();
@@ -50,7 +49,6 @@ public class WelcomeScreenView extends JFrame implements FrameSetter{
 
 		beginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				welcomeScreenViewModel.setupNewFrame(appTitle);
 				welcomeScreenViewModel.switchFrames(classInstance, welcomeScreenViewModel.getLogInView());
 			}
 		});
