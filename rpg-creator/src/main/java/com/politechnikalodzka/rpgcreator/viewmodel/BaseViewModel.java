@@ -9,8 +9,6 @@ import javax.swing.*;
  */
 public abstract class BaseViewModel {
 
-    public abstract void setupNewFrame(String title);
-
     public void switchFrames(JFrame actualFrame, JFrame nextFrame){
         actualFrame.dispose();
         nextFrame.setVisible(true);

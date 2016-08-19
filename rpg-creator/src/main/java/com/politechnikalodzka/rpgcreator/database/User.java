@@ -12,14 +12,23 @@ import java.util.Map;
  */
 public class User extends BaseDataBaseEntity{
 
+    private static User instance = null;
+
     private int id;
     private String nick;
     private String emailAddress;
     private String password;
     private Map<Group, List<Character>> usersGroupsWithTheirCharacters;
 
-    public User() throws ClassNotFoundException, SQLException {
+    protected User() throws ClassNotFoundException, SQLException {
         initDataBaseAndQueryBuilder("User");
+    }
+
+    public static User getInstance() throws ClassNotFoundException, SQLException {
+        if(instance == null) {
+            instance = new User();
+        }
+        return instance;
     }
 
     public boolean authenticateAndGetData(String nick, String password) throws SQLException {
