@@ -1,5 +1,7 @@
 package com.politechnikalodzka.rpgcreator.database;
 
+import com.politechnikalodzka.rpgcreator.view.CharacterCreationView;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,41 +14,92 @@ import java.util.Map;
  */
 public class User extends BaseDataBaseEntity{
 
-    private int id;
-    private String nick;
-    private String emailAddress;
-    private String password;
-    private Map<Group, List<Character>> usersGroupsWithTheirCharacters;
+    private static User instance = null;
 
-    User() throws ClassNotFoundException, SQLException {
+    private static int id;
+    private static String nick;
+    private static String emailAddress;
+    private static String password;
+    private static List<Group> userGroups;
+    private static Map<Integer, List<Character>> usersGroupsWithTheirCharacters;
+
+    protected User() throws ClassNotFoundException, SQLException {
         initDataBaseAndQueryBuilder("User");
     }
 
-    public boolean authenticateAndGetData(String nick, String password) throws SQLException {
+    public static User getInstance() throws ClassNotFoundException, SQLException {
+        if(instance == null) {
+            instance = new User();
+        }
+        return instance;
+    }
+
+    public boolean authenticateAndGetData(String nick, String password) throws SQLException, ClassNotFoundException {
         ResultSet resultSet = dataBaseStatement.executeQuery(queryBuilder.getFullRowQueryFromOwnTable(columnsNames.get(1),
                 nick));
-        if(resultSet.getString(columnsNames.get(3)) != password){
+        if(!resultSet.getString(columnsNames.get(3)).equals(password)){
             return false;
         }
         id = Integer.parseInt(resultSet.getString(columnsNames.get(0)));
         this.nick = nick;
         emailAddress = resultSet.getString(columnsNames.get(2));
         this.password = password;
+        ResultSet groupCharactersResultSet;
+        List<Character> groupCharacters;
+        Group group = new Group();
+        Character character = new Character();
+        usersGroupsWithTheirCharacters = new HashMap<Integer, List<Character>>();
+        userGroups = new ArrayList<Group>();
+        resultSet = dataBaseStatement.executeQuery(queryBuilder.getFullRowQuery(group.getTableName(),
+                group.getColumnsNames().get(group.getColumnsNames().size()-1), String.valueOf(id)));
+        if(resultSet.getFetchSize() == 0){
+            System.out.println("empty");
+            return true;
+        }
+        while (resultSet.next()){
+            System.out.println("Not empty");
+            group = new Group();
+            groupCharacters = new ArrayList<Character>();
+            group.getData(resultSet.getInt(group.getColumnsNames().get(0)));
+            groupCharactersResultSet = dataBaseStatement.executeQuery(queryBuilder.getFullRowQuery(
+                    character.getTableName(), character.getColumnsNames().get(character.getColumnsNames().size()-1),
+                    String.valueOf(group.getId())));
+            while (groupCharactersResultSet.next()){
+                character = new Character();
+                character.getData(groupCharactersResultSet.getInt(character.getColumnsNames().get(0)));
+                groupCharacters.add(character);
+            }
+            usersGroupsWithTheirCharacters.put(group.getId(), groupCharacters);
+            userGroups.add(group);
+            System.out.println("Group "+group.getName());
+        }
         return true;
     }
 
-    public void getUsersGroupsWithTheirCharacters() throws SQLException, ClassNotFoundException {
+    public void updateData() throws SQLException, ClassNotFoundException {
+        ResultSet resultSet = dataBaseStatement.executeQuery(queryBuilder.getFullRowQueryFromOwnTable(columnsNames.get(1),
+                nick));
+        id = Integer.parseInt(resultSet.getString(columnsNames.get(0)));
+        this.nick = resultSet.getString(columnsNames.get(1));
+        emailAddress = resultSet.getString(columnsNames.get(2));
+        this.password = resultSet.getString(columnsNames.get(3));
+    }
+
+    public void retriveUsersGroupsWithTheirCharacters() throws SQLException, ClassNotFoundException {
         ResultSet groupsResultSet, groupCharactersResultSet;
         List<Character> groupCharacters;
         Group group = new Group();
         Character character = new Character();
-        usersGroupsWithTheirCharacters = new HashMap<Group, List<Character>>();
+        usersGroupsWithTheirCharacters = new HashMap<Integer, List<Character>>();
+        userGroups = new ArrayList<Group>();
         groupsResultSet = dataBaseStatement.executeQuery(queryBuilder.getFullRowQuery(group.getTableName(),
                 group.getColumnsNames().get(group.getColumnsNames().size()-1), String.valueOf(id)));
         if(groupsResultSet.getFetchSize() == 0){
+            System.out.println("empty");
             return;
         }
         while (groupsResultSet.next()){
+            System.out.println("Not empty");
             group = new Group();
             groupCharacters = new ArrayList<Character>();
             group.getData(groupsResultSet.getInt(group.getColumnsNames().get(0)));
@@ -58,7 +111,9 @@ public class User extends BaseDataBaseEntity{
                 character.getData(groupCharactersResultSet.getInt(character.getColumnsNames().get(0)));
                 groupCharacters.add(character);
             }
-            usersGroupsWithTheirCharacters.put(group, groupCharacters);
+            usersGroupsWithTheirCharacters.put(group.getId(), groupCharacters);
+            userGroups.add(group);
+            System.out.println("Group "+group.getName());
         }
     }
 
@@ -85,5 +140,14 @@ public class User extends BaseDataBaseEntity{
     public void setNick(String nick) { this.nick = nick; }
     public String getEmailAddress() { return emailAddress; }
     public void setEmailAddress(String emailAddress) { this.emailAddress = emailAddress; }
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
 
+    public static List<Group> getUserGroups() {
+        return userGroups;
+    }
+
+    public static Map<Integer, List<Character>> getUsersGroupsWithTheirCharacters() {
+        return usersGroupsWithTheirCharacters;
+    }
 }

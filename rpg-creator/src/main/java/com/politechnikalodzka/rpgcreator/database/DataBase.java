@@ -8,8 +8,6 @@ import java.sql.SQLException;
  * Created by aleks on 19.05.16.
  */
 
-//Singleton - in order to provide only one instance of this class in whole application
-
 public class DataBase {
 
     private static DataBase instance = null;
@@ -22,15 +20,6 @@ public class DataBase {
             System.out.println("Connected to database");
         }catch(SQLException e){
             System.err.println(e.getMessage());
-        }
-        finally{
-            try{
-                if(connection != null)
-                    connection.close();
-            }
-            catch(SQLException e){
-                System.err.println(e);
-            }
         }
     }
 

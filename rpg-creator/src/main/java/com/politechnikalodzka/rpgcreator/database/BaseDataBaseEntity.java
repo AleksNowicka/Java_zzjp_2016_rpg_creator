@@ -1,6 +1,7 @@
 package com.politechnikalodzka.rpgcreator.database;
 
 import com.politechnikalodzka.rpgcreator.utils.QueryBuilder;
+import sun.rmi.runtime.Log;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -33,9 +34,6 @@ public class BaseDataBaseEntity {
     protected void retriveColumnsNames() throws SQLException {
         columnsNames = new ArrayList<String>();
         ResultSet resultSet = dataBaseStatement.executeQuery(queryBuilder.getAllQuery());
-        if(resultSet.getFetchSize() == 0){
-            return;
-        }
         ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
         for(int i=1; i<=resultSetMetaData.getColumnCount(); i++){
             columnsNames.add(resultSetMetaData.getColumnName(i));
