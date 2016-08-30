@@ -1,12 +1,15 @@
 package com.politechnikalodzka.rpgcreator.view;
 
+import com.politechnikalodzka.rpgcreator.database.Character;
 import com.politechnikalodzka.rpgcreator.enums.ViewModeEnum;
 import com.politechnikalodzka.rpgcreator.interfaces.FrameSetter;
+import com.politechnikalodzka.rpgcreator.viewmodel.CharacterCreationViewModel;
 
 import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JComboBox;
@@ -14,9 +17,10 @@ import javax.swing.DefaultComboBoxModel;
 
 public class CharacterCreationView extends JFrame implements FrameSetter{
 
-	public JButton saveButton;
+	private CharacterCreationViewModel characterCreationViewModel;
 
-	private JButton selectGroupButton;
+	private JButton saveButton;
+	private JComboBox selectGroupButton;
 	private JPanel characterViewPanel;
 	private JComboBox genderComboBox;
 	private JComboBox hairComboBox;
@@ -32,11 +36,12 @@ public class CharacterCreationView extends JFrame implements FrameSetter{
 	private JLabel eyesLabel;
 	private JLabel accessoriesLabel;
 
-	public CharacterCreationView(String title, ViewModeEnum viewModeEnum) {
+	public CharacterCreationView(String title, ViewModeEnum viewModeEnum) throws SQLException, ClassNotFoundException {
 		super(title);
-
+		characterCreationViewModel = new CharacterCreationViewModel(title);
 		setupContentPane();
 		setupComponents();
+		setupListeners();
 	}
 
 	public void setupContentPane() {
@@ -90,7 +95,9 @@ public class CharacterCreationView extends JFrame implements FrameSetter{
 		accessoriesLabel.setBounds(10, 170, 63, 14);
 		getContentPane().add(accessoriesLabel);
 
-		selectGroupButton = new JButton("Select Group");
+		//TODO - reorganize with this new combobox
+		selectGroupButton = new JComboBox();
+		selectGroupButton.setModel(new DefaultComboBoxModel(characterCreationViewModel.getGroupsNames()));
 		selectGroupButton.setBounds(10, 195, 99, 23);
 		getContentPane().add(selectGroupButton);
 

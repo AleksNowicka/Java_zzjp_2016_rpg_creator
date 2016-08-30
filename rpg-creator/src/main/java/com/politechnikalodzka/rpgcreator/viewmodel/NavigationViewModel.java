@@ -28,7 +28,7 @@ public class NavigationViewModel extends BaseViewModel {
         groupCreationView = new GroupCreationView(title, ViewModeEnum.CREATE);
         editExistingGroupsView = new EditExistingGroupsView(title);
         user = User.getInstance();
-        System.out.println("nick: " + user.getNick());
+        user.updateData();
     }
 
     public String getUserNick() {

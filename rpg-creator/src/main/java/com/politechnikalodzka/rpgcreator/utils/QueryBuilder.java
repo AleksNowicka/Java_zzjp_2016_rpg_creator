@@ -71,9 +71,11 @@ public class QueryBuilder {
     public String getUpdateRowQueryFromOwnTable(Map<String, String> columsNamesWithUpdatedValues, String byColumnName, String byValue){
         String query = UPDATE+tableName+SET;
         for(String key : columsNamesWithUpdatedValues.keySet()){
-            query += key+EQUALS+"'"+columsNamesWithUpdatedValues.get(key)+"' ";
+            query += key+EQUALS+"'"+columsNamesWithUpdatedValues.get(key)+"', ";
         }
+        query = query.substring(0, query.length()-2);
         query += WHERE+byColumnName+EQUALS+"'"+byValue+"'";
+        System.out.println(query);
         return query;
     }
 

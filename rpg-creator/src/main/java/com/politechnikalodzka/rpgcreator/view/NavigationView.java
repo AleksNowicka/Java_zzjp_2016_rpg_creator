@@ -28,7 +28,7 @@ public class NavigationView extends JFrame implements FrameSetter{
 	private JLabel welcomeMessageLabel;
 	private JPanel userAvatarPanel;
 
-	public NavigationView(String title) throws SQLException, ClassNotFoundException {
+	public NavigationView(String title){
 		super(title);
         final String appTitle = title;
         this.addWindowFocusListener(new WindowFocusListener() {

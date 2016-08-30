@@ -1,22 +1,23 @@
 package com.politechnikalodzka.rpgcreator.view;
 
 import com.politechnikalodzka.rpgcreator.interfaces.FrameSetter;
+import com.politechnikalodzka.rpgcreator.viewmodel.EditProfileViewModel;
+import sun.rmi.runtime.Log;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 import java.awt.Color;
-import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
+import java.awt.event.*;
+import java.io.File;
+import java.sql.SQLException;
 
-public class EditProfileView extends JFrame implements FrameSetter{
+public class EditProfileView extends JFrame implements FrameSetter {
 
-	public JButton btnSaveChanges;
+	private EditProfileViewModel editProfileViewModel;
 
+	private JButton saveButon;
 	private JTextField loginTextField;
-	private JPasswordField passwordField;
+	private JTextField passwordField;
 	private JButton loadImageButton;
 	private JLabel frameNameLabel;
 	private JPanel userAvatarPanel;
@@ -25,8 +26,17 @@ public class EditProfileView extends JFrame implements FrameSetter{
 
 	public EditProfileView(String title) {
 		super(title);
+		final String appTitle = title;
+		try {
+			editProfileViewModel = new EditProfileViewModel(appTitle);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
 		setupContentPane();
 		setupComponents();
+		setupListeners();
 	}
 
 	public void setupContentPane() {
@@ -64,20 +74,45 @@ public class EditProfileView extends JFrame implements FrameSetter{
 
 		loginTextField = new JTextField();
 		loginTextField.setBounds(182, 95, 86, 20);
-		loginTextField.setColumns(10);
+		loginTextField.setText(editProfileViewModel.getUser().getNick());
 		getContentPane().add(loginTextField);
 
-		passwordField = new JPasswordField();
-		passwordField.setToolTipText("");
+        //TODO Add text field for editing email address
+
+		passwordField = new JTextField();
 		passwordField.setBounds(182, 145, 86, 20);
+		passwordField.setText(editProfileViewModel.getUser().getPassword());
 		getContentPane().add(passwordField);
 
-		btnSaveChanges = new JButton("Save changes");
-		btnSaveChanges.setBounds(316, 173, 99, 23);
-		getContentPane().add(btnSaveChanges);
+		saveButon = new JButton("Save changes");
+		saveButon.setBounds(316, 173, 99, 23);
+		getContentPane().add(saveButon);
 	}
 
 	public void setupListeners() {
+        final EditProfileView classInstance = this;
 
+        loadImageButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+                int result = fileChooser.showOpenDialog(classInstance);
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    File selectedFile = fileChooser.getSelectedFile();
+                }
+            }
+        });
+
+        saveButon.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    editProfileViewModel.updateUserData(loginTextField.getText(), passwordField.getText());
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+                editProfileViewModel.switchFrames(classInstance, editProfileViewModel.getNavigationView());
+                //TODO Add saving chosen icon and changed email address
+            }
+        });
 	}
 }
