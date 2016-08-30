@@ -1,9 +1,11 @@
 package com.politechnikalodzka.rpgcreator;
 
+import com.politechnikalodzka.rpgcreator.picture.ManagePictures;
 import com.politechnikalodzka.rpgcreator.view.WindowSwitcher;
 
 public class App {
-    public static void main( String[] args ) throws ClassNotFoundException {
+
+    public static void main(String[] args) throws ClassNotFoundException {
         //DataBase database = new DataBase();
 //        EventQueue.invokeLater(new Runnable() {
 //            public void run() {
@@ -15,7 +17,8 @@ public class App {
 //                }
 //            }
 //        });
-        WindowSwitcher windowSwitcher = new WindowSwitcher("RPG Creator");
+        ManagePictures mP = new ManagePictures();
+        WindowSwitcher windowSwitcher = new WindowSwitcher("RPG Creator", mP);
         windowSwitcher.launchGui();
     }
 }

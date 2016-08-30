@@ -1,5 +1,7 @@
 package com.politechnikalodzka.rpgcreator.view;
 
+import com.politechnikalodzka.rpgcreator.picture.ManagePictures;
+import com.politechnikalodzka.rpgcreator.picture.Picture;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,12 +21,12 @@ public class WindowSwitcher {
     private GroupCreationFrame groupCreationFrame;
     private EditExistingGroupsFrame editExistingGroupsFrame;
 
-    public WindowSwitcher(String appTitle){
+    public WindowSwitcher(String appTitle, ManagePictures mP){
         welcomeScreen = new WelcomeScreen(appTitle);
         logInFrame = new LogInFrame(appTitle);
         editProfileFrame = new EditProfileFrame(appTitle);
         mainFrame = new MainFrame(appTitle);
-        characterCreationFrame = new CharacterCreationFrame(appTitle);
+        characterCreationFrame = new CharacterCreationFrame(appTitle, mP);
         editExistingCharactersFrame = new EditExistingCharactersFrame(appTitle);
         groupCreationFrame = new GroupCreationFrame(appTitle);
         editExistingGroupsFrame = new EditExistingGroupsFrame(appTitle);
