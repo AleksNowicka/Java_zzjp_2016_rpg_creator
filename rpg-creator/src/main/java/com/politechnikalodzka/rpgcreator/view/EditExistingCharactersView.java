@@ -1,18 +1,23 @@
 package com.politechnikalodzka.rpgcreator.view;
 
 import com.politechnikalodzka.rpgcreator.interfaces.FrameSetter;
+import com.politechnikalodzka.rpgcreator.viewmodel.EditExistingCharactersViewModel;
 
 import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class EditExistingCharactersView extends JFrame implements FrameSetter{
 
-	public JButton goBackButton;
+	private EditExistingCharactersViewModel editExistingCharactersViewModel;
 
+	private JButton goBackButton;
 	private JButton editCharacter1Button;
 	private JButton editCharacter2Button;
 	private JButton editCharacter3Button;
@@ -24,11 +29,12 @@ public class EditExistingCharactersView extends JFrame implements FrameSetter{
 	private JLabel group2Label;
 	private JLabel group3Label;
 
-	public EditExistingCharactersView(String title) {
+	public EditExistingCharactersView(String title) throws SQLException, ClassNotFoundException {
 		super(title);
-
+		editExistingCharactersViewModel = new EditExistingCharactersViewModel(title);
 		setupContentPane();
 		setupComponents();
+		setupListeners();
 	}
 
 	public void setupContentPane() {
@@ -94,6 +100,12 @@ public class EditExistingCharactersView extends JFrame implements FrameSetter{
 	}
 
 	public void setupListeners() {
+		final EditExistingCharactersView classInstance = this;
 
+		goBackButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				editExistingCharactersViewModel.switchFrames(classInstance, editExistingCharactersViewModel.getNavigationView());
+			}
+		});
 	}
 }

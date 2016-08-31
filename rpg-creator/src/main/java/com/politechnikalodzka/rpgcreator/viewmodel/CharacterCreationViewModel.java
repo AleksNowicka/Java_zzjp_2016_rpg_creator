@@ -31,4 +31,7 @@ public class CharacterCreationViewModel extends BaseViewModel {
         return groupsNames;
     }
 
+    public NavigationView getNavigationView() {
+        return navigationView;
+    }
 }
