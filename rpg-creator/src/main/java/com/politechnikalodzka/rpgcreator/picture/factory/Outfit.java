@@ -6,17 +6,18 @@
 package com.politechnikalodzka.rpgcreator.picture.factory;
 
 import com.politechnikalodzka.rpgcreator.enums.Gender;
+import com.politechnikalodzka.rpgcreator.enums.TypeOfPictrues;
 import com.politechnikalodzka.rpgcreator.interfaces.Picture;
 
 /**
  *
  * @author lbary
  */
-public class Outfit extends Picture {
+public class Outfit implements Picture {
 
     private int ID;
     private String URL;
-    private final int priority = 1;
+    private TypeOfPictrues type = TypeOfPictrues.OUTFIT;
     private Gender gender;
 
     public Outfit(int id, String url) {
@@ -35,8 +36,8 @@ public class Outfit extends Picture {
     }
 
     @Override
-    public int getPriority() {
-        return priority;
+    public TypeOfPictrues getType() {
+        return type;
     }
 
     @Override

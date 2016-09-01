@@ -110,32 +110,32 @@ public class CharacterCreationView extends JFrame implements FrameSetter{
 		getContentPane().add(characterViewPanel);
 
 		genderComboBox = new JComboBox();
-		genderComboBox.setModel(new DefaultComboBoxModel(new String[] {"male", "female"}));
+		genderComboBox.setModel(new DefaultComboBoxModel(characterCreationViewModel.getGenderList()));
 		genderComboBox.setBounds(97, 43, 99, 20);
 		getContentPane().add(genderComboBox);
 
 		hairComboBox = new JComboBox();
-		hairComboBox.setModel(new DefaultComboBoxModel(new String[] {"long", "short"}));
+		hairComboBox.setModel(new DefaultComboBoxModel(characterCreationViewModel.getHairList()));
 		hairComboBox.setBounds(97, 68, 99, 20);
 		getContentPane().add(hairComboBox);
 
 		hatComboBox = new JComboBox();
-		hatComboBox.setModel(new DefaultComboBoxModel(new String[] {"ON", "OFF"}));
+		hatComboBox.setModel(new DefaultComboBoxModel(characterCreationViewModel.getHatList()));
 		hatComboBox.setBounds(97, 93, 99, 20);
 		getContentPane().add(hatComboBox);
 
 		outfitComboBox = new JComboBox();
-		outfitComboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3"}));
+		outfitComboBox.setModel(new DefaultComboBoxModel(characterCreationViewModel.getOutfitList()));
 		outfitComboBox.setBounds(97, 118, 99, 20);
 		getContentPane().add(outfitComboBox);
 
 		eyesComboBox = new JComboBox();
-		eyesComboBox.setModel(new DefaultComboBoxModel(new String[] {"brown", "green", "blue"}));
+		eyesComboBox.setModel(new DefaultComboBoxModel(characterCreationViewModel.getEyesList()));
 		eyesComboBox.setBounds(97, 143, 99, 20);
 		getContentPane().add(eyesComboBox);
 
 		accessoriesComboBox = new JComboBox();
-		accessoriesComboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3"}));
+		accessoriesComboBox.setModel(new DefaultComboBoxModel(characterCreationViewModel.getAccessoriesList()));
 		accessoriesComboBox.setBounds(97, 168, 99, 20);
 		getContentPane().add(accessoriesComboBox);
 	}

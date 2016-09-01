@@ -1,17 +1,18 @@
 package com.politechnikalodzka.rpgcreator.picture.factory;
 
 import com.politechnikalodzka.rpgcreator.enums.Gender;
+import com.politechnikalodzka.rpgcreator.enums.TypeOfPictrues;
 import com.politechnikalodzka.rpgcreator.interfaces.Picture;
 
 /**
  *
  * @author lbary
  */
-public class Hat extends Picture {
+public class Hat implements Picture {
 
     private int ID;
     private String URL;
-    private final int priority = 5;
+    private TypeOfPictrues type = TypeOfPictrues.HAT;
     private Gender gender;
 
     public Hat(int id, String url) {
@@ -30,8 +31,8 @@ public class Hat extends Picture {
     }
 
     @Override
-    public int getPriority() {
-        return priority;
+    public TypeOfPictrues getType() {
+        return type;
     }
 
     @Override

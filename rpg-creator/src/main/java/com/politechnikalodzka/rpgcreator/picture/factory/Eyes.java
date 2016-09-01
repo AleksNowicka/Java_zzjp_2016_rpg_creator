@@ -1,18 +1,19 @@
 package com.politechnikalodzka.rpgcreator.picture.factory;
 
 import com.politechnikalodzka.rpgcreator.enums.Gender;
+import com.politechnikalodzka.rpgcreator.enums.TypeOfPictrues;
 import com.politechnikalodzka.rpgcreator.interfaces.Picture;
 
 /**
  *
  * @author lbary
  */
-public class Eyes extends Picture {
+public class Eyes implements Picture {
     private int ID;
     private String URL;
-    private final int priority = 4;
+    private TypeOfPictrues type = TypeOfPictrues.EYES;
     private Gender gender;
-    
+
     public Eyes(int id, String url) {
         this.ID = id;
         this.URL = url;
@@ -29,8 +30,8 @@ public class Eyes extends Picture {
     }
     
     @Override
-    public int getPriority() {
-        return priority;
+    public TypeOfPictrues getType() {
+        return type;
     }
 
     @Override

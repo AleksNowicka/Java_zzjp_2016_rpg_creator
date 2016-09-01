@@ -9,5 +9,7 @@ public enum TypeOfPictrues {
     EYES,
     OUTFIT,
     HAIR,
-    HAT
+    HAT,
+    ACCESSORIES,
+    NONCHANGE
 }

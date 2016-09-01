@@ -8,13 +8,13 @@ import com.politechnikalodzka.rpgcreator.interfaces.Picture;
  *
  * @author lbary
  */
-public class Hair implements Picture {
+public class Accessories implements Picture {
     private int ID;
     private String URL;
-    private TypeOfPictrues type = TypeOfPictrues.HAIR;
+    private TypeOfPictrues type = TypeOfPictrues.ACCESSORIES;
     private Gender gender;
 
-    public Hair(int id, String url) {
+    public Accessories(int id, String url) {
         this.ID = id;
         this.URL = url;
     }

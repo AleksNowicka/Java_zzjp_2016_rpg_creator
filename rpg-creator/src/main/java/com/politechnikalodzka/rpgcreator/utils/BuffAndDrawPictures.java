@@ -1,4 +1,4 @@
-package com.politechnikalodzka.rpgcreator.picture;
+package com.politechnikalodzka.rpgcreator.utils;
 
 import com.politechnikalodzka.rpgcreator.interfaces.Picture;
 import java.awt.Dimension;
