@@ -15,8 +15,8 @@ import java.util.List;
  *
  * @author lbary
  */
-public class Pictures extends BaseDataBaseEntity{
-    
+public class Pictures extends BaseDataBaseEntity {
+
     private static Pictures instance = null;
 
     private List<Picture> pictrueToDraw;
@@ -25,14 +25,14 @@ public class Pictures extends BaseDataBaseEntity{
     private Gender gender = Gender.MALE; //Default
 
     protected Pictures() throws ClassNotFoundException, SQLException {
-        //initDataBaseAndQueryBuilder("Pictures"); TODO Nie wiem jak to dzia³a wiêc na razie wykomentuje
+        //initDataBaseAndQueryBuilder("Pictures"); //TODO Nie wiem jak to dzia³a wiêc na razie wykomentuje
         this.pictrueToDraw = new ArrayList();
         for (int i = 0; i < 5; i++) {
             pictrueToDraw.add(null);
         }
         this.allPicture = new ArrayList();
     }
-    
+
     public Pictures(int a) { //Konstruktor Testowy - Bêdzie trzeba jakoœ to zast¹piæ ale jeszcze nie wiem jak
         this.pictrueToDraw = new ArrayList();
         for (int i = 0; i < 5; i++) {
@@ -48,15 +48,20 @@ public class Pictures extends BaseDataBaseEntity{
     public void setGender(Gender gender) {
         this.gender = gender;
     }
-    
+
     public static Pictures getInstance() throws ClassNotFoundException, SQLException {
-        if(instance == null) {
+        if (instance == null) {
             instance = new Pictures();
         }
         return instance;
     }
 
-    public List<Picture> getPictrueToDraw() {
+    public List<Picture> getPictrueToDraw() throws Exception {
+        for (Picture p : pictrueToDraw) {
+            if (p.equals(null)) {
+                throw new Exception();
+            }
+        }
         return pictrueToDraw;
     }
 

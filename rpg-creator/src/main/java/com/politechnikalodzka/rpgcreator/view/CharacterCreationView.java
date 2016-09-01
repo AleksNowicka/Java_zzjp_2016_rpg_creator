@@ -4,6 +4,8 @@ import com.politechnikalodzka.rpgcreator.database.Character;
 import com.politechnikalodzka.rpgcreator.enums.Gender;
 import com.politechnikalodzka.rpgcreator.enums.ViewModeEnum;
 import com.politechnikalodzka.rpgcreator.interfaces.FrameSetter;
+import com.politechnikalodzka.rpgcreator.interfaces.Picture;
+import com.politechnikalodzka.rpgcreator.utils.PaintCharacter;
 import com.politechnikalodzka.rpgcreator.viewmodel.CharacterCreationViewModel;
 
 import javax.swing.JFrame;
@@ -13,6 +15,8 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JComboBox;
@@ -38,6 +42,7 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
     private JLabel outfitLabel;
     private JLabel eyesLabel;
     private JLabel accessoriesLabel;
+    private List<JPanel> characters;
 
     public CharacterCreationView(String title, ViewModeEnum viewModeEnum) throws SQLException, ClassNotFoundException {
         super(title);
@@ -145,46 +150,107 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
 
     public void setupListeners() {
 
+        //TODO Przetestowanie rysowania poszczególnych elementów postaci.
         genderComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                characters = new ArrayList();
                 String gender = (String) genderComboBox.getSelectedItem();
                 characterCreationViewModel.getPictures().setGender(Gender.valueOf(gender));
+                try {
+                    for (Picture p : characterCreationViewModel.getPictures().getPictrueToDraw()) {
+                        characters.add(new PaintCharacter(p));
+                        add(characters.get(characters.size() - 1));
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
         });
 
         hairComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                characters = new ArrayList();
                 Integer id = (Integer) hairComboBox.getSelectedItem();
                 characterCreationViewModel.getPictures().choosePicture(id);
+                try {
+                    for (Picture p : characterCreationViewModel.getPictures().getPictrueToDraw()) {
+                        characters.add(new PaintCharacter(p));
+                        add(characters.get(characters.size() - 1));
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
-        });
-        
+        }
+        );
+
         hatComboBox.addActionListener(new ActionListener() {
+
             public void actionPerformed(ActionEvent e) {
+                characters = new ArrayList();
                 Integer id = (Integer) hatComboBox.getSelectedItem();
                 characterCreationViewModel.getPictures().choosePicture(id);
+                try {
+                    for (Picture p : characterCreationViewModel.getPictures().getPictrueToDraw()) {
+                        characters.add(new PaintCharacter(p));
+                        add(characters.get(characters.size() - 1));
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
+
         });
-        
+
         outfitComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                characters = new ArrayList();
                 Integer id = (Integer) outfitComboBox.getSelectedItem();
                 characterCreationViewModel.getPictures().choosePicture(id);
+                try {
+                    for (Picture p : characterCreationViewModel.getPictures().getPictrueToDraw()) {
+                        characters.add(new PaintCharacter(p));
+                        add(characters.get(characters.size() - 1));
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
+
         });
-        
+
         eyesComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                characters = new ArrayList();
                 Integer id = (Integer) eyesComboBox.getSelectedItem();
                 characterCreationViewModel.getPictures().choosePicture(id);
+                try {
+                    for (Picture p : characterCreationViewModel.getPictures().getPictrueToDraw()) {
+                        characters.add(new PaintCharacter(p));
+                        add(characters.get(characters.size() - 1));
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
+
         });
-        
+
         accessoriesComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                characters = new ArrayList();
                 Integer id = (Integer) accessoriesComboBox.getSelectedItem();
                 characterCreationViewModel.getPictures().choosePicture(id);
+                try {
+                    for (Picture p : characterCreationViewModel.getPictures().getPictrueToDraw()) {
+                        characters.add(new PaintCharacter(p));
+                        add(characters.get(characters.size() - 1));
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
+
         });
     }
 }
