@@ -27,7 +27,7 @@ public class Pictures extends BaseDataBaseEntity{
     protected Pictures() throws ClassNotFoundException, SQLException {
         //initDataBaseAndQueryBuilder("Pictures"); TODO Nie wiem jak to dzia³a wiêc na razie wykomentuje
         this.pictrueToDraw = new ArrayList();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 5; i++) {
             pictrueToDraw.add(null);
         }
         this.allPicture = new ArrayList();
@@ -35,7 +35,7 @@ public class Pictures extends BaseDataBaseEntity{
     
     public Pictures(int a) { //Konstruktor Testowy - Bêdzie trzeba jakoœ to zast¹piæ ale jeszcze nie wiem jak
         this.pictrueToDraw = new ArrayList();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 5; i++) {
             pictrueToDraw.add(null);
         }
         this.allPicture = new ArrayList();
@@ -99,23 +99,20 @@ public class Pictures extends BaseDataBaseEntity{
 
     private void addToDrawList(TypeOfPictrues type, Picture picture) {
         switch (type) {
-            case HEAD:
+            case OUTFIT:
                 pictrueToDraw.set(0, picture);
                 break;
-            case OUTFIT:
+            case HAIR:
                 pictrueToDraw.set(1, picture);
                 break;
-            case HAIR:
+            case EYES:
                 pictrueToDraw.set(2, picture);
                 break;
-            case EYES:
+            case HAT:
                 pictrueToDraw.set(3, picture);
                 break;
-            case HAT:
-                pictrueToDraw.set(4, picture);
-                break;
             case ACCESSORIES:
-                pictrueToDraw.set(5, picture);
+                pictrueToDraw.set(4, picture);
                 break;
         }
     }

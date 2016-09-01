@@ -12,12 +12,8 @@ import com.politechnikalodzka.rpgcreator.picture.factory.*;
 public class PictureFactory implements Factory {
 
     @Override
-    public Picture addPicture(TypeOfPictrues type, String url, int id)
-    {
-        switch(type) {
-           
-            case HEAD:
-                return new Head(id, url);
+    public Picture addPicture(TypeOfPictrues type, String url, int id) {
+        switch (type) {
             case OUTFIT:
                 return new Outfit(id, url);
             case HAIR:
@@ -31,5 +27,5 @@ public class PictureFactory implements Factory {
             default:
                 return null;
         }
-    }    
+    }
 }

@@ -51,7 +51,7 @@ public class PicturesTest {
         instance.addPictures(TypeOfPictrues.EYES, "www", 3);
         instance.addPictures(TypeOfPictrues.HAIR, "ddd", 4);
         instance.addPictures(TypeOfPictrues.HAT, "eee", 5);
-        instance.addPictures(TypeOfPictrues.HEAD, "fff", 6);
+        instance.addPictures(TypeOfPictrues.ACCESSORIES, "fff", 6);
         instance.addPictures(TypeOfPictrues.OUTFIT, "ggg", 7);
         assertEquals(6, instance.getAllPicture().size());
         instance.addPictures(TypeOfPictrues.HAIR, "bbb", 3);
@@ -70,11 +70,9 @@ public class PicturesTest {
         instance.addPictures(TypeOfPictrues.HAIR, "ccc", 1);
         instance.addPictures(TypeOfPictrues.EYES, "ddd", 2);
         instance.addPictures(TypeOfPictrues.HAT, "eee", 3);
-        instance.addPictures(TypeOfPictrues.HEAD, "fff", 4);
         instance.addPictures(TypeOfPictrues.OUTFIT, "ggg", 5);
         instance.addPictures(TypeOfPictrues.EYES, "hhh", 6);
         instance.addPictures(TypeOfPictrues.HAT, "iii", 7);
-        instance.addPictures(TypeOfPictrues.HEAD, "jjj", 8);
         instance.addPictures(TypeOfPictrues.OUTFIT, "kkk", 9);
         instance.addPictures(TypeOfPictrues.ACCESSORIES, "qwe", 10);
         assertEquals(null, instance.getPictrueToDraw().get(0));
@@ -82,18 +80,17 @@ public class PicturesTest {
         assertEquals(null, instance.getPictrueToDraw().get(2));
         assertEquals(null, instance.getPictrueToDraw().get(3));
         assertEquals(null, instance.getPictrueToDraw().get(4));
-        assertEquals(null, instance.getPictrueToDraw().get(5));
         instance.choosePicture(1);
         instance.choosePicture(2);
         instance.choosePicture(3);
         instance.choosePicture(4);
         instance.choosePicture(5);
         instance.choosePicture(10);
-        assertEquals("ccc", instance.getPictrueToDraw().get(2).getURL());
+        assertEquals("ddd", instance.getPictrueToDraw().get(2).getURL());
         instance.choosePicture(6);
-        assertEquals("ggg", instance.getPictrueToDraw().get(1).getURL());
+        assertEquals("ccc", instance.getPictrueToDraw().get(1).getURL());
         instance.choosePicture(8);
-        assertEquals("hhh", instance.getPictrueToDraw().get(3).getURL());
+        assertEquals("eee", instance.getPictrueToDraw().get(3).getURL());
     }
     
 }
