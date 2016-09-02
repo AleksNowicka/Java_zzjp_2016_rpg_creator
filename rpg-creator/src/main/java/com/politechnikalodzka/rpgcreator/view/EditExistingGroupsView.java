@@ -12,6 +12,8 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class EditExistingGroupsView extends JFrame implements FrameSetter{
 
@@ -65,7 +67,11 @@ public class EditExistingGroupsView extends JFrame implements FrameSetter{
 		button.setBounds(18, 187, 89, 23);
 		getContentPane().add(button);
 		
-		JButton btnSaveGroup = new JButton("Save group");
+		JButton btnSaveGroup = new JButton("Edit group");
+		btnSaveGroup.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnSaveGroup.setBounds(123, 187, 113, 23);
 		getContentPane().add(btnSaveGroup);
 		

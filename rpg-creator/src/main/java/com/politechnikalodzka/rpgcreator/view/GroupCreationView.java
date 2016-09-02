@@ -2,11 +2,15 @@ package com.politechnikalodzka.rpgcreator.view;
 
 import com.politechnikalodzka.rpgcreator.enums.ViewModeEnum;
 import com.politechnikalodzka.rpgcreator.interfaces.FrameSetter;
+import com.politechnikalodzka.rpgcreator.viewmodel.GroupCreationViewModel;
 
 import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
@@ -16,8 +20,9 @@ import javax.swing.JButton;
 
 public class GroupCreationView extends JFrame implements FrameSetter{
 
-	public JButton saveButton;
+	private GroupCreationViewModel groupCreationViewModel;
 
+	private JButton saveButton;
 	private JTextField nameTextField;
 	private JTextField passwordTextField;
 	private JLabel frameNameLabel;
@@ -29,11 +34,12 @@ public class GroupCreationView extends JFrame implements FrameSetter{
 	private JComboBox maxGroupMembersComboBox;
 	private JPanel groupIconPanel;
 
-	public GroupCreationView(String title, ViewModeEnum viewModeEnum) {
+	public GroupCreationView(String title, ViewModeEnum viewModeEnum) throws SQLException, ClassNotFoundException {
 		super(title);
-
+		groupCreationViewModel = new GroupCreationViewModel(title);
 		setupContentPane();
 		setupComponents();
+		setupListeners();
 	}
 
 	public void setupContentPane() {
@@ -103,6 +109,12 @@ public class GroupCreationView extends JFrame implements FrameSetter{
 	}
 
 	public void setupListeners() {
+		final GroupCreationView classInstance = this;
 
+		saveButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				groupCreationViewModel.switchFrames(classInstance, groupCreationViewModel.getNavigationView());
+			}
+		});
 	}
 }

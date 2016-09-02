@@ -9,6 +9,8 @@ import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -141,6 +143,12 @@ public class CharacterCreationView extends JFrame implements FrameSetter{
 	}
 
 	public void setupListeners() {
+		final CharacterCreationView classInstance = this;
 
+		saveButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				characterCreationViewModel.switchFrames(classInstance, characterCreationViewModel.getNavigationView());
+			}
+		});
 	}
 }
