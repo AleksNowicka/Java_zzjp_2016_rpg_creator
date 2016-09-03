@@ -5,7 +5,7 @@
  */
 package com.politechnikalodzka.rpgcreator;
 
-import com.politechnikalodzka.rpgcreator.database.Pictures;
+import com.politechnikalodzka.rpgcreator.utils.Pictures;
 import com.politechnikalodzka.rpgcreator.enums.TypeOfPictrues;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -45,7 +45,7 @@ public class PicturesTest {
     @Test
     public void testAddPictures() {
         System.out.println("addPictures");
-        Pictures instance = new Pictures(1);
+        Pictures instance = new Pictures();
         instance.addPictures(TypeOfPictrues.HAIR, "bbb", 9);
         instance.addPictures(TypeOfPictrues.EYES, "www", 3);
         instance.addPictures(TypeOfPictrues.HAIR, "ddd", 4);
@@ -65,7 +65,7 @@ public class PicturesTest {
     @Test
     public void testChoosePicture() {
         System.out.println("choosePicture");
-        Pictures instance = new Pictures(1);
+        Pictures instance = new Pictures();
         instance.addPictures(TypeOfPictrues.HAIR, "ccc", 1);
         instance.addPictures(TypeOfPictrues.EYES, "ddd", 2);
         instance.addPictures(TypeOfPictrues.HAT, "eee", 3);

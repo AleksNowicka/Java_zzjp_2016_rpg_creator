@@ -1,13 +1,11 @@
-package com.politechnikalodzka.rpgcreator.database;
+package com.politechnikalodzka.rpgcreator.utils;
 
-import com.politechnikalodzka.rpgcreator.database.BaseDataBaseEntity;
-import com.politechnikalodzka.rpgcreator.database.User;
 import com.politechnikalodzka.rpgcreator.enums.Gender;
 import com.politechnikalodzka.rpgcreator.picture.factory.PictureFactory;
 import com.politechnikalodzka.rpgcreator.interfaces.Picture;
 import com.politechnikalodzka.rpgcreator.enums.TypeOfPictrues;
 import com.politechnikalodzka.rpgcreator.interfaces.Factory;
-import java.sql.SQLException;
+import com.politechnikalodzka.rpgcreator.database.Character;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +13,7 @@ import java.util.List;
  *
  * @author lbary
  */
-public class Pictures extends BaseDataBaseEntity {
+public class Pictures {
 
     private static Pictures instance = null;
 
@@ -24,16 +22,7 @@ public class Pictures extends BaseDataBaseEntity {
     private Factory pictrueFactory = new PictureFactory();
     private Gender gender = Gender.MALE; //Default
 
-    protected Pictures() throws ClassNotFoundException, SQLException {
-        //initDataBaseAndQueryBuilder("Pictures"); //TODO Nie wiem jak to dzia³a wiêc na razie wykomentuje
-        this.pictrueToDraw = new ArrayList();
-        for (int i = 0; i < 5; i++) {
-            pictrueToDraw.add(null);
-        }
-        this.allPicture = new ArrayList();
-    }
-
-    public Pictures(int a) { //Konstruktor Testowy - Bêdzie trzeba jakoœ to zast¹piæ ale jeszcze nie wiem jak
+    public Pictures() {
         this.pictrueToDraw = new ArrayList();
         for (int i = 0; i < 5; i++) {
             pictrueToDraw.add(null);
@@ -47,13 +36,6 @@ public class Pictures extends BaseDataBaseEntity {
 
     public void setGender(Gender gender) {
         this.gender = gender;
-    }
-
-    public static Pictures getInstance() throws ClassNotFoundException, SQLException {
-        if (instance == null) {
-            instance = new Pictures();
-        }
-        return instance;
     }
 
     public List<Picture> getPictrueToDraw() throws Exception {
@@ -120,5 +102,16 @@ public class Pictures extends BaseDataBaseEntity {
                 pictrueToDraw.set(4, picture);
                 break;
         }
+    }
+    
+    public void setCurrentCharacter(Character character) { // Ta metoda pobiera dane na temat obrazków dla aktualnie wybranego Character'a
+        this.choosePicture(character.getAccessoriesId());
+        this.choosePicture(character.getEyesId());
+        this.choosePicture(character.getGroupId());
+        this.choosePicture(character.getHairId());
+        this.choosePicture(character.getHatId());
+        this.choosePicture(character.getOutfitId());
+        this.setGender(Gender.valueOf(String.valueOf(character.getGender())));
+        //this.setGender(character.getGender()) // ta linijka bêdzie prawid³owa po dokonaniu zmian w Character
     }
 }

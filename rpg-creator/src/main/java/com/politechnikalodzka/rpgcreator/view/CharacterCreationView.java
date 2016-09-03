@@ -25,7 +25,7 @@ import javax.swing.DefaultComboBoxModel;
 public class CharacterCreationView extends JFrame implements FrameSetter {
 
     private CharacterCreationViewModel characterCreationViewModel;
-    
+
     private JButton saveButton;
     private JComboBox selectGroupButton;
     private JPanel characterViewPanel;
@@ -149,6 +149,7 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
     }
 
     public void setupListeners() {
+        final CharacterCreationView classInstance = this;
 
         //TODO Przetestowanie rysowania poszczególnych elementów postaci.
         genderComboBox.addActionListener(new ActionListener() {
@@ -251,6 +252,12 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
                 }
             }
 
+        });
+
+        saveButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                characterCreationViewModel.switchFrames(classInstance, characterCreationViewModel.getNavigationView());
+            }
         });
     }
 }
