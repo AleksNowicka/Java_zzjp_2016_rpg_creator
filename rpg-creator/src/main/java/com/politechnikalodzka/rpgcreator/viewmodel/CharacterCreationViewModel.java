@@ -96,4 +96,7 @@ public class CharacterCreationViewModel extends BaseViewModel {
         return pictures;
     }
 
+    public NavigationView getNavigationView() {
+        return navigationView;
+    }
 }

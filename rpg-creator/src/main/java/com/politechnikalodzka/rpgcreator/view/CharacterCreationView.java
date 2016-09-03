@@ -25,7 +25,7 @@ import javax.swing.DefaultComboBoxModel;
 public class CharacterCreationView extends JFrame implements FrameSetter {
 
     private CharacterCreationViewModel characterCreationViewModel;
-
+    
     private JButton saveButton;
     private JComboBox selectGroupButton;
     private JPanel characterViewPanel;
