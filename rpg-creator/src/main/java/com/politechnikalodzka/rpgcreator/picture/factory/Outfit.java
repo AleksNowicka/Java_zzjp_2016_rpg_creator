@@ -20,9 +20,10 @@ public class Outfit implements Picture {
     private TypeOfPictrues type = TypeOfPictrues.OUTFIT;
     private Gender gender;
 
-    public Outfit(int id, String url) {
+    public Outfit(int id, String url, Gender gender) {
         this.ID = id;
         this.URL = url;
+        this.gender = gender;
     }
 
     @Override

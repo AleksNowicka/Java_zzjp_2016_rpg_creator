@@ -14,9 +14,10 @@ public class Eyes implements Picture {
     private TypeOfPictrues type = TypeOfPictrues.EYES;
     private Gender gender;
 
-    public Eyes(int id, String url) {
+    public Eyes(int id, String url, Gender gender) {
         this.ID = id;
         this.URL = url;
+        this.gender = gender;
     }
 
     @Override

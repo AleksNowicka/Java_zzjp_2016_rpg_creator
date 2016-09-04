@@ -15,8 +15,6 @@ import java.util.List;
  */
 public class Pictures {
 
-    private static Pictures instance = null;
-
     private List<Picture> pictrueToDraw;
     private List<Picture> allPicture;
     private Factory pictrueFactory = new PictureFactory();
@@ -28,6 +26,18 @@ public class Pictures {
             pictrueToDraw.add(null);
         }
         this.allPicture = new ArrayList();
+
+        this.addPictures(TypeOfPictrues.EYES, "D:\\OneDrive\\Dokumenty\\workspace\\ZZPJ\\Java_zzjp_2016_rpg_creator\\rpg-creator\\resources\\a.png", 0, Gender.MALE);
+        this.addPictures(TypeOfPictrues.ACCESSORIES, "D:\\OneDrive\\Dokumenty\\workspace\\ZZPJ\\Java_zzjp_2016_rpg_creator\\rpg-creator\\resources\\b.png", 1, Gender.MALE);
+        this.addPictures(TypeOfPictrues.HAIR, "D:\\OneDrive\\Dokumenty\\workspace\\ZZPJ\\Java_zzjp_2016_rpg_creator\\rpg-creator\\resources\\c.png", 2, Gender.MALE);
+        this.addPictures(TypeOfPictrues.HAT, "D:\\OneDrive\\Dokumenty\\workspace\\ZZPJ\\Java_zzjp_2016_rpg_creator\\rpg-creator\\resources\\d.png", 3, Gender.MALE);
+        this.addPictures(TypeOfPictrues.OUTFIT, "D:\\OneDrive\\Dokumenty\\workspace\\ZZPJ\\Java_zzjp_2016_rpg_creator\\rpg-creator\\resources\\e.png", 4, Gender.MALE);
+        this.addPictures(TypeOfPictrues.EYES, "D:\\OneDrive\\Dokumenty\\workspace\\ZZPJ\\Java_zzjp_2016_rpg_creator\\rpg-creator\\resources\\f.png", 5, Gender.MALE);
+        this.addPictures(TypeOfPictrues.ACCESSORIES, "D:\\OneDrive\\Dokumenty\\workspace\\ZZPJ\\Java_zzjp_2016_rpg_creator\\rpg-creator\\resources\\g.png", 6, Gender.MALE);
+        this.addPictures(TypeOfPictrues.HAIR, "D:\\OneDrive\\Dokumenty\\workspace\\ZZPJ\\Java_zzjp_2016_rpg_creator\\rpg-creator\\resources\\h.png", 7, Gender.MALE);
+        this.addPictures(TypeOfPictrues.HAT, "D:\\OneDrive\\Dokumenty\\workspace\\ZZPJ\\Java_zzjp_2016_rpg_creator\\rpg-creator\\resources\\i.png", 8, Gender.MALE);
+        this.addPictures(TypeOfPictrues.OUTFIT, "D:\\OneDrive\\Dokumenty\\workspace\\ZZPJ\\Java_zzjp_2016_rpg_creator\\rpg-creator\\resources\\j.png", 9, Gender.MALE);
+
     }
 
     public Gender getGender() {
@@ -38,12 +48,7 @@ public class Pictures {
         this.gender = gender;
     }
 
-    public List<Picture> getPictrueToDraw() throws Exception {
-        for (Picture p : pictrueToDraw) {
-            if (p.equals(null)) {
-                throw new Exception();
-            }
-        }
+    public List<Picture> getPictrueToDraw() {
         return pictrueToDraw;
     }
 
@@ -52,18 +57,17 @@ public class Pictures {
     }
 
     public List<Picture> getPictureByType(TypeOfPictrues type) {
-        List<Picture> pictrueByPriority = new ArrayList();
+        List<Picture> pictrueByType = new ArrayList();
 
         for (Picture p : allPicture) {
             if (p.getGender().equals(gender) && p.getType().equals(type)) {
-                pictrueByPriority.add(p);
+                pictrueByType.add(p);
             }
         }
-
-        return pictrueByPriority;
+        return pictrueByType;
     }
 
-    public void addPictures(TypeOfPictrues type, String url, int id) {
+    public void addPictures(TypeOfPictrues type, String url, int id, Gender gender) {
         boolean isNotContain = true;
         for (int i = 0; i < allPicture.size(); i++) {
             if (allPicture.get(i).getURL().equals(url)) {
@@ -72,7 +76,8 @@ public class Pictures {
         }
 
         if (isNotContain) {
-            allPicture.add(pictrueFactory.addPicture(type, url, id));
+            allPicture.add(pictrueFactory.addPicture(type, url, id, gender));
+            this.choosePicture(id);
         }
     }
 
@@ -103,7 +108,7 @@ public class Pictures {
                 break;
         }
     }
-    
+
     public void setCurrentCharacter(Character character) { // Ta metoda pobiera dane na temat obrazków dla aktualnie wybranego Character'a
         this.choosePicture(character.getAccessoriesId());
         this.choosePicture(character.getEyesId());

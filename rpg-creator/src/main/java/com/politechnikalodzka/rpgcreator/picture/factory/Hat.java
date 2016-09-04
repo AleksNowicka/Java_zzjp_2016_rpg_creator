@@ -15,9 +15,10 @@ public class Hat implements Picture {
     private TypeOfPictrues type = TypeOfPictrues.HAT;
     private Gender gender;
 
-    public Hat(int id, String url) {
+    public Hat(int id, String url, Gender gender) {
         this.ID = id;
         this.URL = url;
+        this.gender = gender;
     }
 
     @Override

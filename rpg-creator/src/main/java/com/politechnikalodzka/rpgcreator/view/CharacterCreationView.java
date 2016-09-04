@@ -1,11 +1,7 @@
 package com.politechnikalodzka.rpgcreator.view;
 
-import com.politechnikalodzka.rpgcreator.database.Character;
-import com.politechnikalodzka.rpgcreator.enums.Gender;
 import com.politechnikalodzka.rpgcreator.enums.ViewModeEnum;
 import com.politechnikalodzka.rpgcreator.interfaces.FrameSetter;
-import com.politechnikalodzka.rpgcreator.interfaces.Picture;
-import com.politechnikalodzka.rpgcreator.utils.PaintCharacter;
 import com.politechnikalodzka.rpgcreator.viewmodel.CharacterCreationViewModel;
 
 import javax.swing.JFrame;
@@ -18,7 +14,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
-import javax.swing.JPanel;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
@@ -28,7 +23,7 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
 
     private JButton saveButton;
     private JComboBox selectGroupButton;
-    private JPanel characterViewPanel;
+    //private JPanel characterViewPanel;
     private JComboBox genderComboBox;
     private JComboBox hairComboBox;
     private JComboBox hatComboBox;
@@ -42,11 +37,18 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
     private JLabel outfitLabel;
     private JLabel eyesLabel;
     private JLabel accessoriesLabel;
-    private List<JPanel> characters;
+    private List<JLabel> characters;
 
     public CharacterCreationView(String title, ViewModeEnum viewModeEnum) throws SQLException, ClassNotFoundException {
         super(title);
         characterCreationViewModel = new CharacterCreationViewModel(title);
+        characters = new ArrayList();
+        characterCreationViewModel.getPictures().choosePicture(characterCreationViewModel.getHairList()[0]);
+        characterCreationViewModel.getPictures().choosePicture(characterCreationViewModel.getAccessoriesList()[0]);
+        characterCreationViewModel.getPictures().choosePicture(characterCreationViewModel.getEyesList()[0]);
+        characterCreationViewModel.getPictures().choosePicture(characterCreationViewModel.getHatList()[0]);
+        characterCreationViewModel.getPictures().choosePicture(characterCreationViewModel.getOutfitList()[0]);
+        characterCreationViewModel.drawCharacter(this, characters);
         setupContentPane();
         setupComponents();
         setupListeners();
@@ -113,9 +115,9 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
         saveButton.setBounds(119, 195, 77, 23);
         getContentPane().add(saveButton);
 
-        characterViewPanel = new JPanel();
-        characterViewPanel.setBounds(264, 43, 160, 175);
-        getContentPane().add(characterViewPanel);
+//        characterViewPanel = new JPanel();
+//        characterViewPanel.setBounds(264, 43, 160, 175);
+//        getContentPane().add(characterViewPanel);
 
         genderComboBox = new JComboBox();
         genderComboBox.setModel(new DefaultComboBoxModel(characterCreationViewModel.getGenderList()));
@@ -154,33 +156,19 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
         //TODO Przetestowanie rysowania poszczególnych elementów postaci.
         genderComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                characters = new ArrayList();
-                String gender = (String) genderComboBox.getSelectedItem();
-                characterCreationViewModel.getPictures().setGender(Gender.valueOf(gender));
-                try {
-                    for (Picture p : characterCreationViewModel.getPictures().getPictrueToDraw()) {
-                        characters.add(new PaintCharacter(p));
-                        add(characters.get(characters.size() - 1));
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+                Integer id = (Integer) genderComboBox.getSelectedItem();
+                characterCreationViewModel.getPictures().choosePicture(id);
+                characterCreationViewModel.cleanCharacter(characters);
+                characterCreationViewModel.drawCharacter(classInstance, characters);
             }
         });
 
         hairComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                characters = new ArrayList();
                 Integer id = (Integer) hairComboBox.getSelectedItem();
                 characterCreationViewModel.getPictures().choosePicture(id);
-                try {
-                    for (Picture p : characterCreationViewModel.getPictures().getPictrueToDraw()) {
-                        characters.add(new PaintCharacter(p));
-                        add(characters.get(characters.size() - 1));
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+                characterCreationViewModel.cleanCharacter(characters);
+                characterCreationViewModel.drawCharacter(classInstance, characters);
             }
         }
         );
@@ -188,68 +176,40 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
         hatComboBox.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                characters = new ArrayList();
                 Integer id = (Integer) hatComboBox.getSelectedItem();
                 characterCreationViewModel.getPictures().choosePicture(id);
-                try {
-                    for (Picture p : characterCreationViewModel.getPictures().getPictrueToDraw()) {
-                        characters.add(new PaintCharacter(p));
-                        add(characters.get(characters.size() - 1));
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+                characterCreationViewModel.cleanCharacter(characters);
+                characterCreationViewModel.drawCharacter(classInstance, characters);
             }
 
         });
 
         outfitComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                characters = new ArrayList();
                 Integer id = (Integer) outfitComboBox.getSelectedItem();
                 characterCreationViewModel.getPictures().choosePicture(id);
-                try {
-                    for (Picture p : characterCreationViewModel.getPictures().getPictrueToDraw()) {
-                        characters.add(new PaintCharacter(p));
-                        add(characters.get(characters.size() - 1));
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+                characterCreationViewModel.cleanCharacter(characters);
+                characterCreationViewModel.drawCharacter(classInstance, characters);
             }
 
         });
 
         eyesComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                characters = new ArrayList();
                 Integer id = (Integer) eyesComboBox.getSelectedItem();
                 characterCreationViewModel.getPictures().choosePicture(id);
-                try {
-                    for (Picture p : characterCreationViewModel.getPictures().getPictrueToDraw()) {
-                        characters.add(new PaintCharacter(p));
-                        add(characters.get(characters.size() - 1));
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+                characterCreationViewModel.cleanCharacter(characters);
+                characterCreationViewModel.drawCharacter(classInstance, characters);
             }
 
         });
 
         accessoriesComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                characters = new ArrayList();
                 Integer id = (Integer) accessoriesComboBox.getSelectedItem();
                 characterCreationViewModel.getPictures().choosePicture(id);
-                try {
-                    for (Picture p : characterCreationViewModel.getPictures().getPictrueToDraw()) {
-                        characters.add(new PaintCharacter(p));
-                        add(characters.get(characters.size() - 1));
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+                characterCreationViewModel.cleanCharacter(characters);
+                characterCreationViewModel.drawCharacter(classInstance, characters);
             }
 
         });
@@ -258,6 +218,7 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
             public void actionPerformed(ActionEvent e) {
                 characterCreationViewModel.switchFrames(classInstance, characterCreationViewModel.getNavigationView());
             }
+
         });
     }
 }

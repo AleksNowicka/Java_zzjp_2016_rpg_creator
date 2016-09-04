@@ -14,9 +14,10 @@ public class Hair implements Picture {
     private TypeOfPictrues type = TypeOfPictrues.HAIR;
     private Gender gender;
 
-    public Hair(int id, String url) {
+    public Hair(int id, String url, Gender gender) {
         this.ID = id;
         this.URL = url;
+        this.gender = gender;
     }
 
     @Override

@@ -14,9 +14,10 @@ public class Accessories implements Picture {
     private TypeOfPictrues type = TypeOfPictrues.ACCESSORIES;
     private Gender gender;
 
-    public Accessories(int id, String url) {
+    public Accessories(int id, String url, Gender gender) {
         this.ID = id;
         this.URL = url;
+        this.gender = gender;
     }
 
     @Override

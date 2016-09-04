@@ -5,13 +5,13 @@ import com.politechnikalodzka.rpgcreator.database.User;
 import com.politechnikalodzka.rpgcreator.enums.Gender;
 import com.politechnikalodzka.rpgcreator.enums.TypeOfPictrues;
 import com.politechnikalodzka.rpgcreator.interfaces.Picture;
-import com.politechnikalodzka.rpgcreator.utils.Pictures;
 import com.politechnikalodzka.rpgcreator.view.NavigationView;
 
 import java.sql.SQLException;
 
 /**
- * Created by aleks on 19.08.16. Modyficate by lbary
+ * Created by aleks on 19.08.16. 
+ * Modyficate by lbary
  */
 public class CharacterCreationViewModel extends BaseViewModel {
 
@@ -89,11 +89,6 @@ public class CharacterCreationViewModel extends BaseViewModel {
         genderList[0] = Gender.MALE.toString();
         genderList[1] = Gender.FEMALE.toString();
         return genderList;
-    }
-
-    @Override
-    public Pictures getPictures() {
-        return super.getPictures();
     }
 
     public NavigationView getNavigationView() {
