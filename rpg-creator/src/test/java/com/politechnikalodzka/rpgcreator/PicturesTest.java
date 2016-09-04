@@ -42,17 +42,17 @@ public class PicturesTest {
     public void testAddPictures() {
         System.out.println("addPictures");
         Pictures instance = new Pictures();
-        instance.addPictures(TypeOfPictrues.HAIR, "bbb", 10, Gender.MALE);
-        instance.addPictures(TypeOfPictrues.EYES, "www", 11, Gender.MALE);
-        instance.addPictures(TypeOfPictrues.HAIR, "ddd", 12, Gender.MALE);
+        instance.addPictures(TypeOfPictrues.HAIR, "bbb", 26, Gender.MALE);
+        instance.addPictures(TypeOfPictrues.EYES, "www", 27, Gender.MALE);
+        instance.addPictures(TypeOfPictrues.HAIR, "ddd", 28, Gender.MALE);
         instance.addPictures(TypeOfPictrues.HAT, "eee", 13, Gender.MALE);
         instance.addPictures(TypeOfPictrues.ACCESSORIES, "fff", 14, Gender.MALE);
         instance.addPictures(TypeOfPictrues.OUTFIT, "ggg", 15, Gender.MALE);
-        assertEquals(16, instance.getAllPicture().size());
+        assertEquals(19, instance.getAllPicture().size());
         instance.addPictures(TypeOfPictrues.HAIR, "bbb", 16, Gender.MALE);
-        assertEquals(16, instance.getAllPicture().size());
+        assertEquals(19, instance.getAllPicture().size());
         instance.addPictures(TypeOfPictrues.ACCESSORIES, "qwe", 17, Gender.MALE);
-        assertEquals(17, instance.getAllPicture().size());
+        assertEquals(20, instance.getAllPicture().size());
     }
 
     /**
@@ -71,11 +71,11 @@ public class PicturesTest {
         instance.addPictures(TypeOfPictrues.OUTFIT, "kkk", 24, Gender.MALE);
         instance.addPictures(TypeOfPictrues.ACCESSORIES, "qwe", 25, Gender.MALE);
         try {
-            assertEquals(24, instance.getPictrueToDraw().get(0).getID());
-            assertEquals(18, instance.getPictrueToDraw().get(1).getID());
+            assertEquals(25, instance.getPictrueToDraw().get(0).getID());
+            assertEquals(23, instance.getPictrueToDraw().get(1).getID());
             assertEquals(22, instance.getPictrueToDraw().get(2).getID());
-            assertEquals(23, instance.getPictrueToDraw().get(3).getID());
-            assertEquals(25, instance.getPictrueToDraw().get(4).getID());
+            assertEquals(18, instance.getPictrueToDraw().get(3).getID());
+            assertEquals(24, instance.getPictrueToDraw().get(4).getID());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -87,11 +87,11 @@ public class PicturesTest {
         instance.choosePicture(5);
         instance.choosePicture(10);
         try {
-            assertEquals("D:\\OneDrive\\Dokumenty\\workspace\\ZZPJ\\Java_zzjp_2016_rpg_creator\\rpg-creator\\resources\\f.png", instance.getPictrueToDraw().get(2).getURL());
+            assertEquals("hhh", instance.getPictrueToDraw().get(2).getURL());
             instance.choosePicture(6);
-            assertEquals("D:\\OneDrive\\Dokumenty\\workspace\\ZZPJ\\Java_zzjp_2016_rpg_creator\\rpg-creator\\resources\\c.png", instance.getPictrueToDraw().get(1).getURL());
+            assertEquals("resources\\Male\\2HatMale.png", instance.getPictrueToDraw().get(1).getURL());
             instance.choosePicture(8);
-            assertEquals("D:\\OneDrive\\Dokumenty\\workspace\\ZZPJ\\Java_zzjp_2016_rpg_creator\\rpg-creator\\resources\\i.png", instance.getPictrueToDraw().get(3).getURL());
+            assertEquals("resources\\Male\\4HairMale.png", instance.getPictrueToDraw().get(3).getURL());
         } catch (Exception e) {
             e.printStackTrace();
         }

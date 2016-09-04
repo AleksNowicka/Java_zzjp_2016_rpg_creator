@@ -1,5 +1,7 @@
 package com.politechnikalodzka.rpgcreator.view;
 
+import com.politechnikalodzka.rpgcreator.enums.Gender;
+import com.politechnikalodzka.rpgcreator.enums.TypeOfPictrues;
 import com.politechnikalodzka.rpgcreator.enums.ViewModeEnum;
 import com.politechnikalodzka.rpgcreator.interfaces.FrameSetter;
 import com.politechnikalodzka.rpgcreator.viewmodel.CharacterCreationViewModel;
@@ -43,11 +45,7 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
         super(title);
         characterCreationViewModel = new CharacterCreationViewModel(title);
         characters = new ArrayList();
-        characterCreationViewModel.getPictures().choosePicture(characterCreationViewModel.getHairList()[0]);
-        characterCreationViewModel.getPictures().choosePicture(characterCreationViewModel.getAccessoriesList()[0]);
-        characterCreationViewModel.getPictures().choosePicture(characterCreationViewModel.getEyesList()[0]);
-        characterCreationViewModel.getPictures().choosePicture(characterCreationViewModel.getHatList()[0]);
-        characterCreationViewModel.getPictures().choosePicture(characterCreationViewModel.getOutfitList()[0]);
+        characterCreationViewModel.setDefaultDrawList();
         characterCreationViewModel.drawCharacter(this, characters);
         setupContentPane();
         setupComponents();
@@ -57,7 +55,7 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
     public void setupContentPane() {
         setResizable(false);
         getContentPane().setBackground(Color.DARK_GRAY);
-        setBounds(100, 100, 450, 260);
+        setBounds(100, 100, 450, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
     }
@@ -118,7 +116,6 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
 //        characterViewPanel = new JPanel();
 //        characterViewPanel.setBounds(264, 43, 160, 175);
 //        getContentPane().add(characterViewPanel);
-
         genderComboBox = new JComboBox();
         genderComboBox.setModel(new DefaultComboBoxModel(characterCreationViewModel.getGenderList()));
         genderComboBox.setBounds(97, 43, 99, 20);
@@ -156,9 +153,15 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
         //TODO Przetestowanie rysowania poszczególnych elementów postaci.
         genderComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Integer id = (Integer) genderComboBox.getSelectedItem();
-                characterCreationViewModel.getPictures().choosePicture(id);
-                characterCreationViewModel.cleanCharacter(characters);
+                String gender = (String) genderComboBox.getSelectedItem();
+                characterCreationViewModel.getPictures().setGender(Gender.valueOf(gender));
+                hairComboBox.setModel(new DefaultComboBoxModel(characterCreationViewModel.getHairList()));
+                accessoriesComboBox.setModel(new DefaultComboBoxModel(characterCreationViewModel.getAccessoriesList()));
+                eyesComboBox.setModel(new DefaultComboBoxModel(characterCreationViewModel.getEyesList()));
+                outfitComboBox.setModel(new DefaultComboBoxModel(characterCreationViewModel.getOutfitList()));
+                hatComboBox.setModel(new DefaultComboBoxModel(characterCreationViewModel.getHatList()));
+                //characterCreationViewModel.setDefaultDrawList();
+                characterCreationViewModel.cleanCharacter(characters);                  
                 characterCreationViewModel.drawCharacter(classInstance, characters);
             }
         });

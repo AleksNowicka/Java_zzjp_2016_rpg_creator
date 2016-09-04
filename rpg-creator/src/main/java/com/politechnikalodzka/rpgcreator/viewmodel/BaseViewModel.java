@@ -36,7 +36,7 @@ public abstract class BaseViewModel {
         try {
             for (Picture p : pictures.getPictrueToDraw()) {
                 characterViewPanels.add(new JLabel());
-                characterViewPanels.get(counter).setBounds(264, 43, 160, 175);
+                characterViewPanels.get(counter).setBounds(230, 43, 230, 396);
                 actualFrame.getContentPane().add(characterViewPanels.get(counter));
                 file = new File(p.getURL());
                 bi = ImageIO.read(file);

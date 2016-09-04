@@ -25,6 +25,8 @@ public class PictureFactory implements Factory {
                 return new Eyes(id, url, gender);
             case ACCESSORIES:
                 return new Accessories(id, url, gender);
+            case BASE:
+                return new Base(id, url, gender);
             default:
                 return null;
         }

@@ -19,25 +19,28 @@ public class Pictures {
     private List<Picture> allPicture;
     private Factory pictrueFactory = new PictureFactory();
     private Gender gender = Gender.MALE; //Default
+    private String patch = "resources\\Male\\";
 
     public Pictures() {
         this.pictrueToDraw = new ArrayList();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 6; i++) {
             pictrueToDraw.add(null);
         }
         this.allPicture = new ArrayList();
 
-        this.addPictures(TypeOfPictrues.EYES, "D:\\OneDrive\\Dokumenty\\workspace\\ZZPJ\\Java_zzjp_2016_rpg_creator\\rpg-creator\\resources\\a.png", 0, Gender.MALE);
-        this.addPictures(TypeOfPictrues.ACCESSORIES, "D:\\OneDrive\\Dokumenty\\workspace\\ZZPJ\\Java_zzjp_2016_rpg_creator\\rpg-creator\\resources\\b.png", 1, Gender.MALE);
-        this.addPictures(TypeOfPictrues.HAIR, "D:\\OneDrive\\Dokumenty\\workspace\\ZZPJ\\Java_zzjp_2016_rpg_creator\\rpg-creator\\resources\\c.png", 2, Gender.MALE);
-        this.addPictures(TypeOfPictrues.HAT, "D:\\OneDrive\\Dokumenty\\workspace\\ZZPJ\\Java_zzjp_2016_rpg_creator\\rpg-creator\\resources\\d.png", 3, Gender.MALE);
-        this.addPictures(TypeOfPictrues.OUTFIT, "D:\\OneDrive\\Dokumenty\\workspace\\ZZPJ\\Java_zzjp_2016_rpg_creator\\rpg-creator\\resources\\e.png", 4, Gender.MALE);
-        this.addPictures(TypeOfPictrues.EYES, "D:\\OneDrive\\Dokumenty\\workspace\\ZZPJ\\Java_zzjp_2016_rpg_creator\\rpg-creator\\resources\\f.png", 5, Gender.MALE);
-        this.addPictures(TypeOfPictrues.ACCESSORIES, "D:\\OneDrive\\Dokumenty\\workspace\\ZZPJ\\Java_zzjp_2016_rpg_creator\\rpg-creator\\resources\\g.png", 6, Gender.MALE);
-        this.addPictures(TypeOfPictrues.HAIR, "D:\\OneDrive\\Dokumenty\\workspace\\ZZPJ\\Java_zzjp_2016_rpg_creator\\rpg-creator\\resources\\h.png", 7, Gender.MALE);
-        this.addPictures(TypeOfPictrues.HAT, "D:\\OneDrive\\Dokumenty\\workspace\\ZZPJ\\Java_zzjp_2016_rpg_creator\\rpg-creator\\resources\\i.png", 8, Gender.MALE);
-        this.addPictures(TypeOfPictrues.OUTFIT, "D:\\OneDrive\\Dokumenty\\workspace\\ZZPJ\\Java_zzjp_2016_rpg_creator\\rpg-creator\\resources\\j.png", 9, Gender.MALE);
-
+        this.addPictures(TypeOfPictrues.HAIR, patch + "3HairMale.png", 0, Gender.MALE);
+        this.addPictures(TypeOfPictrues.ACCESSORIES, patch + "1AccessoryMale.png", 1, Gender.MALE);
+        this.addPictures(TypeOfPictrues.HAIR, patch + "1HairMale.png", 2, Gender.MALE);
+        this.addPictures(TypeOfPictrues.HAT, patch + "1HatMale.png", 3, Gender.MALE);
+        this.addPictures(TypeOfPictrues.OUTFIT, patch + "1OutfitMale.png", 4, Gender.MALE);
+        this.addPictures(TypeOfPictrues.HAIR, patch + "4HairMale.png", 5, Gender.MALE);
+        this.addPictures(TypeOfPictrues.EYES, patch + "BlueEyesMale.png", 6, Gender.MALE);
+        this.addPictures(TypeOfPictrues.EYES, patch + "BrownEyesMale.png", 7, Gender.MALE);
+        this.addPictures(TypeOfPictrues.EYES, patch + "GreenEyesMale.png", 8, Gender.MALE);
+        this.addPictures(TypeOfPictrues.HAIR, patch + "2HairMale.png", 9, Gender.MALE);
+        this.addPictures(TypeOfPictrues.HAT, patch + "2HatMale.png", 10, Gender.MALE);
+        this.addPictures(TypeOfPictrues.OUTFIT, patch + "2OutfitMale.png", 11, Gender.MALE);
+        this.addPictures(TypeOfPictrues.BASE, patch + "BaseMale.png", 12, Gender.MALE);
     }
 
     public Gender getGender() {
@@ -91,20 +94,23 @@ public class Pictures {
 
     private void addToDrawList(TypeOfPictrues type, Picture picture) {
         switch (type) {
+            case BASE:
+                pictrueToDraw.set(5, picture);
+                break;
             case OUTFIT:
-                pictrueToDraw.set(0, picture);
+                pictrueToDraw.set(4, picture);
                 break;
             case HAIR:
-                pictrueToDraw.set(1, picture);
+                pictrueToDraw.set(3, picture);
                 break;
             case EYES:
                 pictrueToDraw.set(2, picture);
                 break;
             case HAT:
-                pictrueToDraw.set(3, picture);
+                pictrueToDraw.set(1, picture);
                 break;
             case ACCESSORIES:
-                pictrueToDraw.set(4, picture);
+                pictrueToDraw.set(0, picture);
                 break;
         }
     }

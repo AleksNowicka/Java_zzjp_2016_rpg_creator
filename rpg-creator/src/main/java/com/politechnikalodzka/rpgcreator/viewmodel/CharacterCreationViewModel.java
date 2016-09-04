@@ -8,15 +8,15 @@ import com.politechnikalodzka.rpgcreator.interfaces.Picture;
 import com.politechnikalodzka.rpgcreator.view.NavigationView;
 
 import java.sql.SQLException;
+import javax.swing.JFrame;
 
 /**
- * Created by aleks on 19.08.16. 
- * Modyficate by lbary
+ * Created by aleks on 19.08.16. Modyficate by lbary
  */
 public class CharacterCreationViewModel extends BaseViewModel {
 
     private NavigationView navigationView;
-    
+
     private User user;
 
     public CharacterCreationViewModel(String title) throws SQLException, ClassNotFoundException {
@@ -93,5 +93,21 @@ public class CharacterCreationViewModel extends BaseViewModel {
 
     public NavigationView getNavigationView() {
         return navigationView;
+    }
+
+    public void setDefaultDrawList() {
+        if (this.getHairList().length > 0
+                && this.getAccessoriesList().length > 0
+                && this.getEyesList().length > 0
+                && this.getHatList().length > 0
+                && this.getOutfitList().length > 0
+                && this.getPictures().getPictureByType(TypeOfPictrues.BASE).size() > 0) {
+            this.getPictures().choosePicture(this.getHairList()[0]);
+            this.getPictures().choosePicture(this.getAccessoriesList()[0]);
+            this.getPictures().choosePicture(this.getEyesList()[0]);
+            this.getPictures().choosePicture(this.getHatList()[0]);
+            this.getPictures().choosePicture(this.getOutfitList()[0]);
+            this.getPictures().choosePicture(this.getPictures().getPictureByType(TypeOfPictrues.BASE).get(0).getID());
+        }
     }
 }

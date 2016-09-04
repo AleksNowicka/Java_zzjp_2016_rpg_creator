@@ -10,5 +10,6 @@ public enum TypeOfPictrues {
     HAIR,
     HAT,
     ACCESSORIES,
+    BASE,
     NONCHANGE
 }
