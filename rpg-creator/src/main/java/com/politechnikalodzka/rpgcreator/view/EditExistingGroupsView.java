@@ -15,6 +15,8 @@ import javax.swing.JList;
 import javax.swing.AbstractListModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.SQLException;
 
 public class EditExistingGroupsView extends JFrame implements FrameSetter{
@@ -53,7 +55,7 @@ public class EditExistingGroupsView extends JFrame implements FrameSetter{
 		getContentPane().add(frameNameLabel);
 		
 		selectGroupComboBox = new JComboBox();
-		selectGroupComboBox.setModel(new DefaultComboBoxModel(new String[] {"Group1", "Group2", "Group3"}));
+		selectGroupComboBox.setModel(new DefaultComboBoxModel(editExistingGroupsViewModel.getUserGroupsNames()));
 		selectGroupComboBox.setBounds(137, 47, 191, 22);
 		getContentPane().add(selectGroupComboBox);
 		
@@ -63,7 +65,8 @@ public class EditExistingGroupsView extends JFrame implements FrameSetter{
 		
 		characterList = new JList();
 		characterList.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Character1", "Character2", "Character3"};
+			String[] values = editExistingGroupsViewModel.getUserGroupCharactersNames(
+					selectGroupComboBox.getSelectedItem().toString());
 			public int getSize() {
 				return values.length;
 			}
@@ -93,6 +96,21 @@ public class EditExistingGroupsView extends JFrame implements FrameSetter{
 
 	public void setupListeners() {
         final EditExistingGroupsView classInstance = this;
+
+		selectGroupComboBox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				characterList.setModel(new AbstractListModel() {
+					String[] values = editExistingGroupsViewModel.getUserGroupCharactersNames(
+							selectGroupComboBox.getSelectedItem().toString());
+					public int getSize() {
+						return values.length;
+					}
+					public Object getElementAt(int index) {
+						return values[index];
+					}
+				});
+			}
+		});
 
         goBackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

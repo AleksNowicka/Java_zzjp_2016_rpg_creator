@@ -1,9 +1,8 @@
 package com.politechnikalodzka.rpgcreator.database;
 
-import com.politechnikalodzka.rpgcreator.view.CharacterCreationView;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,35 +43,7 @@ public class User extends BaseDataBaseEntity{
         this.nick = nick;
         emailAddress = resultSet.getString(columnsNames.get(2));
         this.password = password;
-        ResultSet groupCharactersResultSet;
-        List<Character> groupCharacters;
-        Group group = new Group();
-        Character character = new Character();
-        usersGroupsWithTheirCharacters = new HashMap<Integer, List<Character>>();
-        userGroups = new ArrayList<Group>();
-        resultSet = dataBaseStatement.executeQuery(queryBuilder.getFullRowQuery(group.getTableName(),
-                group.getColumnsNames().get(group.getColumnsNames().size()-1), String.valueOf(id)));
-        if(resultSet.getFetchSize() == 0){
-            System.out.println("empty");
-            return true;
-        }
-        while (resultSet.next()){
-            System.out.println("Not empty");
-            group = new Group();
-            groupCharacters = new ArrayList<Character>();
-            group.getData(resultSet.getInt(group.getColumnsNames().get(0)));
-            groupCharactersResultSet = dataBaseStatement.executeQuery(queryBuilder.getFullRowQuery(
-                    character.getTableName(), character.getColumnsNames().get(character.getColumnsNames().size()-1),
-                    String.valueOf(group.getId())));
-            while (groupCharactersResultSet.next()){
-                character = new Character();
-                character.getData(groupCharactersResultSet.getInt(character.getColumnsNames().get(0)));
-                groupCharacters.add(character);
-            }
-            usersGroupsWithTheirCharacters.put(group.getId(), groupCharacters);
-            userGroups.add(group);
-            System.out.println("Group "+group.getName());
-        }
+        retriveUsersGroupsWithTheirCharacters();
         return true;
     }
 
@@ -86,35 +57,35 @@ public class User extends BaseDataBaseEntity{
     }
 
     public void retriveUsersGroupsWithTheirCharacters() throws SQLException, ClassNotFoundException {
-        ResultSet groupsResultSet, groupCharactersResultSet;
-        List<Character> groupCharacters;
         Group group = new Group();
-        Character character = new Character();
         usersGroupsWithTheirCharacters = new HashMap<Integer, List<Character>>();
         userGroups = new ArrayList<Group>();
-        groupsResultSet = dataBaseStatement.executeQuery(queryBuilder.getFullRowQuery(group.getTableName(),
+        ResultSet resultSet = dataBaseStatement.executeQuery(queryBuilder.getFullRowQuery(group.getTableName(),
                 group.getColumnsNames().get(group.getColumnsNames().size()-1), String.valueOf(id)));
-        if(groupsResultSet.getFetchSize() == 0){
-            System.out.println("empty");
-            return;
-        }
-        while (groupsResultSet.next()){
-            System.out.println("Not empty");
+        while (resultSet.next()) {
             group = new Group();
-            groupCharacters = new ArrayList<Character>();
-            group.getData(groupsResultSet.getInt(group.getColumnsNames().get(0)));
-            groupCharactersResultSet = dataBaseStatement.executeQuery(queryBuilder.getFullRowQuery(
-                    character.getTableName(), character.getColumnsNames().get(character.getColumnsNames().size()-1),
-                            String.valueOf(group.getId())));
-            while (groupCharactersResultSet.next()){
-                character = new Character();
-                character.getData(groupCharactersResultSet.getInt(character.getColumnsNames().get(0)));
-                groupCharacters.add(character);
-            }
-            usersGroupsWithTheirCharacters.put(group.getId(), groupCharacters);
+            group.getData(resultSet.getInt(group.getColumnsNames().get(0)));
             userGroups.add(group);
             System.out.println("Group "+group.getName());
+            usersGroupsWithTheirCharacters.put(group.getId(), retriveCharactersForGroup(group.getId()));
         }
+    }
+
+    public List<Character> retriveCharactersForGroup(int groupId) throws SQLException, ClassNotFoundException {
+        Statement charactersStatement = dataBase.getConnection().createStatement();
+        charactersStatement.setQueryTimeout(30);
+        List<Character> groupCharacters = new ArrayList<Character>();
+        Character character = new Character();
+        ResultSet resultSet = charactersStatement.executeQuery(queryBuilder.getFullRowQuery(
+                character.getTableName(), character.getColumnsNames().get(character.getColumnsNames().size()-1),
+                String.valueOf(groupId)));
+        while (resultSet.next()){
+            character = new Character();
+            character.getData(resultSet.getInt(character.getColumnsNames().get(0)));
+            groupCharacters.add(character);
+            System.out.println("Character "+character.getName());
+        }
+        return groupCharacters;
     }
 
     public void saveAsEditedUser() throws SQLException {
@@ -145,6 +116,16 @@ public class User extends BaseDataBaseEntity{
 
     public static List<Group> getUserGroups() {
         return userGroups;
+    }
+
+    public List<Character> getUserCharacters(){
+        List<Character> characters = new ArrayList<Character>();
+        for(Integer groupId : usersGroupsWithTheirCharacters.keySet()){
+            for (Character character : usersGroupsWithTheirCharacters.get(groupId)){
+                characters.add(character);
+            }
+        }
+        return characters;
     }
 
     public static Map<Integer, List<Character>> getUsersGroupsWithTheirCharacters() {

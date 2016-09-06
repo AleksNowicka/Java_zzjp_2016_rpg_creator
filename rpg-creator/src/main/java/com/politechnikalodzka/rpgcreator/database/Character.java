@@ -30,7 +30,7 @@ public class Character extends BaseDataBaseEntity{
     }
     
     public Character(Double a) {
-        //Konstruktor potrzebny do testów
+        //Konstruktor potrzebny do testï¿½w
     }
 
     public void getData(int id) throws SQLException {
@@ -39,18 +39,17 @@ public class Character extends BaseDataBaseEntity{
             return;
         }
         ResultSet resultSet = dataBaseStatement.executeQuery(queryBuilder.getFullRowQueryFromOwnTable(columnName, Integer.toString(id)));
-        if(resultSet.getFetchSize() == 0){
-            return;
-        }
         this.id = id;
-        name = resultSet.getString(columnsNames.get(1));
-        gender = resultSet.getString(columnsNames.get(2)).charAt(0);
-        hairId = Integer.parseInt(resultSet.getString(columnsNames.get(3)));
-        hatId = Integer.parseInt(resultSet.getString(columnsNames.get(4)));
-        outfitId = Integer.parseInt(resultSet.getString(columnsNames.get(5)));
-        eyesId = Integer.parseInt(resultSet.getString(columnsNames.get(6)));
-        accessoriesId = Integer.parseInt(resultSet.getString(columnsNames.get(7)));
-        groupId = Integer.parseInt(resultSet.getString(columnsNames.get(8)));
+        if(resultSet.next()) {
+            name = resultSet.getString(columnsNames.get(1));
+            gender = resultSet.getString(columnsNames.get(2)).charAt(0);
+            hairId = Integer.parseInt(resultSet.getString(columnsNames.get(3)));
+            hatId = Integer.parseInt(resultSet.getString(columnsNames.get(4)));
+            outfitId = Integer.parseInt(resultSet.getString(columnsNames.get(5)));
+            eyesId = Integer.parseInt(resultSet.getString(columnsNames.get(6)));
+            accessoriesId = Integer.parseInt(resultSet.getString(columnsNames.get(7)));
+            groupId = Integer.parseInt(resultSet.getString(columnsNames.get(8)));
+        }
     }
 
     public void saveAsEditedCharacter() throws SQLException{

@@ -21,7 +21,6 @@ public class LogInViewModel extends BaseViewModel {
 
     public boolean checkGivenDataAndLogIn(String nick, String password) throws SQLException, ClassNotFoundException {
         if(user.authenticateAndGetData(nick, password)){
-//            user.retriveUsersGroupsWithTheirCharacters();
             System.out.println(user.getNick());
             return true;
         }

@@ -39,15 +39,14 @@ public class Group extends BaseDataBaseEntity{
         }
         ResultSet rs = dataBaseStatement.executeQuery(queryBuilder.getFullRowQueryFromOwnTable(columnName,
                 String.valueOf(id)));
-        if(rs.getFetchSize() == 0){
-            return;
+        if(rs.next()) {
+            this.id = id;
+            name = rs.getString(columnsNames.get(1));
+            description = rs.getString(columnsNames.get(2));
+            maxGroupMembers = Integer.parseInt(rs.getString(columnsNames.get(3)));
+            groupIcon = rs.getString(columnsNames.get(4));
+            groupOwnerId = Integer.parseInt(rs.getString(columnsNames.get(5)));
         }
-        this.id = id;
-        name = rs.getString(columnsNames.get(1));
-        description = rs.getString(columnsNames.get(2));
-        maxGroupMembers = Integer.parseInt(rs.getString(columnsNames.get(3)));
-        groupIcon = rs.getString(columnsNames.get(4));
-        groupOwnerId = Integer.parseInt(rs.getString(columnsNames.get(5)));
     }
 
     public void saveAsEditedGroup() throws SQLException{
