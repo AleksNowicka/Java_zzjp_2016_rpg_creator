@@ -28,6 +28,10 @@ public class Character extends BaseDataBaseEntity{
             System.out.println(e.getMessage());
         }
     }
+    
+    public Character(Double a) {
+        //Konstruktor potrzebny do testów
+    }
 
     public void getData(int id) throws SQLException {
         String columnName = "id";

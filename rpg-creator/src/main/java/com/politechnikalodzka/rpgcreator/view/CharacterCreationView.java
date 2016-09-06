@@ -20,14 +20,13 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
     private CharacterCreationViewModel characterCreationViewModel;
 
     private JButton saveButton;
-	private JPanel characterViewPanel;
-	private JComboBox genderComboBox;
-	private JComboBox hairComboBox;
-	private JComboBox hatComboBox;
-	private JComboBox outfitComboBox;
-	private JComboBox eyesComboBox;
-	private JComboBox accessoriesComboBox;
-	private JComboBox selectGroupComboBox;
+    private JComboBox genderComboBox;
+    private JComboBox hairComboBox;
+    private JComboBox hatComboBox;
+    private JComboBox outfitComboBox;
+    private JComboBox eyesComboBox;
+    private JComboBox accessoriesComboBox;
+    private JComboBox selectGroupComboBox;
     private JLabel frameNameLabel;
     private JLabel genderLabel;
     private JLabel hairLabel;
@@ -36,7 +35,7 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
     private JLabel eyesLabel;
     private JLabel accessoriesLabel;
     private List<JLabel> characters;
-	private JLabel groupLabel;
+    private JLabel groupLabel;
 
     public CharacterCreationView(String title, ViewModeEnum viewModeEnum) throws SQLException, ClassNotFoundException {
         super(title);
@@ -100,20 +99,20 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
         accessoriesLabel.setBounds(10, 170, 63, 14);
         getContentPane().add(accessoriesLabel);
 
-		groupLabel = new JLabel("Group");
-		groupLabel.setForeground(Color.WHITE);
-		groupLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		groupLabel.setBounds(10, 195, 63, 14);
-		getContentPane().add(groupLabel);
+        groupLabel = new JLabel("Group");
+        groupLabel.setForeground(Color.WHITE);
+        groupLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        groupLabel.setBounds(10, 195, 63, 14);
+        getContentPane().add(groupLabel);
 
-		selectGroupComboBox = new JComboBox();
-		selectGroupComboBox.setModel(new DefaultComboBoxModel(characterCreationViewModel.getGroupsNames()));
-		selectGroupComboBox.setBounds(97, 195, 99, 20);
-		getContentPane().add(selectGroupComboBox);
+        selectGroupComboBox = new JComboBox();
+        selectGroupComboBox.setModel(new DefaultComboBoxModel(characterCreationViewModel.getGroupsNames()));
+        selectGroupComboBox.setBounds(97, 195, 99, 20);
+        getContentPane().add(selectGroupComboBox);
 
-		saveButton = new JButton("Save");
-		saveButton.setBounds(50, 250, 100, 23);
-		getContentPane().add(saveButton);
+        saveButton = new JButton("Save");
+        saveButton.setBounds(50, 250, 100, 23);
+        getContentPane().add(saveButton);
 
         genderComboBox = new JComboBox();
         genderComboBox.setModel(new DefaultComboBoxModel(characterCreationViewModel.getGenderList()));
@@ -149,7 +148,6 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
     public void setupListeners() {
         final CharacterCreationView classInstance = this;
 
-        //TODO Przetestowanie rysowania poszczeg�lnych element�w postaci.
         genderComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String gender = (String) genderComboBox.getSelectedItem();
@@ -159,8 +157,8 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
                 eyesComboBox.setModel(new DefaultComboBoxModel(characterCreationViewModel.getEyesList()));
                 outfitComboBox.setModel(new DefaultComboBoxModel(characterCreationViewModel.getOutfitList()));
                 hatComboBox.setModel(new DefaultComboBoxModel(characterCreationViewModel.getHatList()));
-                //characterCreationViewModel.setDefaultDrawList();
-                characterCreationViewModel.cleanCharacter(characters);                  
+                characterCreationViewModel.setDefaultDrawList();
+                characterCreationViewModel.cleanCharacter(characters);
                 characterCreationViewModel.drawCharacter(classInstance, characters);
             }
         });
