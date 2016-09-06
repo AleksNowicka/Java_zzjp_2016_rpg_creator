@@ -84,7 +84,6 @@ public class Pictures {
 
         if (isNotContain) {
             allPicture.add(pictrueFactory.addPicture(type, url, id, gender));
-            this.choosePicture(id);
         }
     }
 
@@ -120,17 +119,26 @@ public class Pictures {
     }
 
     public void setCurrentCharacter(Character character) { // Ta metoda pobiera dane na temat obrazk�w dla aktualnie wybranego Character'a
+        if (character.getGender() == 'm') {
+            this.setGender(Gender.MALE);
+        } else {
+            this.setGender(Gender.FEMALE);
+        }
         this.choosePicture(character.getAccessoriesId());
         this.choosePicture(character.getEyesId());
-        this.choosePicture(character.getGroupId());
         this.choosePicture(character.getHairId());
         this.choosePicture(character.getHatId());
         this.choosePicture(character.getOutfitId());
-        this.setGender(Gender.valueOf(String.valueOf(character.getGender())));
         //this.setGender(character.getGender()) // ta linijka b�dzie prawid�owa po dokonaniu zmian w Character
     }
 
     public void setAllPicture(List<Picture> pictures) {
         this.allPicture = pictures;
+    }
+
+    public void setPictureToDraw() {
+        for (int i = 0; i < 6; i++) {
+            pictrueToDraw.set(i, null);
+        }
     }
 }
