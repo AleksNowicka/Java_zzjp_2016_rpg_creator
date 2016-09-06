@@ -86,6 +86,10 @@ public class NavigationView extends JFrame implements FrameSetter{
 		editProfileButton = new JButton("Edit your profile");
 		editProfileButton.setBounds(302, 152, 109, 23);
 		getContentPane().add(editProfileButton);
+		
+		JButton btnLogOut = new JButton("Log out");
+		btnLogOut.setBounds(302, 186, 109, 23);
+		getContentPane().add(btnLogOut);
 	}
 
 	public void setupListeners() {
