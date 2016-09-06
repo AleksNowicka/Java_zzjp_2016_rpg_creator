@@ -22,6 +22,8 @@ public class Pictures {
     //TODO - always change depending on used system (Windows, Linux)
     private String pathMale = "resources\\Male\\";
     private String pathFemale = "resources\\Female\\";
+//    private String pathMale = "resources/Male/";
+//    private String pathFemale = "resources/Female/";
     private static Pictures instance = null;
 
     protected Pictures() {
