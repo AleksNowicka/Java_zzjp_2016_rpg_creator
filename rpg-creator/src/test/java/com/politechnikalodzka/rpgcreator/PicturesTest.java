@@ -42,7 +42,7 @@ public class PicturesTest {
     @Test
     public void testAddPictures() {
         System.out.println("addPictures");
-        Pictures instance = new Pictures();
+        Pictures instance = Pictures.getInstance();
         instance.setAllPicture(new ArrayList());
         instance.addPictures(TypeOfPictrues.HAIR, "bbb", 0, Gender.MALE);
         instance.addPictures(TypeOfPictrues.EYES, "www", 1, Gender.MALE);
@@ -63,7 +63,7 @@ public class PicturesTest {
     @Test
     public void testChoosePicture() {
         System.out.println("choosePicture");
-        Pictures instance = new Pictures();
+        Pictures instance = Pictures.getInstance();
         instance.setAllPicture(new ArrayList());
         instance.addPictures(TypeOfPictrues.HAIR, "ccc", 0, Gender.MALE);
         instance.addPictures(TypeOfPictrues.EYES, "ddd", 1, Gender.MALE);

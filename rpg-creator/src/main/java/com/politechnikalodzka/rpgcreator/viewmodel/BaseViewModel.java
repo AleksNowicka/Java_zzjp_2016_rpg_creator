@@ -17,7 +17,7 @@ import javax.swing.*;
  */
 public abstract class BaseViewModel {
 
-    private Pictures pictures = new Pictures();
+    private Pictures pictures = Pictures.getInstance();
 
     public void switchFrames(JFrame actualFrame, JFrame nextFrame) {
         actualFrame.dispose();
