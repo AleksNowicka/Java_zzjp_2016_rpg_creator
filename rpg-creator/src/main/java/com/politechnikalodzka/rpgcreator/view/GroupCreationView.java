@@ -4,32 +4,27 @@ import com.politechnikalodzka.rpgcreator.enums.ViewModeEnum;
 import com.politechnikalodzka.rpgcreator.interfaces.FrameSetter;
 import com.politechnikalodzka.rpgcreator.viewmodel.GroupCreationViewModel;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 import java.awt.Color;
-import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.sql.SQLException;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JPanel;
-import javax.swing.JButton;
 
 public class GroupCreationView extends JFrame implements FrameSetter{
 
 	private GroupCreationViewModel groupCreationViewModel;
 
 	private JButton saveButton;
+    private JButton chooseIconButton;
 	private JTextField nameTextField;
 	private JTextField passwordTextField;
 	private JLabel frameNameLabel;
 	private JLabel nameLabel;
 	private JLabel descriptionLabel;
 	private JLabel maxGroupMembersLabel;
-	private JLabel groupIconLabel;
+//	private JLabel groupIconLabel;
 	private JLabel membersLabel;
 	private JComboBox maxGroupMembersComboBox;
 	private JPanel groupIconPanel;
@@ -74,10 +69,10 @@ public class GroupCreationView extends JFrame implements FrameSetter{
 		maxGroupMembersLabel.setBounds(24, 157, 56, 20);
 		getContentPane().add(maxGroupMembersLabel);
 
-		groupIconLabel = new JLabel("Group icon:");
-		groupIconLabel.setForeground(Color.LIGHT_GRAY);
-		groupIconLabel.setBounds(322, 62, 99, 14);
-		getContentPane().add(groupIconLabel);
+//		groupIconLabel = new JLabel("Group icon:");
+//		groupIconLabel.setForeground(Color.LIGHT_GRAY);
+//		groupIconLabel.setBounds(322, 62, 99, 14);
+//		getContentPane().add(groupIconLabel);
 
 		nameTextField = new JTextField();
 		nameTextField.setBounds(90, 59, 86, 20);
@@ -100,8 +95,12 @@ public class GroupCreationView extends JFrame implements FrameSetter{
 		getContentPane().add(maxGroupMembersComboBox);
 
 		groupIconPanel = new JPanel();
-		groupIconPanel.setBounds(322, 80, 90, 90);
+		groupIconPanel.setBounds(322, 90, 90, 90);
 		getContentPane().add(groupIconPanel);
+
+        chooseIconButton = new JButton("Load image");
+        chooseIconButton.setBounds(322, 62, 89, 23);
+        getContentPane().add(chooseIconButton);
 
 		saveButton = new JButton("Save ");
 		saveButton.setBounds(170, 186, 89, 23);
@@ -110,6 +109,17 @@ public class GroupCreationView extends JFrame implements FrameSetter{
 
 	public void setupListeners() {
 		final GroupCreationView classInstance = this;
+
+        chooseIconButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+                int result = fileChooser.showOpenDialog(classInstance);
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    File selectedFile = fileChooser.getSelectedFile();
+                }
+            }
+        });
 
 		saveButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
