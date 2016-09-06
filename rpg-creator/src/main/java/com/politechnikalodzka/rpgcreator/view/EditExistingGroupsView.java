@@ -1,6 +1,7 @@
 package com.politechnikalodzka.rpgcreator.view;
 
 import com.politechnikalodzka.rpgcreator.interfaces.FrameSetter;
+import com.politechnikalodzka.rpgcreator.viewmodel.EditExistingGroupsViewModel;
 
 import javax.swing.JFrame;
 import java.awt.Color;
@@ -8,24 +9,32 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JList;
+import javax.swing.AbstractListModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 
 public class EditExistingGroupsView extends JFrame implements FrameSetter{
 
-	private JLabel frameNameLabel;
-	private JButton editGroup1Button;
-	private JButton editGroup2Button;
-	private JButton editGroup3Button;
-	private JPanel group1IconPanel;
-	private JPanel group2IconPanel;
-	private JPanel group3IconPanel;
-	private JLabel character1Label;
-	private JLabel character2Label;
-	private JLabel character3Label;
+    private EditExistingGroupsViewModel editExistingGroupsViewModel;
 
-	public EditExistingGroupsView(String title) {
+    private JButton deleteGroupButton;
+    private JButton saveGroupButton;
+    private JButton goBackButton;
+	private JList characterList;
+	private JPanel groupIcon;
+	private JLabel frameNameLabel;
+	private JComboBox selectGroupComboBox;
+
+	public EditExistingGroupsView(String title) throws SQLException, ClassNotFoundException {
 		super(title);
+        editExistingGroupsViewModel = new EditExistingGroupsViewModel(title);
 		setupContentPane();
 		setupComponents();
+        setupListeners();
 	}
 
 	public void setupContentPane() {
@@ -40,50 +49,55 @@ public class EditExistingGroupsView extends JFrame implements FrameSetter{
 		frameNameLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
 		frameNameLabel.setForeground(Color.LIGHT_GRAY);
 		frameNameLabel.setBackground(Color.WHITE);
-		frameNameLabel.setBounds(117, 11, 211, 25);
+		frameNameLabel.setBounds(123, 11, 211, 25);
 		getContentPane().add(frameNameLabel);
-
-		editGroup1Button = new JButton("Group 1");
-		editGroup1Button.setBounds(21, 116, 89, 23);
-		getContentPane().add(editGroup1Button);
-
-		editGroup2Button = new JButton("Group 2");
-		editGroup2Button.setBounds(167, 116, 89, 23);
-		getContentPane().add(editGroup2Button);
-
-		editGroup3Button = new JButton("Group 3");
-		editGroup3Button.setBounds(319, 116, 89, 23);
-		getContentPane().add(editGroup3Button);
-
-		group1IconPanel = new JPanel();
-		group1IconPanel.setBounds(21, 42, 89, 63);
-		getContentPane().add(group1IconPanel);
-
-		group2IconPanel = new JPanel();
-		group2IconPanel.setBounds(167, 42, 89, 63);
-		getContentPane().add(group2IconPanel);
-
-		group3IconPanel = new JPanel();
-		group3IconPanel.setBounds(319, 42, 89, 63);
-		getContentPane().add(group3IconPanel);
-
-		character1Label = new JLabel("Character 1");
-		character1Label.setForeground(Color.LIGHT_GRAY);
-		character1Label.setBounds(21, 150, 89, 14);
-		getContentPane().add(character1Label);
-
-		character2Label = new JLabel("Character 2");
-		character2Label.setForeground(Color.LIGHT_GRAY);
-		character2Label.setBounds(167, 150, 89, 14);
-		getContentPane().add(character2Label);
-
-		character3Label = new JLabel("Character 3");
-		character3Label.setForeground(Color.LIGHT_GRAY);
-		character3Label.setBounds(318, 150, 90, 14);
-		getContentPane().add(character3Label);
+		
+		selectGroupComboBox = new JComboBox();
+		selectGroupComboBox.setModel(new DefaultComboBoxModel(new String[] {"Group1", "Group2", "Group3"}));
+		selectGroupComboBox.setBounds(137, 47, 191, 22);
+		getContentPane().add(selectGroupComboBox);
+		
+		groupIcon = new JPanel();
+		groupIcon.setBounds(18, 47, 89, 125);
+		getContentPane().add(groupIcon);
+		
+		characterList = new JList();
+		characterList.setModel(new AbstractListModel() {
+			String[] values = new String[] {"Character1", "Character2", "Character3"};
+			public int getSize() {
+				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
+		characterList.setBounds(137, 80, 97, 92);
+		getContentPane().add(characterList);
+		
+		goBackButton = new JButton("Go back");
+		goBackButton.setBounds(18, 187, 89, 23);
+		getContentPane().add(goBackButton);
+		
+		saveGroupButton = new JButton("Edit group");
+		saveGroupButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		saveGroupButton.setBounds(123, 187, 113, 23);
+		getContentPane().add(saveGroupButton);
+		
+		deleteGroupButton = new JButton("Delete group");
+		deleteGroupButton.setBounds(299, 187, 113, 23);
+		getContentPane().add(deleteGroupButton);
 	}
 
 	public void setupListeners() {
+        final EditExistingGroupsView classInstance = this;
 
+        goBackButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                editExistingGroupsViewModel.switchFrames(classInstance, editExistingGroupsViewModel.getNavigationView());
+            }
+        });
 	}
 }

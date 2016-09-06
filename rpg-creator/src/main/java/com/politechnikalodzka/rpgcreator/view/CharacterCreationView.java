@@ -1,6 +1,5 @@
 package com.politechnikalodzka.rpgcreator.view;
 
-import com.politechnikalodzka.rpgcreator.database.Character;
 import com.politechnikalodzka.rpgcreator.enums.ViewModeEnum;
 import com.politechnikalodzka.rpgcreator.interfaces.FrameSetter;
 import com.politechnikalodzka.rpgcreator.viewmodel.CharacterCreationViewModel;
@@ -22,7 +21,6 @@ public class CharacterCreationView extends JFrame implements FrameSetter{
 	private CharacterCreationViewModel characterCreationViewModel;
 
 	private JButton saveButton;
-	private JComboBox selectGroupButton;
 	private JPanel characterViewPanel;
 	private JComboBox genderComboBox;
 	private JComboBox hairComboBox;
@@ -30,6 +28,7 @@ public class CharacterCreationView extends JFrame implements FrameSetter{
 	private JComboBox outfitComboBox;
 	private JComboBox eyesComboBox;
 	private JComboBox accessoriesComboBox;
+	private JComboBox selectGroupComboBox;
 	private JLabel frameNameLabel;
 	private JLabel genderLabel;
 	private JLabel hairLabel;
@@ -37,6 +36,7 @@ public class CharacterCreationView extends JFrame implements FrameSetter{
 	private JLabel outfitLabel;
 	private JLabel eyesLabel;
 	private JLabel accessoriesLabel;
+	private JLabel groupLabel;
 
 	public CharacterCreationView(String title, ViewModeEnum viewModeEnum) throws SQLException, ClassNotFoundException {
 		super(title);
@@ -97,14 +97,19 @@ public class CharacterCreationView extends JFrame implements FrameSetter{
 		accessoriesLabel.setBounds(10, 170, 63, 14);
 		getContentPane().add(accessoriesLabel);
 
-		//TODO - reorganize with this new combobox
-		selectGroupButton = new JComboBox();
-		selectGroupButton.setModel(new DefaultComboBoxModel(characterCreationViewModel.getGroupsNames()));
-		selectGroupButton.setBounds(10, 195, 99, 23);
-		getContentPane().add(selectGroupButton);
+		groupLabel = new JLabel("Group");
+		groupLabel.setForeground(Color.WHITE);
+		groupLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		groupLabel.setBounds(10, 195, 63, 14);
+		getContentPane().add(groupLabel);
+
+		selectGroupComboBox = new JComboBox();
+		selectGroupComboBox.setModel(new DefaultComboBoxModel(characterCreationViewModel.getGroupsNames()));
+		selectGroupComboBox.setBounds(97, 195, 99, 20);
+		getContentPane().add(selectGroupComboBox);
 
 		saveButton = new JButton("Save");
-		saveButton.setBounds(119, 195, 77, 23);
+		saveButton.setBounds(200, 195, 60, 23);
 		getContentPane().add(saveButton);
 
 		characterViewPanel = new JPanel();
