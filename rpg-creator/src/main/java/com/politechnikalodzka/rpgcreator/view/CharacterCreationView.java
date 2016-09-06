@@ -6,18 +6,14 @@ import com.politechnikalodzka.rpgcreator.enums.ViewModeEnum;
 import com.politechnikalodzka.rpgcreator.interfaces.FrameSetter;
 import com.politechnikalodzka.rpgcreator.viewmodel.CharacterCreationViewModel;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 import java.awt.Color;
-import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 
 public class CharacterCreationView extends JFrame implements FrameSetter {
 
@@ -116,12 +112,9 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
 		getContentPane().add(selectGroupComboBox);
 
 		saveButton = new JButton("Save");
-		saveButton.setBounds(200, 195, 60, 23);
+		saveButton.setBounds(50, 250, 100, 23);
 		getContentPane().add(saveButton);
 
-//        characterViewPanel = new JPanel();
-//        characterViewPanel.setBounds(264, 43, 160, 175);
-//        getContentPane().add(characterViewPanel);
         genderComboBox = new JComboBox();
         genderComboBox.setModel(new DefaultComboBoxModel(characterCreationViewModel.getGenderList()));
         genderComboBox.setBounds(97, 43, 99, 20);
@@ -156,7 +149,7 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
     public void setupListeners() {
         final CharacterCreationView classInstance = this;
 
-        //TODO Przetestowanie rysowania poszczególnych elementów postaci.
+        //TODO Przetestowanie rysowania poszczegï¿½lnych elementï¿½w postaci.
         genderComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String gender = (String) genderComboBox.getSelectedItem();

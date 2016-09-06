@@ -12,7 +12,6 @@ import com.politechnikalodzka.rpgcreator.picture.factory.*;
  */
 public class PictureFactory implements Factory {
 
-    @Override
     public Picture addPicture(TypeOfPictrues type, String url, int id, Gender gender) {
         switch (type) {
             case OUTFIT:

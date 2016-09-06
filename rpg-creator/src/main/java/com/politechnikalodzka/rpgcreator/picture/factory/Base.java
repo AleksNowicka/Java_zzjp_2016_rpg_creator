@@ -20,22 +20,18 @@ public class Base implements Picture {
         this.gender = gender;
     }
 
-    @Override
     public int getID() {
         return ID;
     }
 
-    @Override
     public String getURL() {
         return URL;
     }
-    
-    @Override
+
     public TypeOfPictrues getType() {
         return type;
     }
 
-    @Override
     public Gender getGender() {
         return gender;
     }

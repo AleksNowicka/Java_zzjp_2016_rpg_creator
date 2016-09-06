@@ -12,14 +12,8 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JEditorPane;
 import javax.swing.JTextField;
 
 public class EditExistingCharactersView extends JFrame implements FrameSetter{
@@ -27,15 +21,13 @@ public class EditExistingCharactersView extends JFrame implements FrameSetter{
 	private EditExistingCharactersViewModel editExistingCharactersViewModel;
 
 	private JButton goBackButton;
-	private JButton editCharacter1Button;
-	private JButton editCharacter2Button;
-	private JButton editCharacter3Button;
+	private JButton editCharacterButton;
+	private JButton deleteCharacterButton;
 	private JPanel characterIconPanel;
-	private JPanel character1IconPanel;
-	private JPanel character2IconPanel;
-	private JPanel character3IconPanel;
 	private JLabel frameNameLabel;
-	private JTextField textField;
+	private JLabel groupLabel;
+	private JLabel groupNameLabel;
+	private JComboBox characterComboBox;
 
 	public EditExistingCharactersView(String title) throws SQLException, ClassNotFoundException {
 		super(title);
@@ -68,31 +60,34 @@ public class EditExistingCharactersView extends JFrame implements FrameSetter{
 		goBackButton.setBounds(21, 197, 89, 23);
 		getContentPane().add(goBackButton);
 		
-		JComboBox characterComboBox = new JComboBox();
+		characterComboBox = new JComboBox();
 		characterComboBox.setModel(new DefaultComboBoxModel(new String[] {"Character1", "Character2", "Character3"}));
 		characterComboBox.setBounds(137, 47, 191, 22);
 		getContentPane().add(characterComboBox);
 		
-		JButton btnDeleteCharacter = new JButton("Delete character");
-		btnDeleteCharacter.setBounds(309, 197, 113, 23);
-		getContentPane().add(btnDeleteCharacter);
+		deleteCharacterButton = new JButton("Delete character");
+		deleteCharacterButton.setBounds(309, 197, 113, 23);
+		getContentPane().add(deleteCharacterButton);
 		
-		JButton btnSave = new JButton("Edit character");
-		btnSave.addActionListener(new ActionListener() {
+		editCharacterButton = new JButton("Edit character");
+		editCharacterButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnSave.setBounds(125, 197, 113, 23);
-		getContentPane().add(btnSave);
+		editCharacterButton.setBounds(189, 197, 113, 23);
+		getContentPane().add(editCharacterButton);
 		
-		JLabel lblGroup = new JLabel("Group1");
-		lblGroup.setBounds(137, 80, 63, 25);
-		getContentPane().add(lblGroup);
+		groupLabel = new JLabel("Group:");
+        groupLabel.setForeground(Color.WHITE);
+        groupLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		groupLabel.setBounds(137, 80, 63, 25);
+		getContentPane().add(groupLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(242, 80, 86, 20);
-		getContentPane().add(textField);
-		textField.setColumns(10);
+		groupNameLabel = new JLabel("---");
+        groupNameLabel.setForeground(Color.WHITE);
+        groupNameLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		groupNameLabel.setBounds(242, 80, 86, 20);
+		getContentPane().add(groupNameLabel);
 	}
 
 	public void setupListeners() {

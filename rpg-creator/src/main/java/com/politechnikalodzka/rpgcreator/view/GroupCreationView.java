@@ -76,7 +76,7 @@ public class GroupCreationView extends JFrame implements FrameSetter{
 
 		groupIconLabel = new JLabel("Group icon:");
 		groupIconLabel.setForeground(Color.LIGHT_GRAY);
-		groupIconLabel.setBounds(252, 62, 99, 14);
+		groupIconLabel.setBounds(322, 62, 99, 14);
 		getContentPane().add(groupIconLabel);
 
 		nameTextField = new JTextField();
@@ -100,11 +100,11 @@ public class GroupCreationView extends JFrame implements FrameSetter{
 		getContentPane().add(maxGroupMembersComboBox);
 
 		groupIconPanel = new JPanel();
-		groupIconPanel.setBounds(322, 62, 90, 90);
+		groupIconPanel.setBounds(322, 80, 90, 90);
 		getContentPane().add(groupIconPanel);
 
 		saveButton = new JButton("Save ");
-		saveButton.setBounds(322, 186, 89, 23);
+		saveButton.setBounds(170, 186, 89, 23);
 		getContentPane().add(saveButton);
 	}
 

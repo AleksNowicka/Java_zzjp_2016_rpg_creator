@@ -19,7 +19,9 @@ public class Pictures {
     private List<Picture> allPicture;
     private Factory pictrueFactory = new PictureFactory();
     private Gender gender = Gender.MALE; //Default
-    private String patch = "resources\\Male\\";
+    //TODO - always change depending on used system (Windows, Linux)
+    private String path = "resources\\Male\\";
+//    private String path = "resources/Male/";
 
     public Pictures() {
         this.pictrueToDraw = new ArrayList();
@@ -28,19 +30,19 @@ public class Pictures {
         }
         this.allPicture = new ArrayList();
 
-        this.addPictures(TypeOfPictrues.HAIR, patch + "3HairMale.png", 0, Gender.MALE);
-        this.addPictures(TypeOfPictrues.ACCESSORIES, patch + "1AccessoryMale.png", 1, Gender.MALE);
-        this.addPictures(TypeOfPictrues.HAIR, patch + "1HairMale.png", 2, Gender.MALE);
-        this.addPictures(TypeOfPictrues.HAT, patch + "1HatMale.png", 3, Gender.MALE);
-        this.addPictures(TypeOfPictrues.OUTFIT, patch + "1OutfitMale.png", 4, Gender.MALE);
-        this.addPictures(TypeOfPictrues.HAIR, patch + "4HairMale.png", 5, Gender.MALE);
-        this.addPictures(TypeOfPictrues.EYES, patch + "BlueEyesMale.png", 6, Gender.MALE);
-        this.addPictures(TypeOfPictrues.EYES, patch + "BrownEyesMale.png", 7, Gender.MALE);
-        this.addPictures(TypeOfPictrues.EYES, patch + "GreenEyesMale.png", 8, Gender.MALE);
-        this.addPictures(TypeOfPictrues.HAIR, patch + "2HairMale.png", 9, Gender.MALE);
-        this.addPictures(TypeOfPictrues.HAT, patch + "2HatMale.png", 10, Gender.MALE);
-        this.addPictures(TypeOfPictrues.OUTFIT, patch + "2OutfitMale.png", 11, Gender.MALE);
-        this.addPictures(TypeOfPictrues.BASE, patch + "BaseMale.png", 12, Gender.MALE);
+        this.addPictures(TypeOfPictrues.HAIR, path + "3HairMale.png", 0, Gender.MALE);
+        this.addPictures(TypeOfPictrues.ACCESSORIES, path + "1AccessoryMale.png", 1, Gender.MALE);
+        this.addPictures(TypeOfPictrues.HAIR, path + "1HairMale.png", 2, Gender.MALE);
+        this.addPictures(TypeOfPictrues.HAT, path + "1HatMale.png", 3, Gender.MALE);
+        this.addPictures(TypeOfPictrues.OUTFIT, path + "1OutfitMale.png", 4, Gender.MALE);
+        this.addPictures(TypeOfPictrues.HAIR, path + "4HairMale.png", 5, Gender.MALE);
+        this.addPictures(TypeOfPictrues.EYES, path + "BlueEyesMale.png", 6, Gender.MALE);
+        this.addPictures(TypeOfPictrues.EYES, path + "BrownEyesMale.png", 7, Gender.MALE);
+        this.addPictures(TypeOfPictrues.EYES, path + "GreenEyesMale.png", 8, Gender.MALE);
+        this.addPictures(TypeOfPictrues.HAIR, path + "2HairMale.png", 9, Gender.MALE);
+        this.addPictures(TypeOfPictrues.HAT, path + "2HatMale.png", 10, Gender.MALE);
+        this.addPictures(TypeOfPictrues.OUTFIT, path + "2OutfitMale.png", 11, Gender.MALE);
+        this.addPictures(TypeOfPictrues.BASE, path + "BaseMale.png", 12, Gender.MALE);
     }
 
     public Gender getGender() {
@@ -115,7 +117,7 @@ public class Pictures {
         }
     }
 
-    public void setCurrentCharacter(Character character) { // Ta metoda pobiera dane na temat obrazków dla aktualnie wybranego Character'a
+    public void setCurrentCharacter(Character character) { // Ta metoda pobiera dane na temat obrazkï¿½w dla aktualnie wybranego Character'a
         this.choosePicture(character.getAccessoriesId());
         this.choosePicture(character.getEyesId());
         this.choosePicture(character.getGroupId());
@@ -123,6 +125,6 @@ public class Pictures {
         this.choosePicture(character.getHatId());
         this.choosePicture(character.getOutfitId());
         this.setGender(Gender.valueOf(String.valueOf(character.getGender())));
-        //this.setGender(character.getGender()) // ta linijka bêdzie prawid³owa po dokonaniu zmian w Character
+        //this.setGender(character.getGender()) // ta linijka bï¿½dzie prawidï¿½owa po dokonaniu zmian w Character
     }
 }

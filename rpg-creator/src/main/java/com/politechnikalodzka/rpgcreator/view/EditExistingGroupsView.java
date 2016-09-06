@@ -83,7 +83,7 @@ public class EditExistingGroupsView extends JFrame implements FrameSetter{
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		saveGroupButton.setBounds(123, 187, 113, 23);
+		saveGroupButton.setBounds(180, 187, 113, 23);
 		getContentPane().add(saveGroupButton);
 		
 		deleteGroupButton = new JButton("Delete group");
