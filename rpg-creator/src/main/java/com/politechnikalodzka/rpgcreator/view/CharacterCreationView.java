@@ -1,21 +1,16 @@
 package com.politechnikalodzka.rpgcreator.view;
 
 import com.politechnikalodzka.rpgcreator.database.Character;
-import com.politechnikalodzka.rpgcreator.database.Group;
 import com.politechnikalodzka.rpgcreator.enums.Gender;
-import com.politechnikalodzka.rpgcreator.enums.TypeOfPictrues;
 import com.politechnikalodzka.rpgcreator.enums.ViewModeEnum;
 import com.politechnikalodzka.rpgcreator.interfaces.FrameSetter;
 import com.politechnikalodzka.rpgcreator.viewmodel.CharacterCreationViewModel;
-import com.politechnikalodzka.rpgcreator.viewmodel.NavigationViewModel;
 
 import javax.swing.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowFocusListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +39,7 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
     private JLabel outfitLabel;
     private JLabel eyesLabel;
     private JLabel accessoriesLabel;
+
     private List<JLabel> characters;
     private JLabel groupLabel;
 
@@ -55,7 +51,9 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
         setupComponents();
         setupListeners();
         characters = new ArrayList();
-        characterCreationViewModel.setDefaultDrawList();
+        if(viewMode.equals(ViewModeEnum.CREATE)) {
+            characterCreationViewModel.setDefaultDrawList();
+        }
         characterCreationViewModel.drawCharacter(this, characters);
     }
 
@@ -173,6 +171,16 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
     public void setupEditedCharacterData(){
         //TODO - add setting pictures
         nameTextField.setText(characterCreationViewModel.getEditedCharacter().getName());
+        genderComboBox.setSelectedItem(characterCreationViewModel.getEditedCharactersGender().toString());
+        hairComboBox.setSelectedItem(characterCreationViewModel.getEditedCharacter().getHairId());
+        hatComboBox.setSelectedItem(characterCreationViewModel.getEditedCharacter().getHatId());
+        outfitComboBox.setSelectedItem(characterCreationViewModel.getEditedCharacter().getOutfitId());
+        eyesComboBox.setSelectedItem(characterCreationViewModel.getEditedCharacter().getEyesId());
+        accessoriesComboBox.setSelectedItem(characterCreationViewModel.getEditedCharacter().getAccessoriesId());
+        selectGroupComboBox.setSelectedItem(characterCreationViewModel.getGroupNammeById(
+                characterCreationViewModel.getEditedCharacter().getGroupId()));
+        characterCreationViewModel.setSpecificDrawList();
+        characterCreationViewModel.drawCharacter(this, characters);
     }
 
     public void setupListeners() {

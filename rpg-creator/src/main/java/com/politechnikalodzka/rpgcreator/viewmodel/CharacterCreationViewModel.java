@@ -56,6 +56,13 @@ public class CharacterCreationViewModel extends BaseViewModel {
         }
     }
 
+    public Gender getEditedCharactersGender(){
+        if(editedCharacter.getGender() == 'm'){
+            return Gender.MALE;
+        }
+        return Gender.FEMALE;
+    }
+
     public String[] getGroupsNames() {
         String[] groupsNames = new String[user.getUserGroups().size()];
         int counter = 0;
@@ -133,6 +140,16 @@ public class CharacterCreationViewModel extends BaseViewModel {
         return -1;
     }
 
+    public String getGroupNammeById(int groupId){
+        List<Group> userGroups = user.getUserGroups();
+        for(Group group : userGroups){
+            if(group.getId() == groupId){
+                return group.getName();
+            }
+        }
+        return null;
+    }
+
     public NavigationView getNavigationView() {
         return navigationView;
     }
@@ -149,6 +166,22 @@ public class CharacterCreationViewModel extends BaseViewModel {
             this.getPictures().choosePicture(this.getEyesList()[0]);
             this.getPictures().choosePicture(this.getHatList()[0]);
             this.getPictures().choosePicture(this.getOutfitList()[0]);
+            this.getPictures().choosePicture(this.getPictures().getPictureByType(TypeOfPictrues.BASE).get(0).getID());
+        }
+    }
+
+    public void setSpecificDrawList(){
+        if (this.getHairList().length > 0
+                && this.getAccessoriesList().length > 0
+                && this.getEyesList().length > 0
+                && this.getHatList().length > 0
+                && this.getOutfitList().length > 0
+                && this.getPictures().getPictureByType(TypeOfPictrues.BASE).size() > 0) {
+            this.getPictures().choosePicture(editedCharacter.getHairId());
+            this.getPictures().choosePicture(editedCharacter.getAccessoriesId());
+            this.getPictures().choosePicture(editedCharacter.getEyesId());
+            this.getPictures().choosePicture(editedCharacter.getHatId());
+            this.getPictures().choosePicture(editedCharacter.getOutfitId());
             this.getPictures().choosePicture(this.getPictures().getPictureByType(TypeOfPictrues.BASE).get(0).getID());
         }
     }
