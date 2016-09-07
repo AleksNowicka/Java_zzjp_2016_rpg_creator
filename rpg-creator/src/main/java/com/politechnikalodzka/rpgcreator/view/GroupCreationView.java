@@ -162,6 +162,8 @@ public class GroupCreationView extends JFrame implements FrameSetter {
                     group.setName(nameTextField.getText());
                     group.setDescription(descriptionTextField.getText());
                     group.setMaxGroupMembers(Integer.parseInt(maxGroupMembersComboBox.getSelectedItem().toString()));
+                    group.setGroupIcon(groupCreationViewModel.getEditedGroup().getGroupIcon());
+                    System.out.println(groupCreationViewModel.getEditedGroup().getGroupIcon());
                     groupCreationViewModel.saveNewGroup(group);
                 } catch (ClassNotFoundException e1) {
                     e1.printStackTrace();
