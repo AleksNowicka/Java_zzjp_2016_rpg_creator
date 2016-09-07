@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -31,10 +32,12 @@ public class EditExistingCharactersView extends JFrame implements FrameSetter {
     private JLabel groupLabel;
     private JLabel groupNameLabel;
     private JComboBox characterComboBox;
+    private List<JLabel> characters;
 
     public EditExistingCharactersView(String title) throws SQLException, ClassNotFoundException {
         super(title);
         editExistingCharactersViewModel = new EditExistingCharactersViewModel(title);
+        characters = new ArrayList();
         setupContentPane();
         setupComponents();
         setupListeners();
@@ -93,6 +96,10 @@ public class EditExistingCharactersView extends JFrame implements FrameSetter {
             public void itemStateChanged(ItemEvent e) {
                 groupNameLabel.setText(editExistingCharactersViewModel.getCharactersGroupName(
                         e.getItem().toString()));
+                editExistingCharactersViewModel.getPictures()
+                        .setCurrentCharacter(editExistingCharactersViewModel.getCharacterByName((String) characterComboBox.getSelectedItem()));
+                editExistingCharactersViewModel.cleanCharacter(characters);
+                editExistingCharactersViewModel.drawCharacter(classInstance, characters, 21, 48);
             }
         });
 

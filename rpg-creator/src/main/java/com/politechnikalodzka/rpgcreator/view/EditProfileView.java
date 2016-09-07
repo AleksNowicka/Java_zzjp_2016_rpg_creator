@@ -34,6 +34,7 @@ public class EditProfileView extends JFrame implements FrameSetter {
 			e1.printStackTrace();
 		}
                 userAvatarPanel = new JLabel();
+                editProfileViewModel.drawUserIcon(userAvatarPanel, editProfileViewModel.getUser());
 		setupContentPane();
 		setupComponents();
 		setupListeners();

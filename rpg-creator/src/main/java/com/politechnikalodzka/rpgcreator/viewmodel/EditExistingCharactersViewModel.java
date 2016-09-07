@@ -91,4 +91,14 @@ public class EditExistingCharactersViewModel extends BaseViewModel {
     public CharacterCreationView getCharacterCreationView() {
         return characterCreationView;
     }
+    
+    public Character getCharacterByName(String name) {
+        List<Character> userCharacter = user.getUserCharacters();
+        for(Character character : userCharacter){
+            if(character.getName().equals(name)){
+                return character;
+            }
+        }
+        return null;
+    }
 }

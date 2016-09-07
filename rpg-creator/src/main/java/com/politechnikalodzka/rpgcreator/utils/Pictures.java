@@ -94,9 +94,11 @@ public class Pictures {
         this.choosePicture(character.getOutfitId());
         if(character.getGender() == 'm'){
             this.setGender(Gender.MALE);
+            this.choosePicture(this.getPictureByType(TypeOfPictures.BASE).get(0).getID());
         }
         else{
             this.setGender(Gender.FEMALE);
+            this.choosePicture(this.getPictureByType(TypeOfPictures.BASE).get(0).getID());
         }
     }
 

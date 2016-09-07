@@ -60,7 +60,7 @@ public abstract class BaseViewModel {
         File file;
         
         try {
-            if (!currentGroup.getGroupIcon().equals(null)) {
+            if (!(currentGroup.getGroupIcon() == null )) {
                 file = new File(currentGroup.getGroupIcon());
                 bi = ImageIO.read(file);
                 icon.setIcon(new ImageIcon(bi));
@@ -70,12 +70,16 @@ public abstract class BaseViewModel {
         }
     }
     
+    public void cleanIcon(JLabel icon) {
+        icon.setIcon(null);
+    }
+    
     public void drawUserIcon(JLabel icon, User currentUser) {
         BufferedImage bi;
         File file;
         
         try {
-            if (currentUser != null && !currentUser.getUserIcon().equals(null)) {
+            if (currentUser != null && !(currentUser.getUserIcon() == null)) {
                 file = new File(currentUser.getUserIcon());
                 bi = ImageIO.read(file);
                 icon.setIcon(new ImageIcon(bi));

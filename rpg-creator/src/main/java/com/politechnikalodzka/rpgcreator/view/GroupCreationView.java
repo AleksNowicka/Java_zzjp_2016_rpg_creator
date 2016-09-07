@@ -36,6 +36,7 @@ public class GroupCreationView extends JFrame implements FrameSetter {
         super(title);
         groupCreationViewModel = new GroupCreationViewModel(title);
         this.viewMode = viewModeEnum;
+        groupCreationViewModel.drawGroupIcon(groupIconPanel, groupCreationViewModel.getEditedGroup());
         setupContentPane();
         setupComponents();
         setupListeners();
@@ -111,7 +112,7 @@ public class GroupCreationView extends JFrame implements FrameSetter {
     }
 
     public void setupEditedGroupData() {
-        //TODO - add reading icon
+        groupCreationViewModel.drawGroupIcon(groupIconPanel, groupCreationViewModel.getEditedGroup());
         nameTextField.setText(groupCreationViewModel.getEditedGroup().getName());
         descriptionTextField.setText(groupCreationViewModel.getEditedGroup().getDescription());
         maxGroupMembersComboBox.setSelectedItem(groupCreationViewModel.getEditedGroup().getMaxGroupMembers());
@@ -142,7 +143,6 @@ public class GroupCreationView extends JFrame implements FrameSetter {
             public void actionPerformed(ActionEvent e) {
                 if (viewMode.equals(ViewModeEnum.EDIT)) {
                     try {
-                        //TODO - add saving icon
                         groupCreationViewModel.getEditedGroup().setName(nameTextField.getText());
                         groupCreationViewModel.getEditedGroup().setDescription(descriptionTextField.getText());
                         groupCreationViewModel.getEditedGroup().setMaxGroupMembers(
@@ -157,11 +157,11 @@ public class GroupCreationView extends JFrame implements FrameSetter {
                     return;
                 }
                 try {
-                    //TODO - add saving group icon
                     Group group = new Group();
                     group.setName(nameTextField.getText());
                     group.setDescription(descriptionTextField.getText());
                     group.setMaxGroupMembers(Integer.parseInt(maxGroupMembersComboBox.getSelectedItem().toString()));
+                    group.setGroupIcon(groupCreationViewModel.getEditedGroup().getGroupIcon());
                     groupCreationViewModel.saveNewGroup(group);
                 } catch (ClassNotFoundException e1) {
                     e1.printStackTrace();
