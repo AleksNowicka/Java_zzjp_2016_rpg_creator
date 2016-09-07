@@ -19,11 +19,12 @@ public class NavigationView extends JFrame implements FrameSetter{
 
 	private NavigationViewModel navigationViewModel;
 
-	public JButton createNewCharacterButton;
-	public JButton editExistingCharactersButton;
-	public JButton createNewGroupButton;
-	public JButton editExistingGroupsButton;
-	public JButton editProfileButton;
+	private JButton createNewCharacterButton;
+	private JButton editExistingCharactersButton;
+	private JButton createNewGroupButton;
+	private JButton editExistingGroupsButton;
+	private JButton editProfileButton;
+	private JButton logOutButton;
 
 	private JLabel welcomeMessageLabel;
 	private JPanel userAvatarPanel;
@@ -87,9 +88,9 @@ public class NavigationView extends JFrame implements FrameSetter{
 		editProfileButton.setBounds(302, 152, 109, 23);
 		getContentPane().add(editProfileButton);
 		
-		JButton btnLogOut = new JButton("Log out");
-		btnLogOut.setBounds(302, 186, 109, 23);
-		getContentPane().add(btnLogOut);
+		logOutButton = new JButton("Log out");
+		logOutButton.setBounds(302, 186, 109, 23);
+		getContentPane().add(logOutButton);
 	}
 
 	public void setupListeners() {
@@ -124,5 +125,12 @@ public class NavigationView extends JFrame implements FrameSetter{
                 navigationViewModel.switchFrames(classInstance, navigationViewModel.getEditProfileView());
 			}
 		});
+
+        logOutButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                navigationViewModel.logOut();
+                navigationViewModel.switchFrames(classInstance, navigationViewModel.getLogInView());
+            }
+        });
 	}
 }

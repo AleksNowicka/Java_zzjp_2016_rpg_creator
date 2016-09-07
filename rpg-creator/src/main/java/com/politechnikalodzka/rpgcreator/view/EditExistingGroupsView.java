@@ -112,6 +112,19 @@ public class EditExistingGroupsView extends JFrame implements FrameSetter{
 			}
 		});
 
+		deleteGroupButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					editExistingGroupsViewModel.removeChosenGroup(selectGroupComboBox.getSelectedItem().toString());
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				} catch (ClassNotFoundException e1) {
+					e1.printStackTrace();
+				}
+				selectGroupComboBox.setModel(new DefaultComboBoxModel(editExistingGroupsViewModel.getUserGroupsNames()));
+			}
+		});
+
         goBackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 editExistingGroupsViewModel.switchFrames(classInstance, editExistingGroupsViewModel.getNavigationView());

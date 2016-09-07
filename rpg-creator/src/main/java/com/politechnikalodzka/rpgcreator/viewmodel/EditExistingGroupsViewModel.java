@@ -24,6 +24,17 @@ public class EditExistingGroupsViewModel extends BaseViewModel{
         user = User.getInstance();
     }
 
+    public void removeChosenGroup(String groupName) throws SQLException, ClassNotFoundException {
+        List<Group> userGroups = user.getUserGroups();
+        for(Group group : userGroups){
+            if(group.getName().equals(groupName)){
+                user.removeGroup(group.getId());
+                user.retriveUsersGroupsWithTheirCharacters();
+                return;
+            }
+        }
+    }
+
     public String[] getUserGroupsNames(){
         List<Group> userGroups = user.getUserGroups();
         String[] userGroupsNames = new String[userGroups.size()];

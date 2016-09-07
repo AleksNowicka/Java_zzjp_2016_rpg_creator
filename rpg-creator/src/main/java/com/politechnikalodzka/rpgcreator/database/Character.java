@@ -90,6 +90,11 @@ public class Character extends BaseDataBaseEntity{
             gender = 'f';
         }
     }
+
+    public int getId() {
+        return id;
+    }
+
     public int getHairId() { return hairId; }
     public void setHairId(int hairId) { this.hairId = hairId; }
     public int getHatId() { return hatId; }

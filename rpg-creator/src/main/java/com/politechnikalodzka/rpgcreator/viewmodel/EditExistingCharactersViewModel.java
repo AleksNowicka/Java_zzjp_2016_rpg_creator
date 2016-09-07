@@ -24,6 +24,17 @@ public class EditExistingCharactersViewModel extends BaseViewModel {
         user = User.getInstance();
     }
 
+    public void removeChosenCharacter(String characterName) throws SQLException, ClassNotFoundException {
+        List<Character> userCharacters = user.getUserCharacters();
+        for(Character character : userCharacters){
+            if(character.getName().equals(characterName)){
+                user.removeCharacter(character.getId());
+                user.retriveUsersGroupsWithTheirCharacters();
+                return;
+            }
+        }
+    }
+
     public String[] getAllUsersCharactersNames(){
         List<Character> characters = user.getUserCharacters();
         String[] charactersNames = new String[characters.size()];

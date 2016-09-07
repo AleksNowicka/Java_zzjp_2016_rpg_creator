@@ -79,6 +79,10 @@ public class QueryBuilder {
         return query;
     }
 
+    public String getDeleteRowQuery(String searchedTableName, String byColumnName, String byValue){
+        return DELETE+FROM+searchedTableName+WHERE+byColumnName+EQUALS+"'"+byValue+"'";
+    }
+
     public String getDeleteRowQueryFromOwnTable(String byColumnName, String byValue){
         return DELETE+FROM+tableName+WHERE+byColumnName+EQUALS+"'"+byValue+"'";
     }

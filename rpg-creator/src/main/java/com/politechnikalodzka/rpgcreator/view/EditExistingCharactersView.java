@@ -72,10 +72,6 @@ public class EditExistingCharactersView extends JFrame implements FrameSetter{
 		getContentPane().add(deleteCharacterButton);
 		
 		editCharacterButton = new JButton("Edit character");
-		editCharacterButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		editCharacterButton.setBounds(189, 197, 113, 23);
 		getContentPane().add(editCharacterButton);
 		
@@ -100,6 +96,20 @@ public class EditExistingCharactersView extends JFrame implements FrameSetter{
             public void itemStateChanged(ItemEvent e) {
                 groupNameLabel.setText(editExistingCharactersViewModel.getCharactersGroupName(
                         e.getItem().toString()));
+            }
+        });
+
+        deleteCharacterButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    editExistingCharactersViewModel.removeChosenCharacter(
+                            characterComboBox.getSelectedItem().toString());
+                    characterComboBox.setModel(new DefaultComboBoxModel(editExistingCharactersViewModel.getAllUsersCharactersNames()));
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                } catch (ClassNotFoundException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
 

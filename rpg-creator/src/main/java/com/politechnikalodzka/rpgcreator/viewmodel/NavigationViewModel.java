@@ -1,11 +1,9 @@
 package com.politechnikalodzka.rpgcreator.viewmodel;
 
-import com.politechnikalodzka.rpgcreator.database.Character;
 import com.politechnikalodzka.rpgcreator.database.User;
 import com.politechnikalodzka.rpgcreator.enums.ViewModeEnum;
 import com.politechnikalodzka.rpgcreator.view.*;
 
-import javax.jws.soap.SOAPBinding;
 import java.sql.SQLException;
 
 /**
@@ -18,6 +16,7 @@ public class NavigationViewModel extends BaseViewModel {
     private EditExistingCharactersView editExistingCharactersView;
     private GroupCreationView groupCreationView;
     private EditExistingGroupsView editExistingGroupsView;
+    private LogInView logInView;
 
     private User user;
 
@@ -27,8 +26,13 @@ public class NavigationViewModel extends BaseViewModel {
         editExistingCharactersView = new EditExistingCharactersView(title);
         groupCreationView = new GroupCreationView(title, ViewModeEnum.CREATE);
         editExistingGroupsView = new EditExistingGroupsView(title);
+        logInView = new LogInView(title);
         user = User.getInstance();
         user.updateData();
+    }
+
+    public void logOut(){
+        user.clearUser();
     }
 
     public String getUserNick() {
@@ -53,5 +57,9 @@ public class NavigationViewModel extends BaseViewModel {
 
     public EditExistingGroupsView getEditExistingGroupsView() {
         return editExistingGroupsView;
+    }
+
+    public LogInView getLogInView() {
+        return logInView;
     }
 }

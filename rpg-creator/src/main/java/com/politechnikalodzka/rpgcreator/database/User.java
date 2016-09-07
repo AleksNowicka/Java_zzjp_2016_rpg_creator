@@ -54,6 +54,7 @@ public class User extends BaseDataBaseEntity{
         this.nick = resultSet.getString(columnsNames.get(1));
         emailAddress = resultSet.getString(columnsNames.get(2));
         this.password = resultSet.getString(columnsNames.get(3));
+        retriveUsersGroupsWithTheirCharacters();
     }
 
     public void retriveUsersGroupsWithTheirCharacters() throws SQLException, ClassNotFoundException {
@@ -89,11 +90,11 @@ public class User extends BaseDataBaseEntity{
     }
 
     public void saveAsEditedUser() throws SQLException {
-        Map<String, String> columsNamesWithUpdatedValues = new HashMap<String, String>();
-        columsNamesWithUpdatedValues.put(columnsNames.get(1), nick);
-        columsNamesWithUpdatedValues.put(columnsNames.get(2), emailAddress);
-        columsNamesWithUpdatedValues.put(columnsNames.get(3), password);
-        dataBaseStatement.executeUpdate(queryBuilder.getUpdateRowQueryFromOwnTable(columsNamesWithUpdatedValues,
+        Map<String, String> columnsNamesWithUpdatedValues = new HashMap<String, String>();
+        columnsNamesWithUpdatedValues.put(columnsNames.get(1), nick);
+        columnsNamesWithUpdatedValues.put(columnsNames.get(2), emailAddress);
+        columnsNamesWithUpdatedValues.put(columnsNames.get(3), password);
+        dataBaseStatement.executeUpdate(queryBuilder.getUpdateRowQueryFromOwnTable(columnsNamesWithUpdatedValues,
                 columnsNames.get(0), String.valueOf(id)));
     }
 
@@ -105,6 +106,21 @@ public class User extends BaseDataBaseEntity{
         rowValues.add(String.valueOf(newId)); rowValues.add(nick);
         rowValues.add(emailAddress); rowValues.add(password);
         dataBaseStatement.executeUpdate(queryBuilder.getInsertRowQueryFromOwnTable(rowValues));
+    }
+
+    public void removeCharacter(int characterId) throws SQLException, ClassNotFoundException {
+        Character tempCharacter = new Character();
+        dataBaseStatement.executeUpdate(queryBuilder.getDeleteRowQuery(tempCharacter.getTableName(),
+                tempCharacter.getColumnsNames().get(0), String.valueOf(characterId)));
+    }
+
+    public void removeGroup(int groupId) throws SQLException, ClassNotFoundException {
+        Group tempGroup = new Group();
+        for (Character character : usersGroupsWithTheirCharacters.get(groupId)){
+            removeCharacter(character.getId());
+        }
+        dataBaseStatement.executeUpdate(queryBuilder.getDeleteRowQuery(tempGroup.getTableName(),
+                tempGroup.getColumnsNames().get(0), String.valueOf(groupId)));
     }
 
     public String getNick() { return nick; }
@@ -130,5 +146,14 @@ public class User extends BaseDataBaseEntity{
 
     public static Map<Integer, List<Character>> getUsersGroupsWithTheirCharacters() {
         return usersGroupsWithTheirCharacters;
+    }
+
+    public static void clearUser(){
+        id = -1;
+        nick = null;
+        emailAddress = null;
+        password = null;
+        List<Group> userGroups = null;
+        usersGroupsWithTheirCharacters = null;
     }
 }
