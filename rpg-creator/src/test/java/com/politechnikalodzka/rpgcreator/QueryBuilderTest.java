@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by aleks on 07.09.16.
@@ -40,7 +40,7 @@ public class QueryBuilderTest {
         QueryBuilder queryBuilder = new QueryBuilder("TestTable");
         String queryResult = queryBuilder.getAllQuery();
         String expectedResult = " select  *  from TestTable";
-        assertThat(queryResult.equals(expectedResult));
+        assertEquals(queryResult, expectedResult);
     }
 
     @Test
@@ -48,7 +48,7 @@ public class QueryBuilderTest {
         QueryBuilder queryBuilder = new QueryBuilder("TestTable");
         String queryResult = queryBuilder.getFullRowQueryFromOwnTable("id", "1");
         String expectedResult = " select  *  from TestTable where id = '1'";
-        assertThat(queryResult.equals(expectedResult));
+        assertEquals(queryResult, expectedResult);
     }
 
     @Test
@@ -56,7 +56,7 @@ public class QueryBuilderTest {
         QueryBuilder queryBuilder = new QueryBuilder("TestTable");
         String queryResult = queryBuilder.getFullRowQuery("OtherTable", "id", "1");
         String expectedResult = " select  *  from OtherTable where id = '1'";
-        assertThat(queryResult.equals(expectedResult));
+        assertEquals(queryResult, expectedResult);
     }
 
     @Test
@@ -64,7 +64,7 @@ public class QueryBuilderTest {
         QueryBuilder queryBuilder = new QueryBuilder("TestTable");
         String queryResult = queryBuilder.getRowMaxColumnValueQueryFromOwnTable("id");
         String expectedResult = " select max(id) from TestTable";
-        assertThat(queryResult.equals(expectedResult));
+        assertEquals(queryResult, expectedResult);
     }
 
     @Test
@@ -74,7 +74,7 @@ public class QueryBuilderTest {
         rowValues.add("13"); rowValues.add("someName");
         String queryResult = queryBuilder.getInsertRowQueryFromOwnTable(rowValues);
         String expectedResult = " insert into TestTable values ('13', 'someName')";
-        assertThat(queryResult.equals(expectedResult));
+        assertEquals(queryResult, expectedResult);
     }
 
     @Test
@@ -85,7 +85,7 @@ public class QueryBuilderTest {
         columnsNamesWithUpdatedValues.put("testName", "Moon");
         String queryResult = queryBuilder.getUpdateRowQueryFromOwnTable(columnsNamesWithUpdatedValues, "testId", "1");
         String expectedResult = " update TestTable set testId = '13', testName = 'Moon' where testId = '1'";
-        assertThat(queryResult.equals(expectedResult));
+        assertEquals(queryResult, expectedResult);
     }
 
     @Test
@@ -93,7 +93,7 @@ public class QueryBuilderTest {
         QueryBuilder queryBuilder = new QueryBuilder("TestTable");
         String queryResult = queryBuilder.getDeleteRowQuery("TempTable", "id", "1");
         String expectedResult = " delete  from TempTable where id = '1'";
-        assertThat(queryResult.equals(expectedResult));
+        assertEquals(queryResult, expectedResult);
     }
 
 }
