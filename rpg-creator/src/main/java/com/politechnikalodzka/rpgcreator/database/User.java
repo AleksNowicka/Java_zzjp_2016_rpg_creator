@@ -52,6 +52,7 @@ public class User extends BaseDataBaseEntity{
         this.nick = nick;
         emailAddress = resultSet.getString(columnsNames.get(2));
         this.password = password;
+        this.userIcon = resultSet.getString(columnsNames.get(4));
         retriveUsersGroupsWithTheirCharacters();
         return true;
     }
@@ -63,6 +64,7 @@ public class User extends BaseDataBaseEntity{
         this.nick = resultSet.getString(columnsNames.get(1));
         emailAddress = resultSet.getString(columnsNames.get(2));
         this.password = resultSet.getString(columnsNames.get(3));
+        this.userIcon = resultSet.getString(columnsNames.get(4));
         retriveUsersGroupsWithTheirCharacters();
     }
 
@@ -103,6 +105,7 @@ public class User extends BaseDataBaseEntity{
         columnsNamesWithUpdatedValues.put(columnsNames.get(1), nick);
         columnsNamesWithUpdatedValues.put(columnsNames.get(2), emailAddress);
         columnsNamesWithUpdatedValues.put(columnsNames.get(3), password);
+        columnsNamesWithUpdatedValues.put(columnsNames.get(4), userIcon);
         dataBaseStatement.executeUpdate(queryBuilder.getUpdateRowQueryFromOwnTable(columnsNamesWithUpdatedValues,
                 columnsNames.get(0), String.valueOf(id)));
     }
@@ -114,6 +117,7 @@ public class User extends BaseDataBaseEntity{
         List<String> rowValues = new ArrayList<String>();
         rowValues.add(String.valueOf(newId)); rowValues.add(nick);
         rowValues.add(emailAddress); rowValues.add(password);
+        rowValues.add(userIcon);
         dataBaseStatement.executeUpdate(queryBuilder.getInsertRowQueryFromOwnTable(rowValues));
     }
 
