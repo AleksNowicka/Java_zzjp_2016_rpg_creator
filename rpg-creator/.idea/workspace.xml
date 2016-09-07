@@ -25,19 +25,12 @@
       <file leaf-file-name="CharacterCreationView.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/politechnikalodzka/rpgcreator/view/CharacterCreationView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="29">
-              <caret line="57" column="41" selection-start-line="57" selection-start-column="41" selection-end-line="57" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EditProfileView.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/politechnikalodzka/rpgcreator/view/EditProfileView.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="131">
-              <caret line="75" column="50" selection-start-line="75" selection-start-column="8" selection-end-line="75" selection-end-column="50" />
-              <folding />
+            <state relative-caret-position="357">
+              <caret line="238" column="119" selection-start-line="238" selection-start-column="119" selection-end-line="238" selection-end-column="119" />
+              <folding>
+                <element signature="e#10224#10447#0" expanded="true" />
+                <element signature="e#10446#10447#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -89,7 +82,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/politechnikalodzka/rpgcreator/viewmodel/EditProfileViewModel.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/politechnikalodzka/rpgcreator/view/LogInView.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/politechnikalodzka/rpgcreator/viewmodel/CharacterCreationViewModel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/politechnikalodzka/rpgcreator/viewmodel/GroupCreationViewModel.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/politechnikalodzka/rpgcreator/picture/factory/PictureFactory.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/politechnikalodzka/rpgcreator/picture/factory/Outfit.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/politechnikalodzka/rpgcreator/picture/factory/Hat.java" />
@@ -97,7 +89,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/politechnikalodzka/rpgcreator/picture/factory/Eyes.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/politechnikalodzka/rpgcreator/picture/factory/Base.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/politechnikalodzka/rpgcreator/picture/factory/Accessories.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/politechnikalodzka/rpgcreator/view/GroupCreationView.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/politechnikalodzka/rpgcreator/viewmodel/LogInViewModel.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/politechnikalodzka/rpgcreator/database/Group.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/politechnikalodzka/rpgcreator/utils/Pictures.java" />
@@ -110,6 +101,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/politechnikalodzka/rpgcreator/viewmodel/EditExistingGroupsViewModel.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/politechnikalodzka/rpgcreator/view/EditExistingGroupsView.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/politechnikalodzka/rpgcreator/database/User.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/politechnikalodzka/rpgcreator/viewmodel/GroupCreationViewModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/politechnikalodzka/rpgcreator/view/GroupCreationView.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/politechnikalodzka/rpgcreator/view/CharacterCreationView.java" />
       </list>
     </option>
@@ -729,17 +722,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/politechnikalodzka/rpgcreator/viewmodel/GroupCreationViewModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="21" column="47" selection-start-line="21" selection-start-column="47" selection-end-line="21" selection-end-column="47" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#645#646#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.classpath">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -858,14 +840,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/politechnikalodzka/rpgcreator/view/GroupCreationView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1674">
-          <caret line="103" column="0" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1032,17 +1006,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/politechnikalodzka/rpgcreator/view/EditProfileView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="75" column="50" selection-start-line="75" selection-start-column="8" selection-end-line="75" selection-end-column="50" />
+        <state relative-caret-position="59">
+          <caret line="71" column="22" selection-start-line="71" selection-start-column="22" selection-end-line="71" selection-end-column="22" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/politechnikalodzka/rpgcreator/viewmodel/GroupCreationViewModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="22" column="43" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="43" />
+          <folding>
+            <element signature="e#719#720#0" expanded="true" />
+            <element signature="e#756#757#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/politechnikalodzka/rpgcreator/view/GroupCreationView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="125" column="109" selection-start-line="125" selection-start-column="109" selection-end-line="125" selection-end-column="109" />
+          <folding>
+            <element signature="e#4384#4599#0" expanded="true" />
+            <element signature="e#4598#4599#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/politechnikalodzka/rpgcreator/view/CharacterCreationView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="29">
-          <caret line="57" column="41" selection-start-line="57" selection-start-column="41" selection-end-line="57" selection-end-column="41" />
-          <folding />
+        <state relative-caret-position="357">
+          <caret line="238" column="119" selection-start-line="238" selection-start-column="119" selection-end-line="238" selection-end-column="119" />
+          <folding>
+            <element signature="e#10224#10447#0" expanded="true" />
+            <element signature="e#10446#10447#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -17,6 +17,7 @@ public class GroupCreationView extends JFrame implements FrameSetter{
 	private GroupCreationViewModel groupCreationViewModel;
 
 	private JButton saveButton;
+    private JButton goBackButton;
     private JButton chooseIconButton;
 	private JTextField nameTextField;
 	private JTextField passwordTextField;
@@ -69,11 +70,6 @@ public class GroupCreationView extends JFrame implements FrameSetter{
 		maxGroupMembersLabel.setBounds(24, 157, 56, 20);
 		getContentPane().add(maxGroupMembersLabel);
 
-//		groupIconLabel = new JLabel("Group icon:");
-//		groupIconLabel.setForeground(Color.LIGHT_GRAY);
-//		groupIconLabel.setBounds(322, 62, 99, 14);
-//		getContentPane().add(groupIconLabel);
-
 		nameTextField = new JTextField();
 		nameTextField.setBounds(90, 59, 86, 20);
 		getContentPane().add(nameTextField);
@@ -103,8 +99,12 @@ public class GroupCreationView extends JFrame implements FrameSetter{
         getContentPane().add(chooseIconButton);
 
 		saveButton = new JButton("Save ");
-		saveButton.setBounds(170, 186, 89, 23);
+		saveButton.setBounds(230, 195, 89, 23);
 		getContentPane().add(saveButton);
+
+        goBackButton = new JButton("Go back");
+        goBackButton.setBounds(133, 195, 89, 23);
+        getContentPane().add(goBackButton);
 	}
 
 	public void setupListeners() {
@@ -118,6 +118,12 @@ public class GroupCreationView extends JFrame implements FrameSetter{
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
                 }
+            }
+        });
+
+        goBackButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                groupCreationViewModel.switchFrames(classInstance, groupCreationViewModel.getNavigationView());
             }
         });
 

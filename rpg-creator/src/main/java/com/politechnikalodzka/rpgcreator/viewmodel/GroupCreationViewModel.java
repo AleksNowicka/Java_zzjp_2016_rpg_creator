@@ -1,5 +1,6 @@
 package com.politechnikalodzka.rpgcreator.viewmodel;
 
+import com.politechnikalodzka.rpgcreator.database.Group;
 import com.politechnikalodzka.rpgcreator.database.User;
 import com.politechnikalodzka.rpgcreator.view.NavigationView;
 
@@ -17,6 +18,10 @@ public class GroupCreationViewModel extends BaseViewModel {
     public GroupCreationViewModel(String title) throws SQLException, ClassNotFoundException {
         navigationView = new NavigationView(title);
         user = User.getInstance();
+    }
+
+    public void saveGroup(Group groupToSave){
+
     }
 
     public NavigationView getNavigationView() {

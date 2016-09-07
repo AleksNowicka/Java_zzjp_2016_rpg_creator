@@ -23,6 +23,7 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
     private CharacterCreationViewModel characterCreationViewModel;
 
     private JButton saveButton;
+    private JButton goBackButton;
     private JTextField nameTextField;
     private JComboBox genderComboBox;
     private JComboBox hairComboBox;
@@ -122,8 +123,12 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
         getContentPane().add(selectGroupComboBox);
 
         saveButton = new JButton("Save");
-        saveButton.setBounds(50, 300, 100, 23);
+        saveButton.setBounds(120, 300, 100, 23);
         getContentPane().add(saveButton);
+
+        goBackButton = new JButton("Go back");
+        goBackButton.setBounds(10, 300, 100, 23);
+        getContentPane().add(goBackButton);
 
         nameTextField = new JTextField();
         nameTextField.setBounds(97, 68, 99, 20);
@@ -227,6 +232,12 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
                 characterCreationViewModel.drawCharacter(classInstance, characters);
             }
 
+        });
+
+        goBackButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                characterCreationViewModel.switchFrames(classInstance, characterCreationViewModel.getNavigationView());
+            }
         });
 
         saveButton.addActionListener(new ActionListener() {
