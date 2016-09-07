@@ -1,5 +1,6 @@
 package com.politechnikalodzka.rpgcreator.viewmodel;
 
+import com.politechnikalodzka.rpgcreator.database.Character;
 import com.politechnikalodzka.rpgcreator.database.Group;
 import com.politechnikalodzka.rpgcreator.database.User;
 import com.politechnikalodzka.rpgcreator.enums.Gender;
@@ -18,10 +19,12 @@ public class CharacterCreationViewModel extends BaseViewModel {
     private NavigationView navigationView;
 
     private User user;
+    private Character editedCharacter;
 
     public CharacterCreationViewModel(String title) throws SQLException, ClassNotFoundException {
         navigationView = new NavigationView(title);
         user = User.getInstance();
+        editedCharacter = new Character();
     }
 
     public String[] getGroupsNames() {

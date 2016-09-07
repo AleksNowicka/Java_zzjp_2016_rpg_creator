@@ -24,7 +24,7 @@ public class EditExistingGroupsView extends JFrame implements FrameSetter{
     private EditExistingGroupsViewModel editExistingGroupsViewModel;
 
     private JButton deleteGroupButton;
-    private JButton saveGroupButton;
+    private JButton editGroupButton;
     private JButton goBackButton;
 	private JList characterList;
 	private JPanel groupIcon;
@@ -81,13 +81,13 @@ public class EditExistingGroupsView extends JFrame implements FrameSetter{
 		goBackButton.setBounds(18, 187, 89, 23);
 		getContentPane().add(goBackButton);
 		
-		saveGroupButton = new JButton("Edit group");
-		saveGroupButton.addActionListener(new ActionListener() {
+		editGroupButton = new JButton("Edit group");
+		editGroupButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		saveGroupButton.setBounds(180, 187, 113, 23);
-		getContentPane().add(saveGroupButton);
+		editGroupButton.setBounds(180, 187, 113, 23);
+		getContentPane().add(editGroupButton);
 		
 		deleteGroupButton = new JButton("Delete group");
 		deleteGroupButton.setBounds(299, 187, 113, 23);
@@ -124,6 +124,14 @@ public class EditExistingGroupsView extends JFrame implements FrameSetter{
 				selectGroupComboBox.setModel(new DefaultComboBoxModel(editExistingGroupsViewModel.getUserGroupsNames()));
 			}
 		});
+
+        editGroupButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                editExistingGroupsViewModel.setGroupCreationViewGroupToEdit(
+                        selectGroupComboBox.getSelectedItem().toString());
+                editExistingGroupsViewModel.switchFrames(classInstance, editExistingGroupsViewModel.getGroupCreationView());
+            }
+        });
 
         goBackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

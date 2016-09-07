@@ -16,11 +16,11 @@ public class Character extends BaseDataBaseEntity{
     private int accessoriesId;
     private int groupId;
 
-    Character() throws ClassNotFoundException, SQLException {
+    public Character() throws ClassNotFoundException, SQLException {
         initDataBaseAndQueryBuilder("Characters");
     }
 
-    Character(int id) throws ClassNotFoundException, SQLException {
+    public Character(int id) throws ClassNotFoundException, SQLException {
         initDataBaseAndQueryBuilder("Characters");
         try {
             getData(id);

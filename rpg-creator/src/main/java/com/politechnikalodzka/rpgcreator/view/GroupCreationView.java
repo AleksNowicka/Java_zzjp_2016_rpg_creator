@@ -17,6 +17,8 @@ public class GroupCreationView extends JFrame implements FrameSetter{
 
 	private GroupCreationViewModel groupCreationViewModel;
 
+    private ViewModeEnum viewMode;
+
 	private JButton saveButton;
     private JButton goBackButton;
     private JButton chooseIconButton;
@@ -33,6 +35,7 @@ public class GroupCreationView extends JFrame implements FrameSetter{
 	public GroupCreationView(String title, ViewModeEnum viewModeEnum) throws SQLException, ClassNotFoundException {
 		super(title);
 		groupCreationViewModel = new GroupCreationViewModel(title);
+        this.viewMode = viewModeEnum;
 		setupContentPane();
 		setupComponents();
 		setupListeners();
@@ -107,6 +110,13 @@ public class GroupCreationView extends JFrame implements FrameSetter{
         getContentPane().add(goBackButton);
 	}
 
+    public void setupEditedGroupData(){
+        //TODO - add reading icon
+        nameTextField.setText(groupCreationViewModel.getEditedGroup().getName());
+        descriptionTextField.setText(groupCreationViewModel.getEditedGroup().getDescription());
+        maxGroupMembersComboBox.setSelectedItem(groupCreationViewModel.getEditedGroup().getMaxGroupMembers());
+    }
+
 	public void setupListeners() {
 		final GroupCreationView classInstance = this;
 
@@ -116,6 +126,7 @@ public class GroupCreationView extends JFrame implements FrameSetter{
                 fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
                 int result = fileChooser.showOpenDialog(classInstance);
                 if (result == JFileChooser.APPROVE_OPTION) {
+                    //TODO - implement reading and saving icon
                     File selectedFile = fileChooser.getSelectedFile();
                 }
             }
@@ -129,6 +140,22 @@ public class GroupCreationView extends JFrame implements FrameSetter{
 
 		saveButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+                if(viewMode.equals(ViewModeEnum.EDIT)){
+                    try {
+                        //TODO - add saving icon
+                        groupCreationViewModel.getEditedGroup().setName(nameTextField.getText());
+                        groupCreationViewModel.getEditedGroup().setDescription(descriptionTextField.getText());
+                        groupCreationViewModel.getEditedGroup().setMaxGroupMembers(
+                                Integer.parseInt(maxGroupMembersComboBox.getSelectedItem().toString()));
+                        groupCreationViewModel.saveEditedGroup();
+                    } catch (SQLException e1) {
+                        e1.printStackTrace();
+                    } catch (ClassNotFoundException e1) {
+                        e1.printStackTrace();
+                    }
+                    groupCreationViewModel.switchFrames(classInstance, groupCreationViewModel.getNavigationView());
+                    return;
+                }
                 try {
                     //TODO - add saving group icon
                     Group group = new Group();
@@ -141,8 +168,12 @@ public class GroupCreationView extends JFrame implements FrameSetter{
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
-                groupCreationViewModel.switchFrames(classInstance, groupCreationViewModel.getNavigationView());
+				groupCreationViewModel.switchFrames(classInstance, groupCreationViewModel.getNavigationView());
 			}
 		});
 	}
+
+    public void setGroupToEdit(Group groupToEdit){
+        groupCreationViewModel.setEditedGroup(groupToEdit);
+    }
 }
