@@ -10,7 +10,6 @@ import com.politechnikalodzka.rpgcreator.view.NavigationView;
 
 import java.sql.SQLException;
 import java.util.List;
-import javax.swing.JFrame;
 
 /**
  * Created by aleks on 19.08.16. Modyficate by lbary
@@ -30,12 +29,12 @@ public class CharacterCreationViewModel extends BaseViewModel {
 
     public void saveNewCharacter(Character newCharacterToSave) throws SQLException, ClassNotFoundException {
         newCharacterToSave.saveAsNewCharacter();
-        user.retriveUsersGroupsWithTheirCharacters();
+        user.retrieveUsersGroupsWithTheirCharacters();
     }
 
     public void saveAsEditedCharacter() throws SQLException, ClassNotFoundException {
         editedCharacter.saveAsEditedCharacter();
-        user.retriveUsersGroupsWithTheirCharacters();
+        user.retrieveUsersGroupsWithTheirCharacters();
     }
 
     public Character getEditedCharacter() {

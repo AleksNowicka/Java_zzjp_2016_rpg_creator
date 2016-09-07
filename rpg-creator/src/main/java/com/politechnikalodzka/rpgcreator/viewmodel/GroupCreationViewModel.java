@@ -6,7 +6,6 @@ import com.politechnikalodzka.rpgcreator.view.NavigationView;
 
 import java.sql.SQLException;
 import java.util.List;
-import javax.swing.JPanel;
 
 /**
  * Created by aleks on 19.08.16.
@@ -27,13 +26,13 @@ public class GroupCreationViewModel extends BaseViewModel {
     public void saveNewGroup(Group newGroupToSave) throws SQLException, ClassNotFoundException {
         newGroupToSave.setGroupOwnerId(user.getId());
         newGroupToSave.saveAsNewGroup();
-        user.retriveUsersGroupsWithTheirCharacters();
+        user.retrieveUsersGroupsWithTheirCharacters();
     }
 
     public void saveEditedGroup() throws SQLException, ClassNotFoundException {
         editedGroup.setGroupOwnerId(user.getId());
         editedGroup.saveAsEditedGroup();
-        user.retriveUsersGroupsWithTheirCharacters();
+        user.retrieveUsersGroupsWithTheirCharacters();
     }
 
     public Group getEditedGroup() {

@@ -8,7 +8,6 @@ import com.politechnikalodzka.rpgcreator.view.CharacterCreationView;
 import com.politechnikalodzka.rpgcreator.view.NavigationView;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -33,7 +32,7 @@ public class EditExistingCharactersViewModel extends BaseViewModel {
         for (Character character : userCharacters) {
             if (character.getName().equals(characterName)) {
                 user.removeCharacter(character.getId());
-                user.retriveUsersGroupsWithTheirCharacters();
+                user.retrieveUsersGroupsWithTheirCharacters();
                 return;
             }
         }

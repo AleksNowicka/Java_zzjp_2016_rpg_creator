@@ -23,13 +23,6 @@ public class User extends BaseDataBaseEntity{
     private static Map<Integer, List<Character>> usersGroupsWithTheirCharacters;
     private String userIcon;
 
-    public String getUserIcon() {
-        return userIcon;
-    }
-
-    public void setUserIcon(String userIcon) {
-        this.userIcon = userIcon;
-    }
 
     protected User() throws ClassNotFoundException, SQLException {
         initDataBaseAndQueryBuilder("User");
@@ -53,22 +46,11 @@ public class User extends BaseDataBaseEntity{
         emailAddress = resultSet.getString(columnsNames.get(2));
         this.password = password;
         this.userIcon = resultSet.getString(columnsNames.get(4));
-        retriveUsersGroupsWithTheirCharacters();
+        retrieveUsersGroupsWithTheirCharacters();
         return true;
     }
 
-    public void updateData() throws SQLException, ClassNotFoundException {
-        ResultSet resultSet = dataBaseStatement.executeQuery(queryBuilder.getFullRowQueryFromOwnTable(columnsNames.get(1),
-                nick));
-        id = Integer.parseInt(resultSet.getString(columnsNames.get(0)));
-        this.nick = resultSet.getString(columnsNames.get(1));
-        emailAddress = resultSet.getString(columnsNames.get(2));
-        this.password = resultSet.getString(columnsNames.get(3));
-        this.userIcon = resultSet.getString(columnsNames.get(4));
-        retriveUsersGroupsWithTheirCharacters();
-    }
-
-    public void retriveUsersGroupsWithTheirCharacters() throws SQLException, ClassNotFoundException {
+    public void retrieveUsersGroupsWithTheirCharacters() throws SQLException, ClassNotFoundException {
         Group group = new Group();
         usersGroupsWithTheirCharacters = new HashMap<Integer, List<Character>>();
         userGroups = new ArrayList<Group>();
@@ -79,11 +61,22 @@ public class User extends BaseDataBaseEntity{
             group.getData(resultSet.getInt(group.getColumnsNames().get(0)));
             userGroups.add(group);
             System.out.println("Group "+group.getName());
-            usersGroupsWithTheirCharacters.put(group.getId(), retriveCharactersForGroup(group.getId()));
+            usersGroupsWithTheirCharacters.put(group.getId(), retrieveCharactersForGroup(group.getId()));
         }
     }
 
-    public List<Character> retriveCharactersForGroup(int groupId) throws SQLException, ClassNotFoundException {
+    public void updateData() throws SQLException, ClassNotFoundException {
+        ResultSet resultSet = dataBaseStatement.executeQuery(queryBuilder.getFullRowQueryFromOwnTable(columnsNames.get(1),
+                nick));
+        id = Integer.parseInt(resultSet.getString(columnsNames.get(0)));
+        this.nick = resultSet.getString(columnsNames.get(1));
+        emailAddress = resultSet.getString(columnsNames.get(2));
+        this.password = resultSet.getString(columnsNames.get(3));
+        this.userIcon = resultSet.getString(columnsNames.get(4));
+        retrieveUsersGroupsWithTheirCharacters();
+    }
+
+    public List<Character> retrieveCharactersForGroup(int groupId) throws SQLException, ClassNotFoundException {
         Statement charactersStatement = dataBase.getConnection().createStatement();
         charactersStatement.setQueryTimeout(30);
         List<Character> groupCharacters = new ArrayList<Character>();
@@ -110,17 +103,6 @@ public class User extends BaseDataBaseEntity{
                 columnsNames.get(0), String.valueOf(id)));
     }
 
-    public void saveAsNewUser(String password) throws SQLException {
-        ResultSet resultSet = dataBaseStatement.executeQuery(queryBuilder.getRowMaxColumnValueQueryFromOwnTable(
-                String.valueOf(id)));
-        int newId = Integer.parseInt(resultSet.getString("max("+columnsNames.get(0)+")"));
-        List<String> rowValues = new ArrayList<String>();
-        rowValues.add(String.valueOf(newId)); rowValues.add(nick);
-        rowValues.add(emailAddress); rowValues.add(password);
-        rowValues.add(userIcon);
-        dataBaseStatement.executeUpdate(queryBuilder.getInsertRowQueryFromOwnTable(rowValues));
-    }
-
     public void removeCharacter(int characterId) throws SQLException, ClassNotFoundException {
         Character tempCharacter = new Character();
         dataBaseStatement.executeUpdate(queryBuilder.getDeleteRowQuery(tempCharacter.getTableName(),
@@ -136,19 +118,13 @@ public class User extends BaseDataBaseEntity{
                 tempGroup.getColumnsNames().get(0), String.valueOf(groupId)));
     }
 
-    public static int getId() {
-        return id;
-    }
-
-    public String getNick() { return nick; }
-    public void setNick(String nick) { this.nick = nick; }
-    public String getEmailAddress() { return emailAddress; }
-    public void setEmailAddress(String emailAddress) { this.emailAddress = emailAddress; }
-    public String getPassword() { return password; }
-    public void setPassword(String password) { this.password = password; }
-
-    public static List<Group> getUserGroups() {
-        return userGroups;
+    public static void clearUser(){
+        id = -1;
+        nick = null;
+        emailAddress = null;
+        password = null;
+        List<Group> userGroups = null;
+        usersGroupsWithTheirCharacters = null;
     }
 
     public List<Character> getUserCharacters(){
@@ -161,16 +137,21 @@ public class User extends BaseDataBaseEntity{
         return characters;
     }
 
-    public static Map<Integer, List<Character>> getUsersGroupsWithTheirCharacters() {
-        return usersGroupsWithTheirCharacters;
+    public static int getId() {
+        return id;
     }
-
-    public static void clearUser(){
-        id = -1;
-        nick = null;
-        emailAddress = null;
-        password = null;
-        List<Group> userGroups = null;
-        usersGroupsWithTheirCharacters = null;
+    public String getNick() { return nick; }
+    public void setNick(String nick) { this.nick = nick; }
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
+    public String getUserIcon() {
+        return userIcon;
     }
+    public void setUserIcon(String userIcon) {
+        this.userIcon = userIcon;
+    }
+    public static List<Group> getUserGroups() {
+        return userGroups;
+    }
+    public static Map<Integer, List<Character>> getUsersGroupsWithTheirCharacters() { return usersGroupsWithTheirCharacters; }
 }

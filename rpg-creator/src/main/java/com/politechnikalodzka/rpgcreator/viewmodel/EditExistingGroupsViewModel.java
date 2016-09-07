@@ -8,9 +8,7 @@ import com.politechnikalodzka.rpgcreator.view.GroupCreationView;
 import com.politechnikalodzka.rpgcreator.view.NavigationView;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by aleks on 19.08.16.
@@ -33,7 +31,7 @@ public class EditExistingGroupsViewModel extends BaseViewModel{
         for(Group group : userGroups){
             if(group.getName().equals(groupName)){
                 user.removeGroup(group.getId());
-                user.retriveUsersGroupsWithTheirCharacters();
+                user.retrieveUsersGroupsWithTheirCharacters();
                 return;
             }
         }

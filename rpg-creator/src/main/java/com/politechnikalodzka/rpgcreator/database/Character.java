@@ -30,7 +30,6 @@ public class Character extends BaseDataBaseEntity{
     }
     
     public Character(Double a) {
-        //Konstruktor potrzebny do test�w
     }
 
     public void getData(int id) throws SQLException {
@@ -53,16 +52,16 @@ public class Character extends BaseDataBaseEntity{
     }
 
     public void saveAsEditedCharacter() throws SQLException{
-        Map<String, String> columsNamesWithUpdatedValues = new HashMap<String, String>();
-        columsNamesWithUpdatedValues.put(columnsNames.get(1), name);
-        columsNamesWithUpdatedValues.put(columnsNames.get(2), String.valueOf(gender));
-        columsNamesWithUpdatedValues.put(columnsNames.get(3), String.valueOf(hairId));
-        columsNamesWithUpdatedValues.put(columnsNames.get(4), String.valueOf(hatId));
-        columsNamesWithUpdatedValues.put(columnsNames.get(5), String.valueOf(outfitId));
-        columsNamesWithUpdatedValues.put(columnsNames.get(6), String.valueOf(eyesId));
-        columsNamesWithUpdatedValues.put(columnsNames.get(7), String.valueOf(accessoriesId));
-        columsNamesWithUpdatedValues.put(columnsNames.get(8), String.valueOf(groupId));
-        dataBaseStatement.executeUpdate(queryBuilder.getUpdateRowQueryFromOwnTable(columsNamesWithUpdatedValues,
+        Map<String, String> columnsNamesWithUpdatedValues = new HashMap<String, String>();
+        columnsNamesWithUpdatedValues.put(columnsNames.get(1), name);
+        columnsNamesWithUpdatedValues.put(columnsNames.get(2), String.valueOf(gender));
+        columnsNamesWithUpdatedValues.put(columnsNames.get(3), String.valueOf(hairId));
+        columnsNamesWithUpdatedValues.put(columnsNames.get(4), String.valueOf(hatId));
+        columnsNamesWithUpdatedValues.put(columnsNames.get(5), String.valueOf(outfitId));
+        columnsNamesWithUpdatedValues.put(columnsNames.get(6), String.valueOf(eyesId));
+        columnsNamesWithUpdatedValues.put(columnsNames.get(7), String.valueOf(accessoriesId));
+        columnsNamesWithUpdatedValues.put(columnsNames.get(8), String.valueOf(groupId));
+        dataBaseStatement.executeUpdate(queryBuilder.getUpdateRowQueryFromOwnTable(columnsNamesWithUpdatedValues,
                 columnsNames.get(0), String.valueOf(id)));
     }
 
@@ -83,6 +82,7 @@ public class Character extends BaseDataBaseEntity{
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
     public char getGender() { return gender; }
+
     public void setGender(boolean isMan) {
         if(isMan){
             gender = 'm';
@@ -95,7 +95,6 @@ public class Character extends BaseDataBaseEntity{
     public int getId() {
         return id;
     }
-
     public int getHairId() { return hairId; }
     public void setHairId(int hairId) { this.hairId = hairId; }
     public int getHatId() { return hatId; }

@@ -50,13 +50,13 @@ public class Group extends BaseDataBaseEntity{
     }
 
     public void saveAsEditedGroup() throws SQLException{
-        Map<String, String> columsNamesWithUpdatedValues = new HashMap<String, String>();
-        columsNamesWithUpdatedValues.put(columnsNames.get(1), name);
-        columsNamesWithUpdatedValues.put(columnsNames.get(2), description);
-        columsNamesWithUpdatedValues.put(columnsNames.get(3), String.valueOf(maxGroupMembers));
-        columsNamesWithUpdatedValues.put(columnsNames.get(4), groupIcon);
-        columsNamesWithUpdatedValues.put(columnsNames.get(5), String.valueOf(groupOwnerId));
-        dataBaseStatement.executeUpdate(queryBuilder.getUpdateRowQueryFromOwnTable(columsNamesWithUpdatedValues,
+        Map<String, String> columnsNamesWithUpdatedValues = new HashMap<String, String>();
+        columnsNamesWithUpdatedValues.put(columnsNames.get(1), name);
+        columnsNamesWithUpdatedValues.put(columnsNames.get(2), description);
+        columnsNamesWithUpdatedValues.put(columnsNames.get(3), String.valueOf(maxGroupMembers));
+        columnsNamesWithUpdatedValues.put(columnsNames.get(4), groupIcon);
+        columnsNamesWithUpdatedValues.put(columnsNames.get(5), String.valueOf(groupOwnerId));
+        dataBaseStatement.executeUpdate(queryBuilder.getUpdateRowQueryFromOwnTable(columnsNamesWithUpdatedValues,
                 columnsNames.get(0), String.valueOf(id)));
     }
 
