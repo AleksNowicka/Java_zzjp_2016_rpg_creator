@@ -88,10 +88,6 @@ public class EditExistingCharactersViewModel extends BaseViewModel {
         return navigationView;
     }
 
-    public CharacterCreationView getCharacterCreationView() {
-        return characterCreationView;
-    }
-    
     public Character getCharacterByName(String name) {
         List<Character> userCharacter = user.getUserCharacters();
         for(Character character : userCharacter){
@@ -101,4 +97,6 @@ public class EditExistingCharactersViewModel extends BaseViewModel {
         }
         return null;
     }
+
+    public CharacterCreationView getCharacterCreationView() { return characterCreationView; }
 }

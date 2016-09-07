@@ -37,122 +37,6 @@ public class CharacterCreationViewModel extends BaseViewModel {
         user.retrieveUsersGroupsWithTheirCharacters();
     }
 
-    public Character getEditedCharacter() {
-        return editedCharacter;
-    }
-
-    public void setEditedCharacter(Character editedCharacter) {
-        this.editedCharacter = editedCharacter;
-    }
-
-    public void setEditedCharacterById(int characterId){
-        List<Character> userCharacters = user.getUserCharacters();
-        for(Character character : userCharacters){
-            if(character.getId() == characterId){
-                editedCharacter = character;
-                return;
-            }
-        }
-    }
-
-    public Gender getEditedCharactersGender(){
-        if(editedCharacter.getGender() == 'm'){
-            return Gender.MALE;
-        }
-        return Gender.FEMALE;
-    }
-
-    public String[] getGroupsNames() {
-        String[] groupsNames = new String[user.getUserGroups().size()];
-        int counter = 0;
-        for (Group group : user.getUserGroups()) {
-            groupsNames[counter] = group.getName();
-            counter += 1;
-        }
-        return groupsNames;
-    }
-
-    public Integer[] getOutfitList() {
-        Integer[] list = new Integer[super.getPictures().getPictureByType(TypeOfPictures.OUTFIT).size()];
-        int counter = 0;
-        for (Picture picure : super.getPictures().getPictureByType(TypeOfPictures.OUTFIT)) {
-            list[counter] = picure.getID();
-            counter += 1;
-        }
-        return list;
-    }
-
-    public Integer[] getHairList() {
-        Integer[] list = new Integer[super.getPictures().getPictureByType(TypeOfPictures.HAIR).size()];
-        int counter = 0;
-        for (Picture picure : super.getPictures().getPictureByType(TypeOfPictures.HAIR)) {
-            list[counter] = picure.getID();
-            counter += 1;
-        }
-        return list;
-    }
-
-    public Integer[] getEyesList() {
-        Integer[] list = new Integer[super.getPictures().getPictureByType(TypeOfPictures.EYES).size()];
-        int counter = 0;
-        for (Picture picure : super.getPictures().getPictureByType(TypeOfPictures.EYES)) {
-            list[counter] = picure.getID();
-            counter += 1;
-        }
-        return list;
-    }
-
-    public Integer[] getHatList() {
-        Integer[] list = new Integer[super.getPictures().getPictureByType(TypeOfPictures.HAT).size()];
-        int counter = 0;
-        for (Picture picure : super.getPictures().getPictureByType(TypeOfPictures.HAT)) {
-            list[counter] = picure.getID();
-            counter += 1;
-        }
-        return list;
-    }
-
-    public Integer[] getAccessoriesList() {
-        Integer[] list = new Integer[super.getPictures().getPictureByType(TypeOfPictures.ACCESSORIES).size()];
-        int counter = 0;
-        for (Picture picure : super.getPictures().getPictureByType(TypeOfPictures.ACCESSORIES)) {
-            list[counter] = picure.getID();
-            counter += 1;
-        }
-        return list;
-    }
-
-    public String[] getGenderList() {
-        String[] genderList = new String[2];
-        genderList[0] = Gender.MALE.toString();
-        genderList[1] = Gender.FEMALE.toString();
-        return genderList;
-    }
-
-    public int getGroupIdByName(String groupName){
-        List<Group> userGroups = user.getUserGroups();
-        for(Group group : userGroups){
-            if(group.getName().equals(groupName)){
-                return group.getId();
-            }
-        }
-        return -1;
-    }
-
-    public String getGroupNammeById(int groupId){
-        List<Group> userGroups = user.getUserGroups();
-        for(Group group : userGroups){
-            if(group.getId() == groupId){
-                return group.getName();
-            }
-        }
-        return null;
-    }
-
-    public NavigationView getNavigationView() {
-        return navigationView;
-    }
-
     public void setDefaultDrawList() {
         if (this.getHairList().length > 0
                 && this.getAccessoriesList().length > 0
@@ -184,4 +68,109 @@ public class CharacterCreationViewModel extends BaseViewModel {
             this.getPictures().choosePicture(this.getPictures().getPictureByType(TypeOfPictures.BASE).get(0).getID());
         }
     }
+
+    public Gender getEditedCharactersGender(){
+        if(editedCharacter.getGender() == 'm'){
+            return Gender.MALE;
+        }
+        return Gender.FEMALE;
+    }
+
+    public String[] getGroupsNames() {
+        String[] groupsNames = new String[user.getUserGroups().size()];
+        int counter = 0;
+        for (Group group : user.getUserGroups()) {
+            groupsNames[counter] = group.getName();
+            counter += 1;
+        }
+        return groupsNames;
+    }
+
+    public Integer[] getOutfitList() {
+        Integer[] list = new Integer[super.getPictures().getPictureByType(TypeOfPictures.OUTFIT).size()];
+        int counter = 0;
+        for (Picture picture : super.getPictures().getPictureByType(TypeOfPictures.OUTFIT)) {
+            list[counter] = picture.getID();
+            counter += 1;
+        }
+        return list;
+    }
+
+    public Integer[] getHairList() {
+        Integer[] list = new Integer[super.getPictures().getPictureByType(TypeOfPictures.HAIR).size()];
+        int counter = 0;
+        for (Picture picture : super.getPictures().getPictureByType(TypeOfPictures.HAIR)) {
+            list[counter] = picture.getID();
+            counter += 1;
+        }
+        return list;
+    }
+
+    public Integer[] getEyesList() {
+        Integer[] list = new Integer[super.getPictures().getPictureByType(TypeOfPictures.EYES).size()];
+        int counter = 0;
+        for (Picture picture : super.getPictures().getPictureByType(TypeOfPictures.EYES)) {
+            list[counter] = picture.getID();
+            counter += 1;
+        }
+        return list;
+    }
+
+    public Integer[] getHatList() {
+        Integer[] list = new Integer[super.getPictures().getPictureByType(TypeOfPictures.HAT).size()];
+        int counter = 0;
+        for (Picture picture : super.getPictures().getPictureByType(TypeOfPictures.HAT)) {
+            list[counter] = picture.getID();
+            counter += 1;
+        }
+        return list;
+    }
+
+    public Integer[] getAccessoriesList() {
+        Integer[] list = new Integer[super.getPictures().getPictureByType(TypeOfPictures.ACCESSORIES).size()];
+        int counter = 0;
+        for (Picture picture : super.getPictures().getPictureByType(TypeOfPictures.ACCESSORIES)) {
+            list[counter] = picture.getID();
+            counter += 1;
+        }
+        return list;
+    }
+
+    public String[] getGenderList() {
+        String[] genderList = new String[2];
+        genderList[0] = Gender.MALE.toString();
+        genderList[1] = Gender.FEMALE.toString();
+        return genderList;
+    }
+
+    public int getGroupIdByName(String groupName){
+        List<Group> userGroups = user.getUserGroups();
+        for(Group group : userGroups){
+            if(group.getName().equals(groupName)){
+                return group.getId();
+            }
+        }
+        return -1;
+    }
+
+    public String getGroupNameById(int groupId){
+        List<Group> userGroups = user.getUserGroups();
+        for(Group group : userGroups){
+            if(group.getId() == groupId){
+                return group.getName();
+            }
+        }
+        return null;
+    }
+
+    public Character getEditedCharacter() {
+        return editedCharacter;
+    }
+    public void setEditedCharacter(Character editedCharacter) {
+        this.editedCharacter = editedCharacter;
+    }
+    public NavigationView getNavigationView() {
+        return navigationView;
+    }
+
 }

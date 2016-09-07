@@ -59,6 +59,7 @@ public class EditProfileView extends JFrame implements FrameSetter {
 		loadImageButton.setBounds(32, 72, 90, 23);
 		getContentPane().add(loadImageButton);
 
+        //TODO - add reading user icon
 		userAvatarPanel.setBounds(32, 106, 90, 90);
 		getContentPane().add(userAvatarPanel);
 

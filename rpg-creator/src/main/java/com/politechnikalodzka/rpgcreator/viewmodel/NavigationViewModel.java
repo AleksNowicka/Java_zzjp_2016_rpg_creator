@@ -38,31 +38,24 @@ public class NavigationViewModel extends BaseViewModel {
     public String getUserNick() {
         return user.getNick();
     }
-
     public EditProfileView getEditProfileView() {
         return editProfileView;
     }
-
     public CharacterCreationView getCharacterCreationView() {
         return characterCreationView;
     }
-
     public EditExistingCharactersView getEditExistingCharactersView() {
         return editExistingCharactersView;
     }
-
     public GroupCreationView getGroupCreationView() {
         return groupCreationView;
     }
-
     public EditExistingGroupsView getEditExistingGroupsView() {
         return editExistingGroupsView;
     }
-
     public LogInView getLogInView() {
         return logInView;
     }
-    
     public User getUser() {
         return user;
     }

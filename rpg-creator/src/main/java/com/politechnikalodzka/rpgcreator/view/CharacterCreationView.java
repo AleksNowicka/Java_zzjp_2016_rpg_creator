@@ -176,7 +176,7 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
         outfitComboBox.setSelectedItem(characterCreationViewModel.getEditedCharacter().getOutfitId());
         eyesComboBox.setSelectedItem(characterCreationViewModel.getEditedCharacter().getEyesId());
         accessoriesComboBox.setSelectedItem(characterCreationViewModel.getEditedCharacter().getAccessoriesId());
-        selectGroupComboBox.setSelectedItem(characterCreationViewModel.getGroupNammeById(
+        selectGroupComboBox.setSelectedItem(characterCreationViewModel.getGroupNameById(
                 characterCreationViewModel.getEditedCharacter().getGroupId()));
         characterCreationViewModel.setSpecificDrawList();
         characterCreationViewModel.drawCharacter(this, characters, 230, 43);
