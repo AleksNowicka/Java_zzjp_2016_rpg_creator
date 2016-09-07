@@ -54,10 +54,10 @@ public class QueryBuilder {
         return query;
     }
 
-    public String getUpdateRowQueryFromOwnTable(Map<String, String> columsNamesWithUpdatedValues, String byColumnName, String byValue){
+    public String getUpdateRowQueryFromOwnTable(Map<String, String> columnsNamesWithUpdatedValues, String byColumnName, String byValue){
         String query = UPDATE+tableName+SET;
-        for(String key : columsNamesWithUpdatedValues.keySet()){
-            query += key+EQUALS+"'"+columsNamesWithUpdatedValues.get(key)+"', ";
+        for(String key : columnsNamesWithUpdatedValues.keySet()){
+            query += key+EQUALS+"'"+columnsNamesWithUpdatedValues.get(key)+"', ";
         }
         query = query.substring(0, query.length()-2);
         query += WHERE+byColumnName+EQUALS+"'"+byValue+"'";
