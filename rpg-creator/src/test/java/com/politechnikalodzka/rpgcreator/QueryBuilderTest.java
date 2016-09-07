@@ -78,17 +78,6 @@ public class QueryBuilderTest {
     }
 
     @Test
-    public void testGetUpdateRowQueryFromOwnTable(){
-        QueryBuilder queryBuilder = new QueryBuilder("TestTable");
-        Map<String, String> columnsNamesWithUpdatedValues = new HashMap<String, String>();
-        columnsNamesWithUpdatedValues.put("testId", "13");
-        columnsNamesWithUpdatedValues.put("testName", "Moon");
-        String queryResult = queryBuilder.getUpdateRowQueryFromOwnTable(columnsNamesWithUpdatedValues, "testId", "1");
-        String expectedResult = " update TestTable set testId = '13', testName = 'Moon' where testId = '1'";
-        assertEquals(queryResult, expectedResult);
-    }
-
-    @Test
     public void testGetDeleteRowQuery(){
         QueryBuilder queryBuilder = new QueryBuilder("TestTable");
         String queryResult = queryBuilder.getDeleteRowQuery("TempTable", "id", "1");
