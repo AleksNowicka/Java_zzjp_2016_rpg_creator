@@ -20,7 +20,7 @@ public class EditProfileView extends JFrame implements FrameSetter {
 	private JTextField passwordField;
 	private JButton loadImageButton;
 	private JLabel frameNameLabel;
-	private JPanel userAvatarPanel;
+	private JLabel userAvatarPanel;
 	private JLabel editLoginLabel;
 	private JLabel editPasswordLabel;
 
@@ -34,6 +34,7 @@ public class EditProfileView extends JFrame implements FrameSetter {
 		} catch (ClassNotFoundException e1) {
 			e1.printStackTrace();
 		}
+                userAvatarPanel = new JLabel();
 		setupContentPane();
 		setupComponents();
 		setupListeners();
@@ -58,7 +59,6 @@ public class EditProfileView extends JFrame implements FrameSetter {
 		loadImageButton.setBounds(32, 72, 90, 23);
 		getContentPane().add(loadImageButton);
 
-		userAvatarPanel = new JPanel();
 		userAvatarPanel.setBounds(32, 106, 90, 90);
 		getContentPane().add(userAvatarPanel);
 
@@ -98,7 +98,8 @@ public class EditProfileView extends JFrame implements FrameSetter {
                 fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
                 int result = fileChooser.showOpenDialog(classInstance);
                 if (result == JFileChooser.APPROVE_OPTION) {
-                    File selectedFile = fileChooser.getSelectedFile();
+                    editProfileViewModel.getUser().setUserIcon(fileChooser.getSelectedFile().getPath());
+                    editProfileViewModel.drawUserIcon(userAvatarPanel, editProfileViewModel.getUser());
                 }
             }
         });
@@ -111,7 +112,6 @@ public class EditProfileView extends JFrame implements FrameSetter {
                     e1.printStackTrace();
                 }
                 editProfileViewModel.switchFrames(classInstance, editProfileViewModel.getNavigationView());
-                //TODO Add saving chosen icon and changed email address
             }
         });
 	}

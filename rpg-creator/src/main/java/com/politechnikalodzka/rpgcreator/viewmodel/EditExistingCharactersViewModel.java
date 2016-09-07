@@ -26,8 +26,8 @@ public class EditExistingCharactersViewModel extends BaseViewModel {
 
     public void removeChosenCharacter(String characterName) throws SQLException, ClassNotFoundException {
         List<Character> userCharacters = user.getUserCharacters();
-        for(Character character : userCharacters){
-            if(character.getName().equals(characterName)){
+        for (Character character : userCharacters) {
+            if (character.getName().equals(characterName)) {
                 user.removeCharacter(character.getId());
                 user.retriveUsersGroupsWithTheirCharacters();
                 return;
@@ -35,36 +35,36 @@ public class EditExistingCharactersViewModel extends BaseViewModel {
         }
     }
 
-    public String[] getAllUsersCharactersNames(){
+    public String[] getAllUsersCharactersNames() {
         List<Character> characters = user.getUserCharacters();
         String[] charactersNames = new String[characters.size()];
         int counter = 0;
-        for(Character character : characters){
+        for (Character character : characters) {
             charactersNames[counter] = character.getName();
             counter += 1;
         }
         return charactersNames;
     }
 
-    public String getCharactersGroupName(String characterName){
+    public String getCharactersGroupName(String characterName) {
         int charactersGroupId = -1;
         Map<Integer, List<Character>> usersGroupsWithTheirCharacters = user.getUsersGroupsWithTheirCharacters();
-        for(Integer groupId : usersGroupsWithTheirCharacters.keySet()){
-            for (Character character : usersGroupsWithTheirCharacters.get(groupId)){
-                if(character.getName().equals(characterName)){
+        for (Integer groupId : usersGroupsWithTheirCharacters.keySet()) {
+            for (Character character : usersGroupsWithTheirCharacters.get(groupId)) {
+                if (character.getName().equals(characterName)) {
                     charactersGroupId = groupId;
                     break;
                 }
             }
-            if(charactersGroupId != -1){
+            if (charactersGroupId != -1) {
                 break;
             }
         }
-        if(charactersGroupId == -1){
+        if (charactersGroupId == -1) {
             return "-";
         }
-        for(Group group : user.getUserGroups()){
-            if(group.getId() == charactersGroupId){
+        for (Group group : user.getUserGroups()) {
+            if (group.getId() == charactersGroupId) {
                 return group.getName();
             }
         }
@@ -73,5 +73,9 @@ public class EditExistingCharactersViewModel extends BaseViewModel {
 
     public NavigationView getNavigationView() {
         return navigationView;
+    }
+
+    public User getUser() {
+        return user;
     }
 }

@@ -48,7 +48,7 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
         characterCreationViewModel = new CharacterCreationViewModel(title);
         characters = new ArrayList();
         characterCreationViewModel.setDefaultDrawList();
-        characterCreationViewModel.drawCharacter(this, characters);
+        characterCreationViewModel.drawCharacter(this, characters, 230, 43);
         setupContentPane();
         setupComponents();
         setupListeners();
@@ -179,7 +179,7 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
                 hatComboBox.setModel(new DefaultComboBoxModel(characterCreationViewModel.getHatList()));
                 characterCreationViewModel.setDefaultDrawList();
                 characterCreationViewModel.cleanCharacter(characters);
-                characterCreationViewModel.drawCharacter(classInstance, characters);
+                characterCreationViewModel.drawCharacter(classInstance, characters, 230, 43);
             }
         });
 
@@ -188,7 +188,7 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
                 Integer id = (Integer) hairComboBox.getSelectedItem();
                 characterCreationViewModel.getPictures().choosePicture(id);
                 characterCreationViewModel.cleanCharacter(characters);
-                characterCreationViewModel.drawCharacter(classInstance, characters);
+                characterCreationViewModel.drawCharacter(classInstance, characters, 230, 43);
             }
         }
         );
@@ -199,7 +199,7 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
                 Integer id = (Integer) hatComboBox.getSelectedItem();
                 characterCreationViewModel.getPictures().choosePicture(id);
                 characterCreationViewModel.cleanCharacter(characters);
-                characterCreationViewModel.drawCharacter(classInstance, characters);
+                characterCreationViewModel.drawCharacter(classInstance, characters, 230, 43);
             }
 
         });
@@ -209,7 +209,7 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
                 Integer id = (Integer) outfitComboBox.getSelectedItem();
                 characterCreationViewModel.getPictures().choosePicture(id);
                 characterCreationViewModel.cleanCharacter(characters);
-                characterCreationViewModel.drawCharacter(classInstance, characters);
+                characterCreationViewModel.drawCharacter(classInstance, characters, 230, 43);
             }
 
         });
@@ -219,7 +219,7 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
                 Integer id = (Integer) eyesComboBox.getSelectedItem();
                 characterCreationViewModel.getPictures().choosePicture(id);
                 characterCreationViewModel.cleanCharacter(characters);
-                characterCreationViewModel.drawCharacter(classInstance, characters);
+                characterCreationViewModel.drawCharacter(classInstance, characters, 230, 43);
             }
 
         });
@@ -229,7 +229,7 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
                 Integer id = (Integer) accessoriesComboBox.getSelectedItem();
                 characterCreationViewModel.getPictures().choosePicture(id);
                 characterCreationViewModel.cleanCharacter(characters);
-                characterCreationViewModel.drawCharacter(classInstance, characters);
+                characterCreationViewModel.drawCharacter(classInstance, characters, 230, 43);
             }
 
         });

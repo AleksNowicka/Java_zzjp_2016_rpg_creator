@@ -27,11 +27,12 @@ public class NavigationView extends JFrame implements FrameSetter{
 	private JButton logOutButton;
 
 	private JLabel welcomeMessageLabel;
-	private JPanel userAvatarPanel;
+	private JLabel userAvatarPanel;
 
 	public NavigationView(String title){
 		super(title);
         final String appTitle = title;
+        userAvatarPanel = new JLabel();
         this.addWindowFocusListener(new WindowFocusListener() {
             public void windowGainedFocus(WindowEvent e) {
                 try {
@@ -79,10 +80,10 @@ public class NavigationView extends JFrame implements FrameSetter{
 		editExistingGroupsButton = new JButton("Edit existing groups");
 		editExistingGroupsButton.setBounds(22, 186, 145, 23);
 		getContentPane().add(editExistingGroupsButton);
-
-		userAvatarPanel = new JPanel();
-		userAvatarPanel.setBounds(323, 64, 70, 70);
+                
+		userAvatarPanel.setBounds(303, 44, 90, 90);
 		getContentPane().add(userAvatarPanel);
+                navigationViewModel.drawUserIcon(userAvatarPanel, navigationViewModel.getUser());
 
 		editProfileButton = new JButton("Edit your profile");
 		editProfileButton.setBounds(302, 152, 109, 23);

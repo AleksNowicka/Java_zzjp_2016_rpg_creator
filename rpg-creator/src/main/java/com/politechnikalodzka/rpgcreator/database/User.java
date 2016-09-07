@@ -21,6 +21,15 @@ public class User extends BaseDataBaseEntity{
     private static String password;
     private static List<Group> userGroups;
     private static Map<Integer, List<Character>> usersGroupsWithTheirCharacters;
+    private String userIcon;
+
+    public String getUserIcon() {
+        return userIcon;
+    }
+
+    public void setUserIcon(String userIcon) {
+        this.userIcon = userIcon;
+    }
 
     protected User() throws ClassNotFoundException, SQLException {
         initDataBaseAndQueryBuilder("User");

@@ -55,5 +55,6 @@ public class App {
         instance.addPictures(TypeOfPictrues.HAIR, instance.getPathFemale() + "Hair3.png", 25, Gender.FEMALE);
         instance.addPictures(TypeOfPictrues.HAIR, instance.getPathFemale() + "BlankHair.png", 26, Gender.FEMALE);
         instance.addPictures(TypeOfPictrues.BASE, instance.getPathFemale() + "FemaleBase.png", 27, Gender.FEMALE);
+        instance.addPictures(TypeOfPictrues.OUTFIT, instance.getPathFemale() + "Outfit2.png", 28, Gender.FEMALE);
     }
 }
