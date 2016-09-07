@@ -106,11 +106,9 @@ public class EditExistingGroupsView extends JFrame implements FrameSetter {
                 characterList.setModel(new AbstractListModel() {
                     String[] values = editExistingGroupsViewModel.getUserGroupCharactersNames(
                             selectGroupComboBox.getSelectedItem().toString());
-
                     public int getSize() {
                         return values.length;
                     }
-
                     public Object getElementAt(int index) {
                         return values[index];
                     }

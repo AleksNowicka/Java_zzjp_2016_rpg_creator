@@ -27,18 +27,14 @@ public class EditExistingCharactersView extends JFrame implements FrameSetter {
     private JButton goBackButton;
     private JButton editCharacterButton;
     private JButton deleteCharacterButton;
-//	private JPanel characterIconPanel;
     private JLabel frameNameLabel;
     private JLabel groupLabel;
     private JLabel groupNameLabel;
     private JComboBox characterComboBox;
-    private List<JLabel> characters;
 
     public EditExistingCharactersView(String title) throws SQLException, ClassNotFoundException {
         super(title);
         editExistingCharactersViewModel = new EditExistingCharactersViewModel(title);
-        //Pictures.getInstance().setCurrentCharacter(editExistingCharactersViewModel.getUser().getUserCharacters().get(0));
-        //editExistingCharactersViewModel.drawCharacter(this, characters, 21, 48);
         setupContentPane();
         setupComponents();
         setupListeners();
@@ -59,9 +55,6 @@ public class EditExistingCharactersView extends JFrame implements FrameSetter {
         frameNameLabel.setBounds(100, 11, 260, 25);
         getContentPane().add(frameNameLabel);
 
-//		characterIconPanel = new JPanel();
-//		characterIconPanel.setBounds(21, 48, 230, 396);
-//		getContentPane().add(characterIconPanel);
         goBackButton = new JButton("Go back");
         goBackButton.setBounds(365, 396, 86, 23);
         getContentPane().add(goBackButton);

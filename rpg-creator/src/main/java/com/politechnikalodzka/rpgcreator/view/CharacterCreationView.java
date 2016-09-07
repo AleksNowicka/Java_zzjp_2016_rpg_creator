@@ -169,7 +169,6 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
     }
 
     public void setupEditedCharacterData(){
-        //TODO - add setting pictures
         nameTextField.setText(characterCreationViewModel.getEditedCharacter().getName());
         genderComboBox.setSelectedItem(characterCreationViewModel.getEditedCharactersGender().toString());
         hairComboBox.setSelectedItem(characterCreationViewModel.getEditedCharacter().getHairId());

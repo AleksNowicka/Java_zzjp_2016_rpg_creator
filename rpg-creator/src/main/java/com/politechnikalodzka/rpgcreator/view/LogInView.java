@@ -1,6 +1,5 @@
 package com.politechnikalodzka.rpgcreator.view;
 
-import com.politechnikalodzka.rpgcreator.database.User;
 import com.politechnikalodzka.rpgcreator.interfaces.FrameSetter;
 import com.politechnikalodzka.rpgcreator.viewmodel.LogInViewModel;
 

@@ -2,7 +2,6 @@ package com.politechnikalodzka.rpgcreator.view;
 
 import com.politechnikalodzka.rpgcreator.interfaces.FrameSetter;
 import com.politechnikalodzka.rpgcreator.viewmodel.EditProfileViewModel;
-import sun.rmi.runtime.Log;
 
 import javax.swing.*;
 import java.awt.Color;
@@ -15,7 +14,7 @@ public class EditProfileView extends JFrame implements FrameSetter {
 
 	private EditProfileViewModel editProfileViewModel;
 
-	private JButton saveButon;
+	private JButton saveButton;
 	private JTextField loginTextField;
 	private JTextField passwordField;
 	private JButton loadImageButton;
@@ -77,16 +76,14 @@ public class EditProfileView extends JFrame implements FrameSetter {
 		loginTextField.setText(editProfileViewModel.getUser().getNick());
 		getContentPane().add(loginTextField);
 
-        //TODO Add text field for editing email address
-
 		passwordField = new JTextField();
 		passwordField.setBounds(182, 145, 86, 20);
 		passwordField.setText(editProfileViewModel.getUser().getPassword());
 		getContentPane().add(passwordField);
 
-		saveButon = new JButton("Save changes");
-		saveButon.setBounds(316, 173, 99, 23);
-		getContentPane().add(saveButon);
+		saveButton = new JButton("Save changes");
+		saveButton.setBounds(316, 173, 99, 23);
+		getContentPane().add(saveButton);
 	}
 
 	public void setupListeners() {
@@ -104,7 +101,7 @@ public class EditProfileView extends JFrame implements FrameSetter {
             }
         });
 
-        saveButon.addActionListener(new ActionListener() {
+        saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
                     editProfileViewModel.updateUserData(loginTextField.getText(), passwordField.getText());
