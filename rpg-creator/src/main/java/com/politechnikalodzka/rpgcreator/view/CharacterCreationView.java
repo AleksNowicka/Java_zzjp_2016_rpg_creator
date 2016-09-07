@@ -23,6 +23,7 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
     private CharacterCreationViewModel characterCreationViewModel;
 
     private JButton saveButton;
+    private JTextField nameTextField;
     private JComboBox genderComboBox;
     private JComboBox hairComboBox;
     private JComboBox hatComboBox;
@@ -31,6 +32,7 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
     private JComboBox accessoriesComboBox;
     private JComboBox selectGroupComboBox;
     private JLabel frameNameLabel;
+    private JLabel nameLabel;
     private JLabel genderLabel;
     private JLabel hairLabel;
     private JLabel hatLabel;
@@ -66,85 +68,95 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
         frameNameLabel.setBounds(155, 11, 139, 21);
         getContentPane().add(frameNameLabel);
 
+        nameLabel = new JLabel("Name:");
+        nameLabel.setForeground(Color.WHITE);
+        nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        nameLabel.setBounds(10, 70, 46, 14);
+        getContentPane().add(nameLabel);
+
         genderLabel = new JLabel("Gender:");
         genderLabel.setForeground(Color.WHITE);
         genderLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        genderLabel.setBounds(10, 45, 46, 14);
+        genderLabel.setBounds(10, 95, 46, 14);
         getContentPane().add(genderLabel);
 
         hairLabel = new JLabel("Hair:");
         hairLabel.setForeground(Color.WHITE);
         hairLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        hairLabel.setBounds(10, 70, 46, 14);
+        hairLabel.setBounds(10, 120, 46, 14);
         getContentPane().add(hairLabel);
 
         hatLabel = new JLabel("Hat:");
         hatLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
         hatLabel.setForeground(Color.WHITE);
-        hatLabel.setBounds(10, 95, 46, 14);
+        hatLabel.setBounds(10, 145, 46, 14);
         getContentPane().add(hatLabel);
 
         outfitLabel = new JLabel("Oufit:");
         outfitLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
         outfitLabel.setForeground(Color.WHITE);
-        outfitLabel.setBounds(10, 120, 46, 14);
+        outfitLabel.setBounds(10, 170, 46, 14);
         getContentPane().add(outfitLabel);
 
         eyesLabel = new JLabel("Eyes:");
         eyesLabel.setForeground(Color.WHITE);
         eyesLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        eyesLabel.setBounds(10, 145, 46, 14);
+        eyesLabel.setBounds(10, 195, 46, 14);
         getContentPane().add(eyesLabel);
 
         accessoriesLabel = new JLabel("Accessories");
         accessoriesLabel.setForeground(Color.WHITE);
         accessoriesLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        accessoriesLabel.setBounds(10, 170, 63, 14);
+        accessoriesLabel.setBounds(10, 220, 63, 14);
         getContentPane().add(accessoriesLabel);
 
         groupLabel = new JLabel("Group");
         groupLabel.setForeground(Color.WHITE);
         groupLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        groupLabel.setBounds(10, 195, 63, 14);
+        groupLabel.setBounds(10, 245, 63, 14);
         getContentPane().add(groupLabel);
 
         selectGroupComboBox = new JComboBox();
         selectGroupComboBox.setModel(new DefaultComboBoxModel(characterCreationViewModel.getGroupsNames()));
-        selectGroupComboBox.setBounds(97, 195, 99, 20);
+        selectGroupComboBox.setBounds(97, 245, 99, 20);
         getContentPane().add(selectGroupComboBox);
 
         saveButton = new JButton("Save");
-        saveButton.setBounds(50, 250, 100, 23);
+        saveButton.setBounds(50, 300, 100, 23);
         getContentPane().add(saveButton);
+
+        nameTextField = new JTextField();
+        nameTextField.setBounds(97, 68, 99, 20);
+        getContentPane().add(nameTextField);
 
         genderComboBox = new JComboBox();
         genderComboBox.setModel(new DefaultComboBoxModel(characterCreationViewModel.getGenderList()));
-        genderComboBox.setBounds(97, 43, 99, 20);
+        genderComboBox.setBounds(97, 93, 99, 20);
         getContentPane().add(genderComboBox);
 
         hairComboBox = new JComboBox();
         hairComboBox.setModel(new DefaultComboBoxModel(characterCreationViewModel.getHairList()));
-        hairComboBox.setBounds(97, 68, 99, 20);
+        hairComboBox.setBounds(97, 118, 99, 20);
         getContentPane().add(hairComboBox);
 
         hatComboBox = new JComboBox();
         hatComboBox.setModel(new DefaultComboBoxModel(characterCreationViewModel.getHatList()));
-        hatComboBox.setBounds(97, 93, 99, 20);
+        hatComboBox.setBounds(97, 143, 99, 20);
         getContentPane().add(hatComboBox);
 
         outfitComboBox = new JComboBox();
         outfitComboBox.setModel(new DefaultComboBoxModel(characterCreationViewModel.getOutfitList()));
-        outfitComboBox.setBounds(97, 118, 99, 20);
+        outfitComboBox.setBounds(97, 168, 99, 20);
         getContentPane().add(outfitComboBox);
 
         eyesComboBox = new JComboBox();
         eyesComboBox.setModel(new DefaultComboBoxModel(characterCreationViewModel.getEyesList()));
-        eyesComboBox.setBounds(97, 143, 99, 20);
+        eyesComboBox.setBounds(97, 193, 99, 20);
         getContentPane().add(eyesComboBox);
 
         accessoriesComboBox = new JComboBox();
         accessoriesComboBox.setModel(new DefaultComboBoxModel(characterCreationViewModel.getAccessoriesList()));
-        accessoriesComboBox.setBounds(97, 168, 99, 20);
+        accessoriesComboBox.setBounds(97, 218, 99, 20);
         getContentPane().add(accessoriesComboBox);
     }
 
