@@ -64,6 +64,7 @@ public class Group extends BaseDataBaseEntity{
         ResultSet resultSet = dataBaseStatement.executeQuery(queryBuilder.getRowMaxColumnValueQueryFromOwnTable(
                 columnsNames.get(0)));
         int newId = Integer.parseInt(resultSet.getString("max("+columnsNames.get(0)+")"));
+        newId += 1;
         List<String> rowValues = new ArrayList<String>();
         rowValues.add(String.valueOf(newId)); rowValues.add(name);
         rowValues.add(description); rowValues.add(String.valueOf(maxGroupMembers));

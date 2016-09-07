@@ -20,8 +20,10 @@ public class GroupCreationViewModel extends BaseViewModel {
         user = User.getInstance();
     }
 
-    public void saveGroup(Group groupToSave){
-
+    public void saveNewGroup(Group newGroupToSave) throws SQLException, ClassNotFoundException {
+        newGroupToSave.setGroupOwnerId(user.getId());
+        newGroupToSave.saveAsNewGroup();
+        user.retriveUsersGroupsWithTheirCharacters();
     }
 
     public NavigationView getNavigationView() {

@@ -1,5 +1,6 @@
 package com.politechnikalodzka.rpgcreator.view;
 
+import com.politechnikalodzka.rpgcreator.database.Group;
 import com.politechnikalodzka.rpgcreator.enums.ViewModeEnum;
 import com.politechnikalodzka.rpgcreator.interfaces.FrameSetter;
 import com.politechnikalodzka.rpgcreator.viewmodel.GroupCreationViewModel;
@@ -20,12 +21,11 @@ public class GroupCreationView extends JFrame implements FrameSetter{
     private JButton goBackButton;
     private JButton chooseIconButton;
 	private JTextField nameTextField;
-	private JTextField passwordTextField;
+	private JTextField descriptionTextField;
 	private JLabel frameNameLabel;
 	private JLabel nameLabel;
 	private JLabel descriptionLabel;
 	private JLabel maxGroupMembersLabel;
-//	private JLabel groupIconLabel;
 	private JLabel membersLabel;
 	private JComboBox maxGroupMembersComboBox;
 	private JPanel groupIconPanel;
@@ -75,10 +75,10 @@ public class GroupCreationView extends JFrame implements FrameSetter{
 		getContentPane().add(nameTextField);
 		nameTextField.setColumns(10);
 
-		passwordTextField = new JTextField();
-		passwordTextField.setBounds(90, 87, 128, 59);
-		getContentPane().add(passwordTextField);
-		passwordTextField.setColumns(10);
+		descriptionTextField = new JTextField();
+		descriptionTextField.setBounds(90, 87, 128, 59);
+		getContentPane().add(descriptionTextField);
+		descriptionTextField.setColumns(10);
 
 		membersLabel = new JLabel("members:");
 		membersLabel.setForeground(Color.LIGHT_GRAY);
@@ -129,7 +129,19 @@ public class GroupCreationView extends JFrame implements FrameSetter{
 
 		saveButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				groupCreationViewModel.switchFrames(classInstance, groupCreationViewModel.getNavigationView());
+                try {
+                    //TODO - add saving group icon
+                    Group group = new Group();
+                    group.setName(nameTextField.getText());
+                    group.setDescription(descriptionTextField.getText());
+                    group.setMaxGroupMembers(Integer.parseInt(maxGroupMembersComboBox.getSelectedItem().toString()));
+                    groupCreationViewModel.saveNewGroup(group);
+                } catch (ClassNotFoundException e1) {
+                    e1.printStackTrace();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+                groupCreationViewModel.switchFrames(classInstance, groupCreationViewModel.getNavigationView());
 			}
 		});
 	}

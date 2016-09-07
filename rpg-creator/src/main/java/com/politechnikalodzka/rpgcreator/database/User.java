@@ -123,6 +123,10 @@ public class User extends BaseDataBaseEntity{
                 tempGroup.getColumnsNames().get(0), String.valueOf(groupId)));
     }
 
+    public static int getId() {
+        return id;
+    }
+
     public String getNick() { return nick; }
     public void setNick(String nick) { this.nick = nick; }
     public String getEmailAddress() { return emailAddress; }
