@@ -18,21 +18,11 @@ import javax.swing.*;
 public abstract class BaseViewModel {
     
     private Pictures pictures = Pictures.getInstance();
-    
-    public void switchFrames(JFrame actualFrame, JFrame nextFrame) {
-        actualFrame.dispose();
-        nextFrame.setVisible(true);
-    }
-    
-    public Pictures getPictures() {
-        return pictures;
-    }
-    
+
     public void drawCharacter(JFrame actualFrame, List<JLabel> characterViewPanels, int x, int y) {
         BufferedImage bi;
         int counter = 0;
         File file;
-        
         try {
             for (Picture p : pictures.getPictureToDraw()) {
                 characterViewPanels.add(new JLabel());
@@ -46,19 +36,17 @@ public abstract class BaseViewModel {
         } catch (Exception ex) {
             Logger.getLogger(BaseViewModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
-    
+
     public void cleanCharacter(List<JLabel> characterViewPanels) {
         for (JLabel panel : characterViewPanels) {
             panel.setIcon(null);
         }
     }
-    
+
     public void drawGroupIcon(JLabel icon, Group currentGroup) {
         BufferedImage bi;
         File file;
-        
         try {
             if (!currentGroup.getGroupIcon().equals(null)) {
                 file = new File(currentGroup.getGroupIcon());
@@ -69,20 +57,28 @@ public abstract class BaseViewModel {
             Logger.getLogger(BaseViewModel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void drawUserIcon(JLabel icon, User currentUser) {
         BufferedImage bi;
         File file;
-        
         try {
             if (currentUser != null && !currentUser.getUserIcon().equals(null)) {
                 file = new File(currentUser.getUserIcon());
                 bi = ImageIO.read(file);
                 icon.setIcon(new ImageIcon(bi));
             }
-            
         } catch (Exception ex) {
             Logger.getLogger(BaseViewModel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public void switchFrames(JFrame actualFrame, JFrame nextFrame) {
+        actualFrame.dispose();
+        nextFrame.setVisible(true);
+    }
+    
+    public Pictures getPictures() {
+        return pictures;
+    }
+
 }

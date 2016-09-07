@@ -82,14 +82,6 @@ public class EditExistingGroupsViewModel extends BaseViewModel{
         }
     }
 
-    public NavigationView getNavigationView() {
-        return navigationView;
-    }
-
-    public GroupCreationView getGroupCreationView() {
-        return groupCreationView;
-    }
-    
     public Group findGroupByName(String groupName) {
         List<Group> userGroups = user.getUserGroups();
         for(Group group : userGroups){
@@ -99,4 +91,12 @@ public class EditExistingGroupsViewModel extends BaseViewModel{
         }
         return null;
     }
+
+    public NavigationView getNavigationView() {
+        return navigationView;
+    }
+    public GroupCreationView getGroupCreationView() {
+        return groupCreationView;
+    }
+
 }

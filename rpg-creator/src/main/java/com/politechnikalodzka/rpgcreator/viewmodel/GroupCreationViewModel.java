@@ -38,21 +38,9 @@ public class GroupCreationViewModel extends BaseViewModel {
     public Group getEditedGroup() {
         return editedGroup;
     }
-
     public void setEditedGroup(Group editedGroup) {
         this.editedGroup = editedGroup;
     }
-
-    public void setEditedGroupById(int groupId){
-        List<Group> userGroups = user.getUserGroups();
-        for(Group group : userGroups){
-            if(group.getId() == groupId){
-                editedGroup = group;
-                return;
-            }
-        }
-    }
-
     public NavigationView getNavigationView() {
         return navigationView;
     }

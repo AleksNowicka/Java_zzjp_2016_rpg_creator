@@ -87,8 +87,5 @@ public class EditExistingCharactersViewModel extends BaseViewModel {
     public NavigationView getNavigationView() {
         return navigationView;
     }
-
-    public CharacterCreationView getCharacterCreationView() {
-        return characterCreationView;
-    }
+    public CharacterCreationView getCharacterCreationView() { return characterCreationView; }
 }

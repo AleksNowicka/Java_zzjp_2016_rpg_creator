@@ -26,13 +26,11 @@ public class EditProfileViewModel extends BaseViewModel {
         user.setPassword(password);
         System.out.println(user.getNick() + " " + user.getPassword());
         user.saveAsEditedUser();
-        //TODO Add saving chosen icon and changed email address
     }
 
     public NavigationView getNavigationView() {
         return navigationView;
     }
-
     public User getUser() {
         return user;
     }
