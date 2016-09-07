@@ -36,6 +36,7 @@ public class GroupCreationView extends JFrame implements FrameSetter {
         super(title);
         groupCreationViewModel = new GroupCreationViewModel(title);
         this.viewMode = viewModeEnum;
+        groupIconPanel = new JLabel();
         groupCreationViewModel.drawGroupIcon(groupIconPanel, groupCreationViewModel.getEditedGroup());
         setupContentPane();
         setupComponents();
@@ -94,7 +95,6 @@ public class GroupCreationView extends JFrame implements FrameSetter {
         maxGroupMembersComboBox.setBounds(90, 163, 46, 20);
         getContentPane().add(maxGroupMembersComboBox);
 
-        groupIconPanel = new JLabel();
         groupIconPanel.setBounds(322, 90, 90, 90);
         getContentPane().add(groupIconPanel);
 

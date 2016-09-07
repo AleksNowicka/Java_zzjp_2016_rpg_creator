@@ -56,5 +56,9 @@ public class App {
         instance.addPictures(TypeOfPictures.HAIR, instance.getPathFemale() + "BlankHair.png", 26, Gender.FEMALE);
         instance.addPictures(TypeOfPictures.BASE, instance.getPathFemale() + "FemaleBase.png", 27, Gender.FEMALE);
         instance.addPictures(TypeOfPictures.OUTFIT, instance.getPathFemale() + "Outfit2.png", 28, Gender.FEMALE);
+        instance.addPictures(TypeOfPictures.ACCESSORIES, instance.getPathFemale() + "Accessory1.png", 29, Gender.FEMALE);
+        instance.addPictures(TypeOfPictures.ACCESSORIES, instance.getPathFemale() + "Accessory2.png", 30, Gender.FEMALE);
+        instance.addPictures(TypeOfPictures.HAT, instance.getPathFemale() + "Hat1.png", 31, Gender.FEMALE);
+        instance.addPictures(TypeOfPictures.HAT, instance.getPathFemale() + "Hat2.png", 32, Gender.FEMALE);
     }
 }

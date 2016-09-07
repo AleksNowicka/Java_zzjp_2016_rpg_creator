@@ -38,6 +38,10 @@ public class EditExistingCharactersView extends JFrame implements FrameSetter {
         super(title);
         editExistingCharactersViewModel = new EditExistingCharactersViewModel(title);
         characters = new ArrayList();
+        editExistingCharactersViewModel.getPictures()
+                .setCurrentCharacter(editExistingCharactersViewModel.getCharacterByName(editExistingCharactersViewModel.getAllUsersCharactersNames()[0]));
+        editExistingCharactersViewModel.cleanCharacter(characters);
+        editExistingCharactersViewModel.drawCharacter(this, characters, 21, 48);
         setupContentPane();
         setupComponents();
         setupListeners();
@@ -117,18 +121,18 @@ public class EditExistingCharactersView extends JFrame implements FrameSetter {
             }
         });
 
-		editCharacterButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				editExistingCharactersViewModel.setCharacterCreationViewCharacterToEdit(
-						characterComboBox.getSelectedItem().toString());
-				editExistingCharactersViewModel.switchFrames(classInstance, editExistingCharactersViewModel.getCharacterCreationView());
-			}
-		});
+        editCharacterButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                editExistingCharactersViewModel.setCharacterCreationViewCharacterToEdit(
+                        characterComboBox.getSelectedItem().toString());
+                editExistingCharactersViewModel.switchFrames(classInstance, editExistingCharactersViewModel.getCharacterCreationView());
+            }
+        });
 
-		goBackButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				editExistingCharactersViewModel.switchFrames(classInstance, editExistingCharactersViewModel.getNavigationView());
-			}
-		});
-	}
+        goBackButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                editExistingCharactersViewModel.switchFrames(classInstance, editExistingCharactersViewModel.getNavigationView());
+            }
+        });
+    }
 }
