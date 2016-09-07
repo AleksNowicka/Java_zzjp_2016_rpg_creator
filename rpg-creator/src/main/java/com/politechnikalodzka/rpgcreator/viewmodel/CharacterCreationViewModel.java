@@ -4,7 +4,7 @@ import com.politechnikalodzka.rpgcreator.database.Character;
 import com.politechnikalodzka.rpgcreator.database.Group;
 import com.politechnikalodzka.rpgcreator.database.User;
 import com.politechnikalodzka.rpgcreator.enums.Gender;
-import com.politechnikalodzka.rpgcreator.enums.TypeOfPictrues;
+import com.politechnikalodzka.rpgcreator.enums.TypeOfPictures;
 import com.politechnikalodzka.rpgcreator.interfaces.Picture;
 import com.politechnikalodzka.rpgcreator.view.NavigationView;
 
@@ -73,9 +73,9 @@ public class CharacterCreationViewModel extends BaseViewModel {
     }
 
     public Integer[] getOutfitList() {
-        Integer[] list = new Integer[super.getPictures().getPictureByType(TypeOfPictrues.OUTFIT).size()];
+        Integer[] list = new Integer[super.getPictures().getPictureByType(TypeOfPictures.OUTFIT).size()];
         int counter = 0;
-        for (Picture picure : super.getPictures().getPictureByType(TypeOfPictrues.OUTFIT)) {
+        for (Picture picure : super.getPictures().getPictureByType(TypeOfPictures.OUTFIT)) {
             list[counter] = picure.getID();
             counter += 1;
         }
@@ -83,9 +83,9 @@ public class CharacterCreationViewModel extends BaseViewModel {
     }
 
     public Integer[] getHairList() {
-        Integer[] list = new Integer[super.getPictures().getPictureByType(TypeOfPictrues.HAIR).size()];
+        Integer[] list = new Integer[super.getPictures().getPictureByType(TypeOfPictures.HAIR).size()];
         int counter = 0;
-        for (Picture picure : super.getPictures().getPictureByType(TypeOfPictrues.HAIR)) {
+        for (Picture picure : super.getPictures().getPictureByType(TypeOfPictures.HAIR)) {
             list[counter] = picure.getID();
             counter += 1;
         }
@@ -93,9 +93,9 @@ public class CharacterCreationViewModel extends BaseViewModel {
     }
 
     public Integer[] getEyesList() {
-        Integer[] list = new Integer[super.getPictures().getPictureByType(TypeOfPictrues.EYES).size()];
+        Integer[] list = new Integer[super.getPictures().getPictureByType(TypeOfPictures.EYES).size()];
         int counter = 0;
-        for (Picture picure : super.getPictures().getPictureByType(TypeOfPictrues.EYES)) {
+        for (Picture picure : super.getPictures().getPictureByType(TypeOfPictures.EYES)) {
             list[counter] = picure.getID();
             counter += 1;
         }
@@ -103,9 +103,9 @@ public class CharacterCreationViewModel extends BaseViewModel {
     }
 
     public Integer[] getHatList() {
-        Integer[] list = new Integer[super.getPictures().getPictureByType(TypeOfPictrues.HAT).size()];
+        Integer[] list = new Integer[super.getPictures().getPictureByType(TypeOfPictures.HAT).size()];
         int counter = 0;
-        for (Picture picure : super.getPictures().getPictureByType(TypeOfPictrues.HAT)) {
+        for (Picture picure : super.getPictures().getPictureByType(TypeOfPictures.HAT)) {
             list[counter] = picure.getID();
             counter += 1;
         }
@@ -113,9 +113,9 @@ public class CharacterCreationViewModel extends BaseViewModel {
     }
 
     public Integer[] getAccessoriesList() {
-        Integer[] list = new Integer[super.getPictures().getPictureByType(TypeOfPictrues.ACCESSORIES).size()];
+        Integer[] list = new Integer[super.getPictures().getPictureByType(TypeOfPictures.ACCESSORIES).size()];
         int counter = 0;
-        for (Picture picure : super.getPictures().getPictureByType(TypeOfPictrues.ACCESSORIES)) {
+        for (Picture picure : super.getPictures().getPictureByType(TypeOfPictures.ACCESSORIES)) {
             list[counter] = picure.getID();
             counter += 1;
         }
@@ -159,13 +159,13 @@ public class CharacterCreationViewModel extends BaseViewModel {
                 && this.getEyesList().length > 0
                 && this.getHatList().length > 0
                 && this.getOutfitList().length > 0
-                && this.getPictures().getPictureByType(TypeOfPictrues.BASE).size() > 0) {
+                && this.getPictures().getPictureByType(TypeOfPictures.BASE).size() > 0) {
             this.getPictures().choosePicture(this.getHairList()[0]);
             this.getPictures().choosePicture(this.getAccessoriesList()[0]);
             this.getPictures().choosePicture(this.getEyesList()[0]);
             this.getPictures().choosePicture(this.getHatList()[0]);
             this.getPictures().choosePicture(this.getOutfitList()[0]);
-            this.getPictures().choosePicture(this.getPictures().getPictureByType(TypeOfPictrues.BASE).get(0).getID());
+            this.getPictures().choosePicture(this.getPictures().getPictureByType(TypeOfPictures.BASE).get(0).getID());
         }
     }
 
@@ -175,13 +175,13 @@ public class CharacterCreationViewModel extends BaseViewModel {
                 && this.getEyesList().length > 0
                 && this.getHatList().length > 0
                 && this.getOutfitList().length > 0
-                && this.getPictures().getPictureByType(TypeOfPictrues.BASE).size() > 0) {
+                && this.getPictures().getPictureByType(TypeOfPictures.BASE).size() > 0) {
             this.getPictures().choosePicture(editedCharacter.getHairId());
             this.getPictures().choosePicture(editedCharacter.getAccessoriesId());
             this.getPictures().choosePicture(editedCharacter.getEyesId());
             this.getPictures().choosePicture(editedCharacter.getHatId());
             this.getPictures().choosePicture(editedCharacter.getOutfitId());
-            this.getPictures().choosePicture(this.getPictures().getPictureByType(TypeOfPictrues.BASE).get(0).getID());
+            this.getPictures().choosePicture(this.getPictures().getPictureByType(TypeOfPictures.BASE).get(0).getID());
         }
     }
 }

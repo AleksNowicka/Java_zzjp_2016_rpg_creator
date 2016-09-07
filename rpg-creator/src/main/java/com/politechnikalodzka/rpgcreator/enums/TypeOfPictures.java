@@ -4,7 +4,7 @@ package com.politechnikalodzka.rpgcreator.enums;
  *
  * @author lbary
  */
-public enum TypeOfPictrues {
+public enum TypeOfPictures {
     EYES,
     OUTFIT,
     HAIR,

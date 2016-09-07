@@ -1,7 +1,7 @@
 package com.politechnikalodzka.rpgcreator.interfaces;
 
 import com.politechnikalodzka.rpgcreator.enums.Gender;
-import com.politechnikalodzka.rpgcreator.enums.TypeOfPictrues;
+import com.politechnikalodzka.rpgcreator.enums.TypeOfPictures;
 
 /**
  *
@@ -9,5 +9,5 @@ import com.politechnikalodzka.rpgcreator.enums.TypeOfPictrues;
  */
 public interface Factory {
 
-    public Picture addPicture(TypeOfPictrues type, String url, int id, Gender gender);
+    public Picture addPicture(TypeOfPictures type, String url, int id, Gender gender);
 }

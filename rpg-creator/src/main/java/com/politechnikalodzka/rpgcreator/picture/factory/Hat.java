@@ -1,7 +1,7 @@
 package com.politechnikalodzka.rpgcreator.picture.factory;
 
 import com.politechnikalodzka.rpgcreator.enums.Gender;
-import com.politechnikalodzka.rpgcreator.enums.TypeOfPictrues;
+import com.politechnikalodzka.rpgcreator.enums.TypeOfPictures;
 import com.politechnikalodzka.rpgcreator.interfaces.Picture;
 
 /**
@@ -12,7 +12,7 @@ public class Hat implements Picture {
 
     private int ID;
     private String URL;
-    private TypeOfPictrues type = TypeOfPictrues.HAT;
+    private TypeOfPictures type = TypeOfPictures.HAT;
     private Gender gender;
 
     public Hat(int id, String url, Gender gender) {
@@ -29,7 +29,7 @@ public class Hat implements Picture {
         return URL;
     }
 
-    public TypeOfPictrues getType() {
+    public TypeOfPictures getType() {
         return type;
     }
 

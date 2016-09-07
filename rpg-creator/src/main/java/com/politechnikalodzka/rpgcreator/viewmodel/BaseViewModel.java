@@ -34,7 +34,7 @@ public abstract class BaseViewModel {
         File file;
         
         try {
-            for (Picture p : pictures.getPictrueToDraw()) {
+            for (Picture p : pictures.getPictureToDraw()) {
                 characterViewPanels.add(new JLabel());
                 characterViewPanels.get(counter).setBounds(x, y, 230, 396);
                 actualFrame.getContentPane().add(characterViewPanels.get(counter));

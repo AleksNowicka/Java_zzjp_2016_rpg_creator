@@ -1,7 +1,7 @@
 package com.politechnikalodzka.rpgcreator.picture.factory;
 
 import com.politechnikalodzka.rpgcreator.enums.Gender;
-import com.politechnikalodzka.rpgcreator.enums.TypeOfPictrues;
+import com.politechnikalodzka.rpgcreator.enums.TypeOfPictures;
 import com.politechnikalodzka.rpgcreator.interfaces.Picture;
 
 /**
@@ -9,9 +9,10 @@ import com.politechnikalodzka.rpgcreator.interfaces.Picture;
  * @author lbary
  */
 public class Accessories implements Picture {
+
     private int ID;
     private String URL;
-    private TypeOfPictrues type = TypeOfPictrues.ACCESSORIES;
+    private TypeOfPictures type = TypeOfPictures.ACCESSORIES;
     private Gender gender;
 
     public Accessories(int id, String url, Gender gender) {
@@ -28,7 +29,7 @@ public class Accessories implements Picture {
         return URL;
     }
 
-    public TypeOfPictrues getType() {
+    public TypeOfPictures getType() {
         return type;
     }
 
