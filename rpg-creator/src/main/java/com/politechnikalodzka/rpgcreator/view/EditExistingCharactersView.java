@@ -1,6 +1,7 @@
 package com.politechnikalodzka.rpgcreator.view;
 
 import com.politechnikalodzka.rpgcreator.interfaces.FrameSetter;
+import com.politechnikalodzka.rpgcreator.utils.Pictures;
 import com.politechnikalodzka.rpgcreator.viewmodel.EditExistingCharactersViewModel;
 
 import javax.swing.JFrame;
@@ -12,85 +13,88 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.sql.SQLException;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
 
-public class EditExistingCharactersView extends JFrame implements FrameSetter{
+public class EditExistingCharactersView extends JFrame implements FrameSetter {
 
-	private EditExistingCharactersViewModel editExistingCharactersViewModel;
+    private EditExistingCharactersViewModel editExistingCharactersViewModel;
 
-	private JButton goBackButton;
-	private JButton editCharacterButton;
-	private JButton deleteCharacterButton;
-	private JPanel characterIconPanel;
-	private JLabel frameNameLabel;
-	private JLabel groupLabel;
-	private JLabel groupNameLabel;
-	private JComboBox characterComboBox;
+    private JButton goBackButton;
+    private JButton editCharacterButton;
+    private JButton deleteCharacterButton;
+//	private JPanel characterIconPanel;
+    private JLabel frameNameLabel;
+    private JLabel groupLabel;
+    private JLabel groupNameLabel;
+    private JComboBox characterComboBox;
+    private List<JLabel> characters;
 
-	public EditExistingCharactersView(String title) throws SQLException, ClassNotFoundException {
-		super(title);
-		editExistingCharactersViewModel = new EditExistingCharactersViewModel(title);
-		setupContentPane();
-		setupComponents();
-		setupListeners();
-	}
+    public EditExistingCharactersView(String title) throws SQLException, ClassNotFoundException {
+        super(title);
+        editExistingCharactersViewModel = new EditExistingCharactersViewModel(title);
+        //Pictures.getInstance().setCurrentCharacter(editExistingCharactersViewModel.getUser().getUserCharacters().get(0));
+        //editExistingCharactersViewModel.drawCharacter(this, characters, 21, 48);
+        setupContentPane();
+        setupComponents();
+        setupListeners();
+    }
 
-	public void setupContentPane() {
-		getContentPane().setBackground(Color.DARK_GRAY);
-		setResizable(false);
-		setBounds(100, 100, 450, 260);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		getContentPane().setLayout(null);
-	}
+    public void setupContentPane() {
+        getContentPane().setBackground(Color.DARK_GRAY);
+        setResizable(false);
+        setBounds(100, 100, 500, 500);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
+    }
 
-	public void setupComponents() {
-		frameNameLabel = new JLabel("Edit existing characters");
-		frameNameLabel.setForeground(Color.LIGHT_GRAY);
-		frameNameLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
-		frameNameLabel.setBounds(100, 11, 260, 25);
-		getContentPane().add(frameNameLabel);
+    public void setupComponents() {
+        frameNameLabel = new JLabel("Edit existing characters");
+        frameNameLabel.setForeground(Color.LIGHT_GRAY);
+        frameNameLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
+        frameNameLabel.setBounds(100, 11, 260, 25);
+        getContentPane().add(frameNameLabel);
 
-		characterIconPanel = new JPanel();
-		characterIconPanel.setBounds(21, 48, 89, 125);
-		getContentPane().add(characterIconPanel);
+//		characterIconPanel = new JPanel();
+//		characterIconPanel.setBounds(21, 48, 230, 396);
+//		getContentPane().add(characterIconPanel);
+        goBackButton = new JButton("Go back");
+        goBackButton.setBounds(365, 396, 86, 23);
+        getContentPane().add(goBackButton);
 
-		goBackButton = new JButton("Go back");
-		goBackButton.setBounds(21, 197, 89, 23);
-		getContentPane().add(goBackButton);
-		
-		characterComboBox = new JComboBox();
-		characterComboBox.setModel(new DefaultComboBoxModel(editExistingCharactersViewModel.getAllUsersCharactersNames()));
-		characterComboBox.setBounds(137, 47, 191, 22);
-		getContentPane().add(characterComboBox);
-		
-		deleteCharacterButton = new JButton("Delete character");
-		deleteCharacterButton.setBounds(309, 197, 113, 23);
-		getContentPane().add(deleteCharacterButton);
-		
-		editCharacterButton = new JButton("Edit character");
-		editCharacterButton.setBounds(189, 197, 113, 23);
-		getContentPane().add(editCharacterButton);
-		
-		groupLabel = new JLabel("Group:");
+        characterComboBox = new JComboBox();
+        characterComboBox.setModel(new DefaultComboBoxModel(editExistingCharactersViewModel.getAllUsersCharactersNames()));
+        characterComboBox.setBounds(260, 47, 191, 22);
+        getContentPane().add(characterComboBox);
+
+        deleteCharacterButton = new JButton("Delete character");
+        deleteCharacterButton.setBounds(338, 115, 113, 23);
+        getContentPane().add(deleteCharacterButton);
+
+        editCharacterButton = new JButton("Edit character");
+        editCharacterButton.setBounds(338, 150, 113, 23);
+        getContentPane().add(editCharacterButton);
+
+        groupLabel = new JLabel("Group:");
         groupLabel.setForeground(Color.WHITE);
         groupLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		groupLabel.setBounds(137, 80, 63, 25);
-		getContentPane().add(groupLabel);
-		
-		groupNameLabel = new JLabel(editExistingCharactersViewModel.getCharactersGroupName(
+        groupLabel.setBounds(260, 80, 63, 25);
+        getContentPane().add(groupLabel);
+
+        groupNameLabel = new JLabel(editExistingCharactersViewModel.getCharactersGroupName(
                 characterComboBox.getSelectedItem().toString()));
         groupNameLabel.setForeground(Color.WHITE);
         groupNameLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		groupNameLabel.setBounds(242, 80, 86, 20);
-		getContentPane().add(groupNameLabel);
-	}
+        groupNameLabel.setBounds(365, 80, 86, 20);
+        getContentPane().add(groupNameLabel);
+    }
 
-	public void setupListeners() {
-		final EditExistingCharactersView classInstance = this;
+    public void setupListeners() {
+        final EditExistingCharactersView classInstance = this;
 
         characterComboBox.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {

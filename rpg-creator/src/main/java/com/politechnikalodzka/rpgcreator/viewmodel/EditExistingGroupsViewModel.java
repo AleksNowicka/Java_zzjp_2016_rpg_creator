@@ -91,4 +91,14 @@ public class EditExistingGroupsViewModel extends BaseViewModel{
     public GroupCreationView getGroupCreationView() {
         return groupCreationView;
     }
+    
+    public Group findGroupByName(String groupName) {
+        List<Group> userGroups = user.getUserGroups();
+        for(Group group : userGroups){
+            if(group.getName().equals(groupName)){
+                return group;
+            }
+        }
+        return null;
+    }
 }

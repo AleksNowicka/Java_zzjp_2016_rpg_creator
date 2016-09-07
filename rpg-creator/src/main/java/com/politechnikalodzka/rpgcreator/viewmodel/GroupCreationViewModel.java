@@ -6,6 +6,7 @@ import com.politechnikalodzka.rpgcreator.view.NavigationView;
 
 import java.sql.SQLException;
 import java.util.List;
+import javax.swing.JPanel;
 
 /**
  * Created by aleks on 19.08.16.

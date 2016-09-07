@@ -62,4 +62,8 @@ public class NavigationViewModel extends BaseViewModel {
     public LogInView getLogInView() {
         return logInView;
     }
+    
+    public User getUser() {
+        return user;
+    }
 }
