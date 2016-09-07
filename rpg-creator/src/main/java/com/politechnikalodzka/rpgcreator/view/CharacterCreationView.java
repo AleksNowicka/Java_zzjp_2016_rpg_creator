@@ -1,5 +1,7 @@
 package com.politechnikalodzka.rpgcreator.view;
 
+import com.politechnikalodzka.rpgcreator.database.Character;
+import com.politechnikalodzka.rpgcreator.database.Group;
 import com.politechnikalodzka.rpgcreator.enums.Gender;
 import com.politechnikalodzka.rpgcreator.enums.TypeOfPictrues;
 import com.politechnikalodzka.rpgcreator.enums.ViewModeEnum;
@@ -21,6 +23,8 @@ import java.util.List;
 public class CharacterCreationView extends JFrame implements FrameSetter {
 
     private CharacterCreationViewModel characterCreationViewModel;
+
+    private ViewModeEnum viewMode;
 
     private JButton saveButton;
     private JButton goBackButton;
@@ -45,13 +49,14 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
 
     public CharacterCreationView(String title, ViewModeEnum viewModeEnum) throws SQLException, ClassNotFoundException {
         super(title);
+        this.viewMode = viewModeEnum;
         characterCreationViewModel = new CharacterCreationViewModel(title);
-        characters = new ArrayList();
-        characterCreationViewModel.setDefaultDrawList();
-        characterCreationViewModel.drawCharacter(this, characters);
         setupContentPane();
         setupComponents();
         setupListeners();
+        characters = new ArrayList();
+        characterCreationViewModel.setDefaultDrawList();
+        characterCreationViewModel.drawCharacter(this, characters);
     }
 
     public void setupContentPane() {
@@ -165,6 +170,11 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
         getContentPane().add(accessoriesComboBox);
     }
 
+    public void setupEditedCharacterData(){
+        //TODO - add setting pictures
+        nameTextField.setText(characterCreationViewModel.getEditedCharacter().getName());
+    }
+
     public void setupListeners() {
         final CharacterCreationView classInstance = this;
 
@@ -242,9 +252,61 @@ public class CharacterCreationView extends JFrame implements FrameSetter {
 
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                if(viewMode.equals(ViewModeEnum.EDIT)){
+                    try {
+                        characterCreationViewModel.getEditedCharacter().setName(nameTextField.getText());
+                        if(Gender.valueOf(genderComboBox.getSelectedItem().toString()).equals(Gender.FEMALE)) {
+                            characterCreationViewModel.getEditedCharacter().setGender(false);
+                        }
+                        else{
+                            characterCreationViewModel.getEditedCharacter().setGender(true);
+                        }
+                        characterCreationViewModel.getEditedCharacter().setHairId((Integer) hairComboBox.getSelectedItem());
+                        characterCreationViewModel.getEditedCharacter().setHatId((Integer) hatComboBox.getSelectedItem());
+                        characterCreationViewModel.getEditedCharacter().setOutfitId((Integer) outfitComboBox.getSelectedItem());
+                        characterCreationViewModel.getEditedCharacter().setEyesId((Integer) eyesComboBox.getSelectedItem());
+                        characterCreationViewModel.getEditedCharacter().setAccessoriesId((Integer) accessoriesComboBox.getSelectedItem());
+                        characterCreationViewModel.getEditedCharacter().setGroupId(characterCreationViewModel.getGroupIdByName(
+                                selectGroupComboBox.getSelectedItem().toString()));
+                        characterCreationViewModel.saveAsEditedCharacter();
+                    } catch (SQLException e1) {
+                        e1.printStackTrace();
+                    } catch (ClassNotFoundException e1) {
+                        e1.printStackTrace();
+                    }
+                    characterCreationViewModel.switchFrames(classInstance, characterCreationViewModel.getNavigationView());
+                    return;
+                }
+                try {
+                    Character newCharacterToSave = new Character();
+                    newCharacterToSave.setName(nameTextField.getText());
+                    if(Gender.valueOf(genderComboBox.getSelectedItem().toString()).equals(Gender.FEMALE)) {
+                        newCharacterToSave.setGender(false);
+                    }
+                    else{
+                        newCharacterToSave.setGender(true);
+                    }
+                    newCharacterToSave.setHairId((Integer) hairComboBox.getSelectedItem());
+                    newCharacterToSave.setHatId((Integer) hatComboBox.getSelectedItem());
+                    newCharacterToSave.setOutfitId((Integer) outfitComboBox.getSelectedItem());
+                    newCharacterToSave.setEyesId((Integer) eyesComboBox.getSelectedItem());
+                    newCharacterToSave.setAccessoriesId((Integer) accessoriesComboBox.getSelectedItem());
+                    newCharacterToSave.setGroupId(characterCreationViewModel.getGroupIdByName(
+                            selectGroupComboBox.getSelectedItem().toString()));
+                    characterCreationViewModel.saveNewCharacter(newCharacterToSave);
+                } catch (ClassNotFoundException e1) {
+                    e1.printStackTrace();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
                 characterCreationViewModel.switchFrames(classInstance, characterCreationViewModel.getNavigationView());
             }
 
         });
     }
+
+    public void setCharacterToEdit(Character characterToEdit){
+        characterCreationViewModel.setEditedCharacter(characterToEdit);
+    }
+
 }

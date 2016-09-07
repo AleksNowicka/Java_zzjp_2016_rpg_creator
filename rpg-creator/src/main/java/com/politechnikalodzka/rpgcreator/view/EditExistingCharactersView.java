@@ -113,6 +113,14 @@ public class EditExistingCharactersView extends JFrame implements FrameSetter{
             }
         });
 
+		editCharacterButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				editExistingCharactersViewModel.setCharacterCreationViewCharacterToEdit(
+						characterComboBox.getSelectedItem().toString());
+				editExistingCharactersViewModel.switchFrames(classInstance, editExistingCharactersViewModel.getCharacterCreationView());
+			}
+		});
+
 		goBackButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				editExistingCharactersViewModel.switchFrames(classInstance, editExistingCharactersViewModel.getNavigationView());

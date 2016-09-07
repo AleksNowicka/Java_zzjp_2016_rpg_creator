@@ -9,6 +9,7 @@ import com.politechnikalodzka.rpgcreator.interfaces.Picture;
 import com.politechnikalodzka.rpgcreator.view.NavigationView;
 
 import java.sql.SQLException;
+import java.util.List;
 import javax.swing.JFrame;
 
 /**
@@ -25,6 +26,34 @@ public class CharacterCreationViewModel extends BaseViewModel {
         navigationView = new NavigationView(title);
         user = User.getInstance();
         editedCharacter = new Character();
+    }
+
+    public void saveNewCharacter(Character newCharacterToSave) throws SQLException, ClassNotFoundException {
+        newCharacterToSave.saveAsNewCharacter();
+        user.retriveUsersGroupsWithTheirCharacters();
+    }
+
+    public void saveAsEditedCharacter() throws SQLException, ClassNotFoundException {
+        editedCharacter.saveAsEditedCharacter();
+        user.retriveUsersGroupsWithTheirCharacters();
+    }
+
+    public Character getEditedCharacter() {
+        return editedCharacter;
+    }
+
+    public void setEditedCharacter(Character editedCharacter) {
+        this.editedCharacter = editedCharacter;
+    }
+
+    public void setEditedCharacterById(int characterId){
+        List<Character> userCharacters = user.getUserCharacters();
+        for(Character character : userCharacters){
+            if(character.getId() == characterId){
+                editedCharacter = character;
+                return;
+            }
+        }
     }
 
     public String[] getGroupsNames() {
@@ -92,6 +121,16 @@ public class CharacterCreationViewModel extends BaseViewModel {
         genderList[0] = Gender.MALE.toString();
         genderList[1] = Gender.FEMALE.toString();
         return genderList;
+    }
+
+    public int getGroupIdByName(String groupName){
+        List<Group> userGroups = user.getUserGroups();
+        for(Group group : userGroups){
+            if(group.getName().equals(groupName)){
+                return group.getId();
+            }
+        }
+        return -1;
     }
 
     public NavigationView getNavigationView() {

@@ -3,6 +3,8 @@ package com.politechnikalodzka.rpgcreator.viewmodel;
 import com.politechnikalodzka.rpgcreator.database.Character;
 import com.politechnikalodzka.rpgcreator.database.Group;
 import com.politechnikalodzka.rpgcreator.database.User;
+import com.politechnikalodzka.rpgcreator.enums.ViewModeEnum;
+import com.politechnikalodzka.rpgcreator.view.CharacterCreationView;
 import com.politechnikalodzka.rpgcreator.view.NavigationView;
 
 import java.sql.SQLException;
@@ -16,11 +18,13 @@ import java.util.Map;
 public class EditExistingCharactersViewModel extends BaseViewModel {
 
     private NavigationView navigationView;
+    private CharacterCreationView characterCreationView;
 
     private User user;
 
     public EditExistingCharactersViewModel(String title) throws SQLException, ClassNotFoundException {
         navigationView = new NavigationView(title);
+        characterCreationView = new CharacterCreationView(title, ViewModeEnum.EDIT);
         user = User.getInstance();
     }
 
@@ -71,7 +75,21 @@ public class EditExistingCharactersViewModel extends BaseViewModel {
         return "-";
     }
 
+    public void setCharacterCreationViewCharacterToEdit(String characterName){
+        List<Character> userCharacter = user.getUserCharacters();
+        for(Character character : userCharacter){
+            if(character.getName().equals(characterName)){
+                characterCreationView.setCharacterToEdit(character);
+                characterCreationView.setupEditedCharacterData();
+            }
+        }
+    }
+
     public NavigationView getNavigationView() {
         return navigationView;
+    }
+
+    public CharacterCreationView getCharacterCreationView() {
+        return characterCreationView;
     }
 }
